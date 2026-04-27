@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dial_transparent_0: 5967606477858406266
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

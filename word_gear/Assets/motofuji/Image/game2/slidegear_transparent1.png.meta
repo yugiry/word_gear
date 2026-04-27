@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      slidegear_transparent1_0: 602130678112363660
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
