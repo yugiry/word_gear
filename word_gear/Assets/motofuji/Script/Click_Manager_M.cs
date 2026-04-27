@@ -18,12 +18,13 @@ public class Click_Manager_M : MonoBehaviour
 
     //変数
     private Vector2 object_pos;
-    private Vector2 prev_mouse;              //ドラッグしている時のマウスの座標
-    private Vector2 mouse;              //クリックした時のマウスの座標
+    private Vector2 prev_mouse;             //ドラッグしている時のマウスの座標
+    private Vector2 mouse;                  //クリックした時のマウスの座標
     private Vector2 mouse_pos;
-    private Vector2 click_pos; 
+    private float before_delta;
+    private Vector2 click_pos;
     private Vector2[] start_pos;            //クリックされた時のスライダーの位置の保持用
-    private int slider_index = 0;            //スライダーが何個あるかの保持用
+    private int slider_index = 0;           //スライダーが何個あるかの保持用
     private bool return_rotation = false;
     private bool on_click = false;
     private float disk_rotation;
@@ -31,7 +32,7 @@ public class Click_Manager_M : MonoBehaviour
     public float angle_delta;
     [SerializeField] private float total_angle;
     [SerializeField] private float angle;
-    private List<Vector2> vecList = new List<Vector2>();
+    [SerializeField] private List<Vector2> vecList = new List<Vector2>();
 
     private void Update()
     {
@@ -59,10 +60,17 @@ public class Click_Manager_M : MonoBehaviour
     {
         if (!return_rotation)
         {
+            object_pos = Camera.main.WorldToScreenPoint(disk_transform.position);
+
             prev_mouse = mouse = Input.mousePosition;
-            
+
             click_pos = (Vector2)Input.mousePosition - object_pos;
-            angle_delta = Mathf.Atan2(click_pos.y, click_pos.x) * Mathf.Rad2Deg;
+            before_delta = angle_delta = Mathf.Atan2(click_pos.y, click_pos.x) * Mathf.Rad2Deg;
+            if (angle_delta < 0)
+            {
+                angle_delta += round;
+                before_delta += round;
+            }
 
             on_click = true;
 
@@ -79,36 +87,57 @@ public class Click_Manager_M : MonoBehaviour
     {
         if (!return_rotation && on_click)
         {
-            var F_now_mouse = Input.mousePosition;
-            var F_dis = Vector2.Distance(mouse, F_now_mouse);
-            float F_check_dis = 810f * (30.0f / 1170f);
-            if(F_dis >= F_check_dis)
+            //現在の入力位置(スクリーン座標)
+            mouse_pos = (Vector2)Input.mousePosition - object_pos;
+
+            //開始位置と現在位置の角度差を計算(アークタンジェントでベクトル→角度変換)
+            float F_angle_current = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+            if (F_angle_current < 0) F_angle_current += round;
+            if (5f > total_angle && total_angle >= 0f)
             {
-                prev_mouse = mouse;
-                mouse = F_now_mouse;
-
-                vecList.Add((prev_mouse - mouse).normalized);
-                var count = vecList.Count;
-
-                if (count >= 2)
+                Debug.Log($"ｺﾝﾆﾁﾊ{before_delta}、{F_angle_current}、{before_delta - F_angle_current}ｺﾝﾆﾁﾊ");
+                if (before_delta - F_angle_current < 0)
                 {
-                    angle = Vector2.SignedAngle(vecList[count - 2],vecList[count - 1]);
-
-                    if (-45f <= angle && angle < -5)
-                    {
-                        //現在の入力位置(スクリーン座標)
-                        mouse_pos = (Vector2)Input.mousePosition - object_pos;
-
-                        //開始位置と現在位置の角度差を計算(アークタンジェントでベクトル→角度変換)
-                        float F_angle_current = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-                        total_angle = F_angle_current - angle_delta;
-                        if (total_angle < 0) total_angle += round;
-
-                        //計算された角度差をもとにオブジェクトを回転させる
-                        disk_transform.rotation = Quaternion.Euler(0, 0, total_angle);
-                    }
+                    before_delta = F_angle_current;
+                }
+                else if (before_delta > 300f && F_angle_current > 0 && (before_delta - 360f) - F_angle_current < 0)
+                {
+                    before_delta = F_angle_current;
+                }
+                else
+                {
+                    total_angle = F_angle_current - before_delta;
                 }
             }
+            else if (total_angle < 30f)
+            {
+                //Debug.Log($"ｺﾝﾆﾁﾊ{before_delta}、{F_angle_current}、{before_delta - F_angle_current}ｺﾝﾆﾁﾊ");
+                if (before_delta - F_angle_current < 0)
+                {
+                    before_delta = F_angle_current + 30f;
+                    if (before_delta > 360f) before_delta -= 360f;
+                }
+                else if (before_delta > 0f && F_angle_current > 300f && before_delta - (F_angle_current - 360f) < 0)
+                {
+                    before_delta = F_angle_current + 30f;
+                    if (before_delta > 360f) before_delta -= 360f;
+                }
+                else
+                {
+                    Debug.Log($"{before_delta}、{F_angle_current}");
+                    //total_angle = F_angle_current - before_delta;
+                }
+            }
+            else
+            {
+                total_angle = F_angle_current - before_delta;
+            }
+
+            //total_angle -= Mathf.Abs(angle);
+            if (total_angle < 0) total_angle += round;
+
+            //計算された角度差をもとにオブジェクトを回転させる
+            disk_transform.rotation = Quaternion.Euler(0, 0, total_angle);
 
             Debug.Log("ディスクをドラッグ中");
         }
@@ -222,7 +251,7 @@ public class Click_Manager_M : MonoBehaviour
         //すべてのスライダーオブジェクトに適応させる
         for (int i = 0; i < slider_index; i++)
         {
-            slide_child[i].anchoredPosition += F_move_pos; 
+            slide_child[i].anchoredPosition += F_move_pos;
         }
 
         Debug.Log("スライダーを離した");

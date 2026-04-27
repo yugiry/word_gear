@@ -104,3 +104,6 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+word_gear/Assets/Sakagchi/Scenes.meta
+word_gear/Assets/Aiko/Scenes.meta
+word_gear/Assets/Motofuji/Scenes.meta
