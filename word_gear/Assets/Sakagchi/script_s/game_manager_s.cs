@@ -15,7 +15,7 @@ public class game_manager_s : MonoBehaviour
     public static game_manager_s Instance;
     private const float wait_time = 0.5f;//切り替わる時間変数
     [SerializeField] private GameObject main_game_scene;//ゲームメインシーンゲームオブジェクト
-    [SerializeField] private bool go_to_maingame = false;//メインゲームに進めるかの変数（広告用）
+    private const int first_half = 15;
 
     //時間関連
     public C_TimeRelated Time_Related_Class;
@@ -92,6 +92,7 @@ public class game_manager_s : MonoBehaviour
     private const int split = 6;
     private const int problem_row = 2;
     private List<string> csv_data = new List<string>();
+    private List<string> csv_data_2 = new List<string>();
 
 
     private void Awake()
@@ -129,8 +130,9 @@ public class game_manager_s : MonoBehaviour
     // Update is called once per frame
     void Update()
    {
-        if (go_to_maingame)
+        if (start_processing.Instance.Finish_Count)
         {
+            Debug.Log("スタート");
             Situation_Scene_Class.Scene.SetActive(false);
             main_game_scene.SetActive(true);
             TimeControl();
@@ -198,19 +200,41 @@ public class game_manager_s : MonoBehaviour
         Debug.Log("Dialogue = " + Problem_Class.Dialogue);
 
         csv_data = Problem_Class.CSV_LOAD.CSVInput("stage_inf");
+        csv_data_2 = Problem_Class.CSV_LOAD.CSVInput("stage_inf");
 
         //分割
         int F_start = (Stage_Count - 1) * split;
 
-        string F_problem = csv_data[F_start + problem_row];
+        string F_problem;
 
-        string F_situation = csv_data[F_start + situation_row];
+        string F_situation;
 
-        string F_gameover_text = csv_data[F_start + failure_row];
+        string F_gameover_text;
 
-        string F_gameclear_text = csv_data[F_start + success_row];
+        string F_gameclear_text;
 
-        Problem_Class.Dialogue.text = F_problem.Replace("\\n","\n");
+        if(Stage_Count < first_half)
+        {
+            F_problem = csv_data[F_start + problem_row];
+
+            F_situation = csv_data[F_start + situation_row];
+
+            F_gameover_text = csv_data[F_start + failure_row];
+
+            F_gameclear_text = csv_data[F_start + success_row];
+        }
+        else
+        {
+            F_problem = csv_data_2[F_start + problem_row];
+
+            F_situation = csv_data_2[F_start + situation_row];
+
+            F_gameover_text = csv_data_2[F_start + failure_row];
+
+            F_gameclear_text = csv_data_2[F_start + success_row];
+        }
+
+            Problem_Class.Dialogue.text = F_problem.Replace("\\n", "\n");
 
 
         ChangeUI(F_gameover_text,F_gameclear_text,F_situation);

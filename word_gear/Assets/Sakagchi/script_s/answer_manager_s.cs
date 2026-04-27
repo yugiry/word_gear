@@ -83,9 +83,11 @@ public class answer_manager_s : MonoBehaviour
     //csv関連
     //CSV関連--------------------------------------
     private List<string> csv_data = new List<string>();
+    private List<string> cas_data_2 = new List<string>();
     [SerializeField] private CSV_load_s CSV_LOAD;
     private const int split = 6;
     private const int answer_row  = 3;
+    private const int first_falf = 15;
 
     //ゲームオーバー関連
     private bool game_over = false;
@@ -152,12 +154,22 @@ public class answer_manager_s : MonoBehaviour
     void LoadCSV()
     {
         csv_data = CSV_LOAD.CSVInput("stage_inf");
+        cas_data_2 = CSV_LOAD.CSVInput("stage_inf2");
 
         int F_problem_index = game_manager_s.Stage_Count;
         //分割
         int F_start = (F_problem_index - 1) * split;
 
-        string F_answer = csv_data[F_start + answer_row];
+        string F_answer;
+
+        if (F_problem_index < first_falf)
+        {
+           F_answer = csv_data[F_start + answer_row];
+        }
+        else
+        {
+            F_answer = cas_data_2[F_start + answer_row];
+        }
 
         Debug.Log("現在ステージ = " + F_problem_index);
         Debug.Log("答え = " + F_answer);
@@ -166,6 +178,7 @@ public class answer_manager_s : MonoBehaviour
 
         foreach (char F_c in F_answer)
         {
+
             if (panel_manager_s.Word_To_Index.ContainsKey(F_c))
             {
                 panel_manager_s.Problem_List.Add(
