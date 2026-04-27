@@ -27,6 +27,8 @@ public class Continue_Synopsis_A : MonoBehaviour
         LS.PlaySE(LS.Sound_Effect[0]);
         synopsis_text.gameObject.SetActive(false );
         LS.Normal_Canvas.gameObject.SetActive(true);
+        LS.BP.StopBGM();
+        LS.BP.PlayBGM(LS.BGM_Clip[0]);
     }
 
 }

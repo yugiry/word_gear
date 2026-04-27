@@ -41,7 +41,7 @@ public class Tap_Center_Ball_A : MonoBehaviour
 
     public void ClickCenterBall()
     {
-        LS.PlaySE(LS.Sound_Effect[0]);
+        LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Click]);
 
         if (LS.ONAB.Overlapped_Needle_Ball_Flag&& LS.ONAB.Overlapping_Ball!=null)
         {

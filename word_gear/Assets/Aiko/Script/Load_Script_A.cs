@@ -9,6 +9,7 @@ public class Load_Script_A : MonoBehaviour
     public Create_Box_A CB;
     public Tap_Center_Ball_A TCB;
     public Csv_Loader_A CL;
+    public BGM_Playback_A BP;
 
     [SerializeField] private GameObject needle;
     [SerializeField] private GameObject rotate_gear;
@@ -16,6 +17,7 @@ public class Load_Script_A : MonoBehaviour
     [SerializeField] private GameObject create_box_object;
     [SerializeField] private GameObject center_ball;
     [SerializeField] private GameObject csv_loader;
+    [SerializeField] private GameObject bgm_playback_object;
 
     public Canvas Normal_Canvas;
     public Canvas Success_Canvas;
@@ -23,6 +25,13 @@ public class Load_Script_A : MonoBehaviour
 
     public AudioSource Audio_Souce;
     public AudioClip[] Sound_Effect;
+    public AudioClip[] BGM_Clip;
+    public enum SE_Names
+    {
+        Click,Gear,
+    }
+
+   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,9 +41,11 @@ public class Load_Script_A : MonoBehaviour
         CA=check_answer_script.GetComponent<Checking_Answers_A>();
         CB=create_box_object.GetComponent<Create_Box_A>();
         TCB=center_ball.GetComponent<Tap_Center_Ball_A>();
-
+        BP=bgm_playback_object.GetComponent<BGM_Playback_A>();
         CL=csv_loader.GetComponent<Csv_Loader_A>();
-        Debug.Log(CL.file);
+        
+
+
         CL.Csv_Input(CL.file);
 
         Normal_Canvas.gameObject.SetActive(false);
@@ -42,11 +53,42 @@ public class Load_Script_A : MonoBehaviour
         Failure_Canvas.gameObject.SetActive(false);
 
         Audio_Souce=GetComponent<AudioSource>();
+
+        BP.PlayBGM(BGM_Clip[1]);
     }
 
     public void PlaySE(AudioClip _sound_effect)
     {
         Audio_Souce.PlayOneShot(_sound_effect);
+    }
+
+    public void StopSE()
+    {
+        Audio_Souce.Stop();
+    }
+
+    public int SoundEffectGearRepearting(int _rotate_gear_num, AudioClip _sound_effect)
+    {
+
+
+
+        if (_rotate_gear_num == 0)
+        {
+            PlaySE(_sound_effect);
+            _rotate_gear_num = 1;
+        }
+        else if (_rotate_gear_num > 20)
+        {
+
+            _rotate_gear_num = 0;
+        }
+        else
+        {
+            _rotate_gear_num++;
+        }
+
+        Debug.Log("gear" + _rotate_gear_num);
+        return _rotate_gear_num;
     }
 
     // Update is called once per frame

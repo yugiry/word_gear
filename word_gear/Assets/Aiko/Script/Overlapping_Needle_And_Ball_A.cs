@@ -29,6 +29,10 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
 
     public bool[] Ball_flg;
     public int Chosen_ball_number;
+
+    //外部
+    float previous_z;
+    private int rotate_gear_num;
     //[SerializeField] private RectTransform image_size;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,19 +47,12 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
 
         Ball_flg =new bool[MysteriousBalls.Length];
 
-        //Chosen_ball_number = RandomBallChoose(Chosen_ball_number,MysteriousBalls,Ball_flg);
-        //MbLetter = MysteriousBalls[Chosen_ball_number].GetComponent<HoldInformationOfMysteriousBall>().Ball_Letter;
-        //CenterBall.GetComponentInChildren<Text>().text = MbLetter;
-        //Ball_flg[chosen_ball_number] = true;
-
+       
         needle_collider=GetComponent<Collider2D>();
 
         Overlapping_Ball = FindClosestBall();
 
-        //overlapping_balls_collider=new Collider2D[MysteriousBalls.Length];
-        //overlapping_balls_center_collider=new Vector2[MysteriousBalls.Length];
-
-        //needle_pos = transform.position;
+       
 
     }
 
@@ -96,43 +93,7 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
         return _chosen_ball;
     }
 
-    // void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.gameObject.tag=="MysteriousBall")
-    //    {
-    //        Vector2 F_center = needle_collider.bounds.center;
-
-    //        //for (int i = 0; i < MysteriousBalls.Length; i++)
-    //        //{
-    //        //    overlapping_balls_collider[i] = MysteriousBalls[i].GetComponent<Collider2D>();
-    //        //    overlapping_balls_center_collider[i] = overlapping_balls_collider[i].bounds.center;
-    //        //}
-
-
-
-    //        LS.HIOMB = other.GetComponent<Hold_Information_Of_Mysterious_Ball_A>();
-
-    //        if (!LS.HIOMB.Pressed_Flag)
-    //        {
-    //            //Overlapped_Needle_Ball_Flag = true;
-    //            //other.gameObject;
-    //        }
-    //        else
-    //        {
-                
-    //        }
-
-
-    //        //MbLetter = other.gameObject.GetComponent<HoldInformationOfMysteriousBall>().BallLetter;
-    //        //Debug.Log("Trigger Enter: " + MbLetter);
-    //        //CenterBall.GetComponentInChildren<Text>().text = MbLetter;
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Trigger Tigauyo");
-    //    }
-    //}
-
+    
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "MysteriousBall")
@@ -185,7 +146,8 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
         needle_pos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
        // needle_pos.y -= image_size.rect.height/2;
         needle_start_angle = transform.eulerAngles.z;
-
+        previous_z = needle_start_angle;
+        rotate_gear_num = 0;
     }
 
     private void OnMouseDrag()
@@ -193,11 +155,29 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
         Vector3 F_end_pos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
         float F_angle = Vector2.SignedAngle(needle_pos, F_end_pos);
+        float F_newz = needle_start_angle + F_angle;
+
+        //回転方向判定
+        float F_delta = Mathf.DeltaAngle(previous_z, F_newz);
+
+        if (Mathf.Abs(F_delta) > 0.05f) // ノイズ防止
+            rotate_gear_num = LS.SoundEffectGearRepearting(rotate_gear_num, LS.Sound_Effect[(int)Load_Script_A.SE_Names.Gear]);
 
         transform.rotation = Quaternion.Euler(0, 0, needle_start_angle + F_angle);
 
         Overlapping_Ball = FindClosestBall();
 
+        
+
+        // 次フレーム用に保存
+        previous_z = F_newz;
+
+    }
+
+    private void OnMouseUp()
+    {
+       
+        LS.StopSE();
     }
 
     GameObject FindClosestBall()
