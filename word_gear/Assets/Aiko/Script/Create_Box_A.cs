@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
+[DefaultExecutionOrder(-1)]
 public class Create_Box_A : MonoBehaviour
 {
     [SerializeField] private Load_Script_A LS;
@@ -11,16 +11,16 @@ public class Create_Box_A : MonoBehaviour
     //[SerializeField] private GameObject checking_answer;
     //private Checking_Answers_A ca;
 
-    private int boxes_num;
+    //private int boxes_num;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         LS = GameObject.FindGameObjectWithTag("ScriptLoader").GetComponent<Load_Script_A>();
-        
-        
-        boxes_num = LS.CA.Answers.Length-1;
-        CreateBox();
+
+
+        //boxes_num = LS.CA.Answers.Length-1;
+        //CreateBox();
     }
 
     public void CreateBox()

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
-[DefaultExecutionOrder(1)]
+[DefaultExecutionOrder(-1)]
 public class Create_Balls_A : MonoBehaviour
 {
     [SerializeField] private Load_Script_A LS;
@@ -26,11 +26,11 @@ public class Create_Balls_A : MonoBehaviour
     {
         LS = GameObject.FindGameObjectWithTag("ScriptLoader").GetComponent<Load_Script_A>();
 
-        CreateBall();
+        //CreateBall();
 
     }
 
-    private void CreateBall()
+    public void CreateBall()
     {
 
         itemCount = LS.CA.Answers.Length;
@@ -60,6 +60,24 @@ public class Create_Balls_A : MonoBehaviour
         var F_sorted_list = spawn_object.OrderBy(F_obj => F_obj.transform.GetSiblingIndex()).ToArray();
 
         spawn_object = F_sorted_list;
+
+    }
+
+    public void VanishAllBalls()
+    {
+        for (int i = 0; i < itemCount; i++)
+        {
+           Destroy(spawn_object[i]);
+        }
+
+        while (LS.CBX.Clone_Boxes.Length > 0)
+        {
+
+
+            LS.CBX.VanishBox();
+            Debug.Log("E");
+
+        }
 
     }
 

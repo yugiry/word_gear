@@ -28,7 +28,9 @@ public class Continue_Synopsis_A : MonoBehaviour
         synopsis_text.gameObject.SetActive(false );
         LS.Normal_Canvas.gameObject.SetActive(true);
         LS.BP.StopBGM();
-        LS.BP.PlayBGM(LS.BGM_Clip[0]);
+        LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.GameStart]);
+
+        LS.GameStart();
     }
 
 }

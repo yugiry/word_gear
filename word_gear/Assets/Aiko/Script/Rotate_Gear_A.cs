@@ -29,22 +29,41 @@ public class Rotate_Gear_A : MonoBehaviour
         LS = GameObject.FindGameObjectWithTag("ScriptLoader").GetComponent<Load_Script_A>();
 
         //gear_pos = transform.position;
+        //gear_start_pos = transform.position;
+
+        //foreach(Image _center_ball in center_ball.GetComponentsInChildren<Image>())
+        //{
+
+        //    if (center_ball.gameObject!=gameObject)
+        //    {
+        //        Mosike_image = _center_ball.GetComponentInChildren<Image>();
+        //        Mosike_alpha = Mosike_image.color;
+               
+        //    }
+           
+        //}
+
+        //rotate_gear_num = 0;
+        
+    }
+
+    public void SetCenterBallColor()
+    {
         gear_start_pos = transform.position;
 
-        foreach(Image _center_ball in center_ball.GetComponentsInChildren<Image>())
+        foreach (Image _center_ball in center_ball.GetComponentsInChildren<Image>())
         {
 
-            if (center_ball.gameObject!=gameObject)
+            if (center_ball.gameObject != gameObject)
             {
                 Mosike_image = _center_ball.GetComponentInChildren<Image>();
                 Mosike_alpha = Mosike_image.color;
-               
+
             }
-           
+
         }
 
         rotate_gear_num = 0;
-        
     }
 
     // Update is called once per frame
@@ -108,148 +127,12 @@ public class Rotate_Gear_A : MonoBehaviour
             // 次フレーム用に保存
             previous_z = F_newz;
 
-
-
-        //if (JudgeStartTransform(F_end_pos, gear_pos))//右回転なら
-        // {
-        //     //if (JudgeStartTransform(F_end_pos, gear_pos))//右回転なら
-        //     {
-        //         if (Mosike_alpha.a>0.8f)
-        //         {
-        //             Mosike_alpha.a -= 0.0005f;
-        //             Mosike_image.color = Mosike_alpha;
-        //         }
-
-        //     }
-        //     //else
-        //     //{
-        //     //    if (mosike_alpha.a < 1.0f)
-        //     //    {
-        //     //        mosike_alpha.a += 0.01f;
-        //     //        mosike_image.color = mosike_alpha;
-        //     //    }
-        //     //}
-
-        //     gear_pos = CalculateJustBeforePos(F_end_pos, gear_pos);
-        //     float F_angle = Vector2.SignedAngle(gear_start_pos, F_end_pos);
-
-        //     transform.rotation = Quaternion.Euler(0, 0, start_angle + F_angle);
-        //     Debug.Log("Gear_pos:" + gear_pos.x + "," + gear_pos.y);
-        //     Debug.Log("F_end_pos:" + F_end_pos.x + "," + F_end_pos.y);
-        // }
-        //else//左回転なら
-        //{
-        //    // transform.rotation = Quaternion.Euler(0, 0, start_angle);
-        //    Debug.Log("Gear_pos+Dame:" + gear_pos.x + "," + gear_pos.y);
-        //    Debug.Log("F_end_pos+Dame:" + F_end_pos.x + "," + F_end_pos.y);
-        //}
-
     }
 
    
 
 
-    private Vector2 CalculateJustBeforePos(Vector2 _now_mouse_pos, Vector2 _now_just_before_mouse_pos)
-    {
-        if (_now_mouse_pos.x > 0f)
-        {
-            if (_now_mouse_pos.y > 0f)
-            {
-                _now_just_before_mouse_pos.x = _now_mouse_pos.x - 0.01f;
-                _now_just_before_mouse_pos.y = _now_mouse_pos.y + 0.01f;
-               
-            }
-            else
-            {//
-                _now_just_before_mouse_pos.x = _now_mouse_pos.x + 0.01f;
-                _now_just_before_mouse_pos.y = System.Math.Min(_now_mouse_pos.y + 0.01f,0.0f);
-            }
-
-
-        }
-        else
-        {
-            if (_now_mouse_pos.y > 0f)
-            {//
-                _now_just_before_mouse_pos.x = System.Math.Min(_now_mouse_pos.x - 0.01f, 0.0f);
-                _now_just_before_mouse_pos.y = _now_mouse_pos.y - 0.01f;
-            }
-            else
-            {
-                _now_just_before_mouse_pos.x = _now_mouse_pos.x + 0.01f;
-                _now_just_before_mouse_pos.y = System.Math.Min(_now_mouse_pos.y - 0.01f, 0.0f);
-            }
-        }
-
-        return _now_just_before_mouse_pos;
-    }
-
-    private bool JudgeStartTransform(Vector2 _mouse_pos,Vector2 _just_before_mouse_pos)
-    {
-       //_just_before_mouse_pos= CalculateJustBeforePos(_mouse_pos, _just_before_mouse_pos);
-
-        if (_mouse_pos.x > 0f)
-        {
-           
-         if (_mouse_pos.y > 0f)
-            {
-                if (_mouse_pos.x>_just_before_mouse_pos.x)
-                {
-                    return true;
-                }
-                else
-                {
-                    Debug.Log("Dame1");
-                    return false;
-                   
-                }
-
-            }
-            else
-            {
-                
-                if (_mouse_pos.x <= _just_before_mouse_pos.x)
-                {
-                    return true;
-                }
-                else
-                {
-                    Debug.Log("Dame2");
-                    return false;
-                }
-            }
-
-        }
-        else
-        {
-            if (_mouse_pos.y > 0f)
-            {
-                if (_mouse_pos.x > _just_before_mouse_pos.x)
-                {
-                    return true;
-                }
-                else
-                {
-                    Debug.Log("Dame3");
-                    return false;
-                }
-            }
-            else
-            {
-                if (_mouse_pos.x <= _just_before_mouse_pos.x)
-                {
-                    return true;
-                }
-                else
-                {
-                    Debug.Log("Dame4");
-                    return false;
-                }
-            }
-        }
-
-        
-    }
+    
 
     private void OnMouseUp()
     {

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
+﻿using System;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
 
-[DefaultExecutionOrder(2)]
+
+[DefaultExecutionOrder(-1)]
 public class Overlapping_Needle_And_Ball_A : MonoBehaviour
 {
     [SerializeField] private Load_Script_A LS;
@@ -19,7 +20,7 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
     private string MbLetter;
     public GameObject CenterBall;
 
-    public GameObject[] MysteriousBalls;
+    public GameObject[] Mysterious_Balls;
     public bool Overlapped_Needle_Ball_Flag;
     public GameObject Overlapping_Ball;
     private Collider2D overlapping_ball_collider;
@@ -39,21 +40,39 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
     {
         LS = GameObject.FindGameObjectWithTag("ScriptLoader").GetComponent<Load_Script_A>();
 
-        MysteriousBalls = GameObject.FindGameObjectsWithTag("MysteriousBall");
+        //MysteriousBalls = GameObject.FindGameObjectsWithTag("MysteriousBall");
 
-        var sortedList = MysteriousBalls.OrderBy(obj => obj.transform.GetSiblingIndex()).ToArray();
+        //var sortedList = MysteriousBalls.OrderBy(obj => obj.transform.GetSiblingIndex()).ToArray();
 
-        MysteriousBalls = sortedList;
+        //MysteriousBalls = sortedList;
 
-        Ball_flg =new bool[MysteriousBalls.Length];
+        //Ball_flg =new bool[MysteriousBalls.Length];
 
        
-        needle_collider=GetComponent<Collider2D>();
+        //needle_collider=GetComponent<Collider2D>();
+
+        //Overlapping_Ball = FindClosestBall();
+
+       
+
+    }
+
+    public void SetNeedle()
+    {
+        Array.Resize(ref Mysterious_Balls, 0);
+
+        Mysterious_Balls = GameObject.FindGameObjectsWithTag("MysteriousBall");
+
+        var sortedList = Mysterious_Balls.OrderBy(obj => obj.transform.GetSiblingIndex()).ToArray();
+
+        Mysterious_Balls = sortedList;
+
+        Ball_flg = new bool[Mysterious_Balls.Length];
+
+
+        needle_collider = GetComponent<Collider2D>();
 
         Overlapping_Ball = FindClosestBall();
-
-       
-
     }
 
     // Update is called once per frame
@@ -76,14 +95,14 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
             }
            
             if (i==_mysteryous_balls.Length-1)
-            return Random.Range(0, _mysteryous_balls.Length);
+            return UnityEngine.Random.Range(0, _mysteryous_balls.Length);
         }
         
         do
         {
             
 
-            _chosen_ball = Random.Range(0, _mysteryous_balls.Length);
+            _chosen_ball = UnityEngine.Random.Range(0, _mysteryous_balls.Length);
         } while (_ball_flag[_chosen_ball]);
         
         MbLetter = _mysteryous_balls[_chosen_ball].ToString()/*.GetComponent<HoldInformationOfMysteriousBall>().Ball_Letter*/;

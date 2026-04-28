@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[DefaultExecutionOrder(-1)]
 public class BGM_Playback_A : MonoBehaviour
 {
     public AudioSource BGM_Source;

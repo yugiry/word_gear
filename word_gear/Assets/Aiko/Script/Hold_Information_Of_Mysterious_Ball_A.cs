@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
-
+[DefaultExecutionOrder(-1)]
 public class Hold_Information_Of_Mysterious_Ball_A : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,6 +18,7 @@ public class Hold_Information_Of_Mysterious_Ball_A : MonoBehaviour
         Ball_text = gameObject.GetComponentInChildren<Text>();
         Ball_text.text = Ball_Letter;
         Ball_text.gameObject.SetActive(false);
+        Pressed_Flag = false;
     }
 
     // Update is called once per frame
