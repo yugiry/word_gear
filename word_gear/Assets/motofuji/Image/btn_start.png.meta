@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 60b7b4d19861ebd4395694301a6b4db7
+guid: 68e860be54dd2384798d3bbcb828412f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5905358785927170718
-    second: clear_0
-  - first:
-      213: -1951696380875582694
-    second: clear_1
-  - first:
-      213: 5086069302426462005
-    second: clear_2
-  - first:
-      213: 4004350427619923938
-    second: clear_3
-  - first:
-      213: 3689506613362651060
-    second: clear_4
+      213: 3957877770281677071
+    second: btn_start_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -112,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: clear_0
+      name: btn_start_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 4
-        width: 131
-        height: 236
+        x: 1
+        y: 2
+        width: 317
+        height: 103
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,96 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 265349dd873fb0ea0800000000000000
-      internalID: -5905358785927170718
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: clear_1
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 0
-        width: 124
-        height: 237
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a13de7c6b7e2ae4e0800000000000000
-      internalID: -1951696380875582694
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: clear_2
-      rect:
-        serializedVersion: 2
-        x: 262
-        y: 1
-        width: 129
-        height: 239
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 537e52a5519559640800000000000000
-      internalID: 5086069302426462005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: clear_3
-      rect:
-        serializedVersion: 2
-        x: 392
-        y: 3
-        width: 133
-        height: 236
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2e7187a7f7f429730800000000000000
-      internalID: 4004350427619923938
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: clear_4
-      rect:
-        serializedVersion: 2
-        x: 524
-        y: 1
-        width: 130
-        height: 238
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4bf6fed87b2c33330800000000000000
-      internalID: 3689506613362651060
+      spriteID: f01fd02ccd43de630800000000000000
+      internalID: 3957877770281677071
       vertices: []
       indices: 
       edges: []
@@ -225,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -234,12 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      clear_0: -5905358785927170718
-      clear_1: -1951696380875582694
-      clear_2: 5086069302426462005
-      clear_3: 4004350427619923938
-      clear_4: 3689506613362651060
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -2,10 +2,12 @@
 using Common;
 using System;
 using System.Linq;
+using UnityEngine.UI;
 
-public class Game_Manager_M : Csv_Loder_M
+public class Game_Manager_M : MonoBehaviour
 {
     //オブジェクト
+    [SerializeField] GameObject start_canvas;
     [SerializeField] GameObject game_canvas;
     [SerializeField] GameObject success_canvas;
     [SerializeField] GameObject failure_canvas;
@@ -33,18 +35,19 @@ public class Game_Manager_M : Csv_Loder_M
     private bool do_slide = false;
     private bool show_slide = false;
     private bool game_over = false;
+    private bool in_game = false;
 
-    void Start()
+    private void Start()
     {
-        TurnCanvas(2);
-        game_texts = Csv_Input(file);
-        StageStart();
-        flame_time = 0;
+        start_canvas.SetActive(true);
+        game_canvas.SetActive(false);
+        success_canvas.SetActive(false);
+        failure_canvas.SetActive(false);
     }
 
     private void Update()
     {
-        if (!game_over)
+        if (!game_over && in_game)
         {
             if (time == 0)
             {
@@ -81,10 +84,18 @@ public class Game_Manager_M : Csv_Loder_M
         }
     }
 
+    public void StageTap()
+    {
+        TurnCanvas(2);
+        GameStart();
+        flame_time = 0;
+        in_game = true;
+    }
+
     /// <summary>
     /// ステージに入ったら玉やスライダーの生成をする
     /// </summary>
-    public void StageStart()
+    public void GameStart()
     {
         //スライダーの真ん中を求める
         RectTransform F_parent_rectpos = hole_parent.GetComponent<RectTransform>();
@@ -207,8 +218,8 @@ public class Game_Manager_M : Csv_Loder_M
         if (!get_correct)
         {
             get_correct = true;
-
             do_slide = true;
+            game_over = true;
 
             Debug.Log("大正解！！！");
         }
@@ -267,7 +278,7 @@ public class Game_Manager_M : Csv_Loder_M
         time = 60;
         flame_time = 0;
         TurnCanvas(2);
-        StageStart();
+        GameStart();
     }
 
     private void DeleteObject()
@@ -289,6 +300,7 @@ public class Game_Manager_M : Csv_Loder_M
     /// </summary>
     private void TurnCanvas(int _mode)
     {
+        start_canvas.SetActive(false);
         game_canvas.SetActive(false);
         success_canvas.SetActive(false);
         failure_canvas.SetActive(false);
