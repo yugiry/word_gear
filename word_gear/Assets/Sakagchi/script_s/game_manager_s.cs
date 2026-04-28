@@ -13,9 +13,10 @@ public class game_manager_s : MonoBehaviour
 {
     public static int Stage_Count = 1;//ステージのカウント
     public static game_manager_s Instance;
-    private const float wait_time = 0.5f;//切り替わる時間変数
+    private const float wait_time = 2.0f;//切り替わる時間変数
     [SerializeField] private GameObject main_game_scene;//ゲームメインシーンゲームオブジェクト
     private const int first_half = 15;
+    [SerializeField] private GameObject clear_text;
 
     //時間関連
     public C_TimeRelated Time_Related_Class;
@@ -35,7 +36,7 @@ public class game_manager_s : MonoBehaviour
         public Sprite[] Sprite;//背景の画像配列
         public Image Image;//背景
         public Text Dialogue_Text;//セリフテキスト
-        public bool Insert_An_Ad = false;//広告フラグ
+        public bool Insert_An_Ad = true;//広告フラグ
         public GameObject Scene;//シーンのゲームオブジェクト
     }
 
@@ -88,6 +89,15 @@ public class game_manager_s : MonoBehaviour
         public Text Dialogue;
     }
 
+    //音楽クラス
+    [SerializeField] private C_MusicClass music_class;
+
+    [System.Serializable]
+    public class C_MusicClass
+    {
+        public AudioSource AS;
+        public AudioClip Clear_SE;
+    };
 
     private const int split = 6;
     private const int problem_row = 2;
@@ -108,6 +118,8 @@ public class game_manager_s : MonoBehaviour
             Problem_Class.Dialogue =
                 Problem_Class.Dialogue_Gameobject.GetComponent<Text>();
         }
+
+        clear_text.gameObject.SetActive(false);
     }
 
 
@@ -141,7 +153,6 @@ public class game_manager_s : MonoBehaviour
         {
             StartCoroutine(GameOver());
         }
-
         if(panel_manager_s.Game_Clear  && !gc_running)
         {
             StartCoroutine(GameClear());
@@ -160,6 +171,7 @@ public class game_manager_s : MonoBehaviour
     {
         if (Game_Over || panel_manager_s.Game_Clear)
             return;
+
 
         Time_Related_Class.Now_Time += Time.deltaTime;
         float F_t = Time_Related_Class.Now_Time / Time_Related_Class.Time_Limit[Stage_Count - 1];//スライダーの正規化
@@ -189,6 +201,9 @@ public class game_manager_s : MonoBehaviour
    private IEnumerator GameClear()
     {
         gc_running = true;
+        clear_text.gameObject.SetActive(true);
+        //SE
+        music_class.AS.PlayOneShot(music_class.Clear_SE);
         yield return new WaitForSeconds(wait_time);
         panel_manager_s.Game_Clear = false;
         main_game_scene.SetActive(false);
@@ -282,14 +297,15 @@ public class game_manager_s : MonoBehaviour
     //ゲームオーバー時にリトライボタンを押したとき
     public void GameOverReTryButton()
     {
-        if (Game_Over_Class.Insert_An_Ad)
-        {
-            StopAllCoroutines();
-            go_running = false;
-            answer_manager_s.Instance.InitializeVariable();
-            InitializeVariableGO();
-            Game_Over_Class.Insert_An_Ad = false;
-        }
+        //if (Game_Over_Class.Insert_An_Ad)
+        //{
+        StopAllCoroutines();
+        go_running = false;
+        answer_manager_s.Instance.InitializeVariable();
+        InitializeVariableGO();
+        Game_Over_Class.Insert_An_Ad = false;
+        start_processing.Instance.Initialization();
+        //}
     }
 
     //ゲームオーバー時にタイトルボタンを押したとき

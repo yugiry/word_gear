@@ -151,6 +151,7 @@ MonoBehaviour:
   Panel_Num: 00000000
   Corn_Num: 0
   Touch: 1
+  clear_text: {fileID: 9039112189106301391, guid: 706dc3afcd448da4e8145e784682da75, type: 3}
 --- !u!1 &7107397232400530154
 GameObject:
   m_ObjectHideFlags: 0

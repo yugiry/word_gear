@@ -13,6 +13,15 @@ public class start_processing : MonoBehaviour
     public bool Finish_Count = false;
     private bool is_count = false;
 
+    //音楽クラス
+    [SerializeField] private C_MusicClass music_class;
+
+    [System.Serializable]
+    public class C_MusicClass
+    {
+        public AudioSource AS;
+        public AudioClip Count_Down_SE;
+    };
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -26,6 +35,7 @@ public class start_processing : MonoBehaviour
     void Start()
     {
         countdown_image.gameObject.SetActive(false);
+        start_button_gameobj.SetActive(true);
     }
 
     private void Update()
@@ -54,6 +64,9 @@ public class start_processing : MonoBehaviour
 
         countdown_image.gameObject.SetActive(true);
 
+        //カウントダウンのSE
+        music_class.AS.PlayOneShot(music_class.Count_Down_SE);
+
         //画像の切り替え
         for (int i = 0; i < countdown_sprite.Count; i++)
         {
@@ -71,5 +84,11 @@ public class start_processing : MonoBehaviour
 
         is_count = false;
     }
-  
+
+    //初期化関数
+    public void Initialization()
+    {
+        start_button_gameobj.SetActive(true);
+        Finish_Count = false;
+    }
 }

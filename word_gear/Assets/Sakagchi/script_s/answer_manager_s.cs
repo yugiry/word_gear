@@ -162,7 +162,7 @@ public class answer_manager_s : MonoBehaviour
 
         string F_answer;
 
-        if (F_problem_index < first_falf)
+        if (F_problem_index <= first_falf)
         {
            F_answer = csv_data[F_start + answer_row];
         }

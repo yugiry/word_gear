@@ -36,7 +36,6 @@ public class panel_manager_s : MonoBehaviour
     public static int Problem_Count = 1;
     public bool Touch = true;
     public static bool Initialized = false;
-
     //Dictionary-----------------------------------
     private static Dictionary<int, string> hiragana;
     private static Dictionary<int, string> katakana;
@@ -65,7 +64,6 @@ public class panel_manager_s : MonoBehaviour
     {
         InitDictionary();
         word_type = WORD_TYPE.KATAKANA;
-        
     }
 
 
@@ -191,6 +189,9 @@ public class panel_manager_s : MonoBehaviour
     {
         string text = "";
 
+        Debug.Log(name + " Word_Index = " + Word_Index);
+
+
         switch (word_type)
         {
             case WORD_TYPE.HIRAGANA:
@@ -268,20 +269,6 @@ public class panel_manager_s : MonoBehaviour
 
     }
 
-    //csvのロード関数
-    public void LoadAnswerWord(string _answer_text)
-    {
-        Problem_List.Clear();
-
-        foreach(char F_c in _answer_text)
-        {
-            if(Word_To_Index.ContainsKey(F_c))
-            {
-                int F_index = Word_To_Index[F_c];
-                Problem_List.Add(F_index);
-            }
-        }
-    }
 
     //不正解のパネルをタップしたとき
     public void ResetAnswer()
@@ -351,5 +338,4 @@ public class panel_manager_s : MonoBehaviour
 
         Initialized = true;
     }
-
 }
