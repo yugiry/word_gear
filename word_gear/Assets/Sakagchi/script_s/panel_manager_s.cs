@@ -221,6 +221,9 @@ public class panel_manager_s : MonoBehaviour
 
     public void Paneltouch()
     {
+        if (!start_processing.Instance.Finish_Count)
+            return;
+
         //正解済みにパネルを押すとリセット
         if (!this.Touch)
         {

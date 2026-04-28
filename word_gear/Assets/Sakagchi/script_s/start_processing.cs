@@ -11,14 +11,8 @@ public class start_processing : MonoBehaviour
     [SerializeField] private GameObject start_button_gameobj;
     public static start_processing Instance;
     public bool Finish_Count = false;
-    
-    [SerializeField] private float fade_speed = 0.5f;//フェードスピード
-    private float red, green, blue, alfa;
+    private bool is_count = false;
 
-    [SerializeField] private bool fade_out = false;
-    [SerializeField] private bool fade_in = false;
-
-    [SerializeField] private Image fade_image;//パネルイメージ
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -31,40 +25,31 @@ public class start_processing : MonoBehaviour
 
     void Start()
     {
-        fade_image.gameObject.SetActive(false);
         countdown_image.gameObject.SetActive(false);
-        red = fade_image.color.r;
-        green = fade_image.color.g;
-        blue = fade_image.color.b;
-        alfa = fade_image.color.a;
     }
 
     private void Update()
     {
-        if (fade_in)
+        //ゲームオブジェクトのボタンのアクティブfalse
+        if (fade_manager.Instance.Fade_In || fade_manager.Instance.Fade_Out)
         {
-            FadeIn();
+            start_button_gameobj.SetActive(false);
         }
 
-        if (fade_out)
+        //カウント開始
+        if(fade_manager.Instance.Finish_Fade && !is_count)
         {
-            FadeOut();
+           
+            StartCoroutine(CountDown());
         }
     }
 
-    //ボタンが押された時の処理関数
-    public void ClickStart()
-    {
-        fade_image.gameObject.SetActive(true);
-        start_button_gameobj.SetActive(false);
-        fade_in = true;
-        //fade_out = true;
-        
-    }
+   
 
     //カウントダウンの処理関数
     IEnumerator CountDown()
     {
+        is_count = true;
         Finish_Count = false;
 
         countdown_image.gameObject.SetActive(true);
@@ -81,43 +66,10 @@ public class start_processing : MonoBehaviour
 
         Finish_Count = true;
 
-    }
+        //初期化
+        fade_manager.Instance.InitVariable();
 
-    //フェードインの処理関数
-    void FadeIn()
-    {
-        //alfa値を変化
-        alfa -= fade_speed * Time.deltaTime;
-        alfa = Mathf.Clamp01(alfa);
-        ApplyColor();
-        if (alfa <= 0)
-        {
-            //フェードイン終了
-            fade_in = false;
-            fade_image.enabled = false;
-            StartCoroutine(CountDown());
-        }
+        is_count = false;
     }
-
-    //フェードアウトの処理関数
-    void FadeOut()
-    {
-        //alfa値の変化
-        fade_image.enabled = true;
-        alfa += fade_speed * Time.deltaTime;
-        alfa = Mathf.Clamp01(alfa);
-        ApplyColor();
-        if (alfa >= 1)
-        {
-            //フェードアウト終了
-            fade_out = false;
-            StartCoroutine(CountDown());
-        }
-    }
-
-    //フェード中の画像の色の変化処理関数
-    void ApplyColor()
-    {
-        fade_image.color = new Color(red, green, blue, alfa);
-    }
+  
 }

@@ -132,12 +132,9 @@ public class game_manager_s : MonoBehaviour
    {
         if (start_processing.Instance.Finish_Count)
         {
-            Debug.Log("スタート");
-            Situation_Scene_Class.Scene.SetActive(false);
-            main_game_scene.SetActive(true);
+
             TimeControl();
         }
-
 
 
         if (Game_Over && !go_running)
@@ -149,6 +146,13 @@ public class game_manager_s : MonoBehaviour
         {
             StartCoroutine(GameClear());
         }
+    }
+
+    //キャンバスの切り替え
+    public void ChangeCanvas()
+    {
+        Situation_Scene_Class.Scene.SetActive(false);
+        main_game_scene.SetActive(true);
     }
 
     //時間の制御関数
