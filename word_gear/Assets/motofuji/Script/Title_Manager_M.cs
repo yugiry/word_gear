@@ -53,6 +53,7 @@ public class Title_Manager_M : MonoBehaviour
             switch(_button_num % 3)
             {
                 case 0:
+                    SceneManager.LoadScene("GearNeedleRotationScene");
                     Debug.Log("à§çb");
                     break;
                 case 1:
@@ -60,6 +61,7 @@ public class Title_Manager_M : MonoBehaviour
                     Debug.Log("å≥ì°");
                     break;
                 case 2:
+                    SceneManager.LoadScene("Word_Search");
                     Debug.Log("ç‚å˚");
                     break;
             }
