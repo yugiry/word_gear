@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class panel_manager_s : MonoBehaviour
@@ -45,6 +42,19 @@ public class panel_manager_s : MonoBehaviour
 
     //ゲームクリア関連
     public static bool Game_Clear = false;
+
+
+    //音楽クラス
+    [SerializeField] private C_Music music_class;
+
+    [System.Serializable]
+    public class C_Music
+    {
+        public AudioSource AS;
+        public AudioClip Click_Button;
+        public AudioClip Incorrect_Button;
+        public bool End_SE = false;
+    }
 
     //指定された値に対応するリストを取得するメソッド
     public static List<int> GetProblemList(int F_value)
@@ -251,6 +261,8 @@ public class panel_manager_s : MonoBehaviour
 
             this.Touch = false;
             word_num++;
+            //SE
+            music_class.AS.PlayOneShot(music_class.Click_Button);
         }
         else
         {
@@ -284,6 +296,13 @@ public class panel_manager_s : MonoBehaviour
         Correct_Word.Clear();
 
         word_num = 0;
+        //SE
+        if (!music_class.End_SE)
+        {
+            music_class.AS.PlayOneShot(music_class.Incorrect_Button);
+            music_class.End_SE = true;
+            StartCoroutine(SE_Reset());
+        }
 
 
     }
@@ -337,5 +356,13 @@ public class panel_manager_s : MonoBehaviour
         SettingDictionary();
 
         Initialized = true;
+    }
+
+    //SEフラグリセット
+    private IEnumerator SE_Reset()
+    {
+        float F_se_time = 1f;
+        yield return new WaitForSeconds(F_se_time);
+        music_class.End_SE = false;
     }
 }

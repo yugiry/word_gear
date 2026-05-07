@@ -8,7 +8,6 @@ public class start_processing : MonoBehaviour
 {
     [SerializeField] private List<Sprite> countdown_sprite = new List<Sprite>();
     [SerializeField] private Image countdown_image;
-    [SerializeField] private GameObject start_button_gameobj;
     public static start_processing Instance;
     public bool Finish_Count = false;
     private bool is_count = false;
@@ -35,21 +34,13 @@ public class start_processing : MonoBehaviour
     void Start()
     {
         countdown_image.gameObject.SetActive(false);
-        start_button_gameobj.SetActive(true);
     }
 
     private void Update()
     {
-        //ゲームオブジェクトのボタンのアクティブfalse
-        if (fade_manager.Instance.Fade_In || fade_manager.Instance.Fade_Out)
-        {
-            start_button_gameobj.SetActive(false);
-        }
-
         //カウント開始
-        if(fade_manager.Instance.Finish_Fade && !is_count)
+        if(fade_manager.Instance.Finish_Fade && !is_count && fade_manager.Instance.Start_Fade)
         {
-           
             StartCoroutine(CountDown());
         }
     }
@@ -79,6 +70,7 @@ public class start_processing : MonoBehaviour
 
         Finish_Count = true;
 
+        fade_manager.Instance.Start_Fade = false;
         //初期化
         fade_manager.Instance.InitVariable();
 
@@ -88,7 +80,6 @@ public class start_processing : MonoBehaviour
     //初期化関数
     public void Initialization()
     {
-        start_button_gameobj.SetActive(true);
         Finish_Count = false;
     }
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
+
 
 public class fade_manager : MonoBehaviour
 {
@@ -11,11 +10,12 @@ public class fade_manager : MonoBehaviour
     public bool Fade_Out = false;
     public bool Fade_In = false;
     public bool Finish_Fade = false;
+    public bool Finish_Fade_Out = false;
+    public bool Start_Fade = false;
 
     [SerializeField] private Image fade_image;//パネルイメージ
 
     public static fade_manager Instance;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -23,6 +23,11 @@ public class fade_manager : MonoBehaviour
        if(Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+       else
+        {
+            Destroy(gameObject);
         }
        
     }
@@ -54,7 +59,10 @@ public class fade_manager : MonoBehaviour
     //フェードの処理関数
     public void Fade()
     {
-       
+        Finish_Fade = false;
+        Finish_Fade_Out = false;
+        alfa = 0f;
+        ApplyColor();
         fade_image.gameObject.SetActive(true);
         fade_image.enabled = true;
 
@@ -93,8 +101,7 @@ public class fade_manager : MonoBehaviour
         {
             //フェードアウト終了
             Fade_Out = false;
-            game_manager_s.Instance.ChangeCanvas();
-            Fade_In = true;
+            Finish_Fade_Out = true;
         }
     }
 
@@ -110,5 +117,7 @@ public class fade_manager : MonoBehaviour
         Fade_Out = false;
         Fade_In = false;
         Finish_Fade = false ;
+        Finish_Fade_Out = false;
+        fade_image.gameObject.SetActive(false);
     }
 }

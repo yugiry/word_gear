@@ -1,13 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Timeline;
-using UnityEngine.U2D;
 using UnityEngine.UI;
-using System.Numerics;
 
 public class game_manager_s : MonoBehaviour
 {
@@ -17,6 +11,7 @@ public class game_manager_s : MonoBehaviour
     [SerializeField] private GameObject main_game_scene;//ゲームメインシーンゲームオブジェクト
     private const int first_half = 15;
     [SerializeField] private GameObject clear_text;
+    [SerializeField] private StageClear_Manager_M STAGECLEAR_MANAGER;
 
     //時間関連
     public C_TimeRelated Time_Related_Class;
@@ -71,8 +66,9 @@ public class game_manager_s : MonoBehaviour
     [System.Serializable]
     public class C_SituationScene : C_GameSceneUI
     {
-       //public  UnityEngine.Vector2 Situation_Text_Pos;
-       //public Transform Dialogue_Recttransform;
+        //public  UnityEngine.Vector2 Situation_Text_Pos;
+        //public Transform Dialogue_Recttransform;
+        public GameObject Start_Button;
     }
     private bool situation_running = false;
     private const int situation_row = 1;
@@ -91,12 +87,14 @@ public class game_manager_s : MonoBehaviour
 
     //音楽クラス
     [SerializeField] private C_MusicClass music_class;
-
     [System.Serializable]
     public class C_MusicClass
     {
         public AudioSource AS;
         public AudioClip Clear_SE;
+        public AudioClip Cliclk_Button_SE;
+        public AudioClip Success_SE;
+        public AudioClip Faile_SE;
     };
 
     private const int split = 6;
@@ -120,6 +118,8 @@ public class game_manager_s : MonoBehaviour
         }
 
         clear_text.gameObject.SetActive(false);
+
+        //StageClear_Manager_M.instance.now_stage = Stage_Count;
     }
 
 
@@ -131,6 +131,7 @@ public class game_manager_s : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        BGM_manager_s.Instance.PlayBGM(BGM_manager_s.SCENE_TYPE.SITUATION);
         Situation_Scene_Class.Scene.SetActive(true);
         main_game_scene.SetActive(false);
         Game_Over_Class.Scene.SetActive(false);
@@ -160,9 +161,10 @@ public class game_manager_s : MonoBehaviour
     }
 
     //キャンバスの切り替え
-    public void ChangeCanvas()
+    public  void ChangeCanvas()
     {
         Situation_Scene_Class.Scene.SetActive(false);
+        BGM_manager_s.Instance.PlayBGM(BGM_manager_s.SCENE_TYPE.GAME_1);
         main_game_scene.SetActive(true);
     }
 
@@ -190,11 +192,14 @@ public class game_manager_s : MonoBehaviour
     private IEnumerator GameOver()
     {
         go_running = true;
-        yield return new WaitForSeconds(wait_time);
-        Game_Over = false;
+        fade_manager.Instance.Fade();
+        // 真っ黒になるまで待機
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         main_game_scene.SetActive(false);
         Game_Over_Class.Scene.SetActive(true);
-        go_running = false;
+        //SE
+        music_class.AS.PlayOneShot(music_class.Faile_SE);
+        fade_manager.Instance.Fade_In = true;
     }
 
     //ゲームクリア関数
@@ -205,10 +210,16 @@ public class game_manager_s : MonoBehaviour
         //SE
         music_class.AS.PlayOneShot(music_class.Clear_SE);
         yield return new WaitForSeconds(wait_time);
-        panel_manager_s.Game_Clear = false;
+        fade_manager.Instance.Fade();
+        // 真っ黒になるまで待機
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         main_game_scene.SetActive(false);
         Game_Clear_Class.Scene.SetActive(true);
-        gc_running = false;
+        //SE
+        music_class.AS.PlayOneShot(music_class.Success_SE);
+        fade_manager.Instance.Fade_In = true;
+       //STAGECLEAR_MANAGER.StageClear();
+        Debug.Log(StageClear_Manager_M.instance);
     }
 
     //問題csvのロード
@@ -295,17 +306,27 @@ public class game_manager_s : MonoBehaviour
     }
 
     //ゲームオーバー時にリトライボタンを押したとき
-    public void GameOverReTryButton()
+    public void ClickGameOverRetryButton()
     {
-        //if (Game_Over_Class.Insert_An_Ad)
-        //{
-        StopAllCoroutines();
-        go_running = false;
+        Game_Over = false;
+        go_running = true;
+        music_class.AS.PlayOneShot(music_class.Cliclk_Button_SE);
+        Situation_Scene_Class.Start_Button.gameObject.SetActive(true);
+        StartCoroutine(GameOverRetry());
+    }
+
+    private IEnumerator GameOverRetry()
+    {
+        fade_manager.Instance.Fade();
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
+
         answer_manager_s.Instance.InitializeVariable();
         InitializeVariableGO();
         Game_Over_Class.Insert_An_Ad = false;
         start_processing.Instance.Initialization();
-        //}
+        fade_manager.Instance.InitVariable();
+        fade_manager.Instance.Fade_In = true;
+        go_running = false;
     }
 
     //ゲームオーバー時にタイトルボタンを押したとき
@@ -318,5 +339,28 @@ public class game_manager_s : MonoBehaviour
     public void GameClearNextButton()
     {
         Debug.Log("次");
+        gc_running = false;
+        panel_manager_s.Game_Clear = false;
+    }
+
+    //ボタンが押されたとき
+    public void StartGameButton()
+    {
+        music_class.AS.PlayOneShot(music_class.Cliclk_Button_SE);
+        fade_manager.Instance.Start_Fade = true;
+        Situation_Scene_Class.Start_Button.gameObject.SetActive(false);
+        StartCoroutine(GameStart());
+    }
+
+    //ゲームスタート
+    private IEnumerator GameStart()
+    {
+        fade_manager.Instance.Fade();
+
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
+
+        ChangeCanvas();
+
+        fade_manager.Instance.Fade_In = true;
     }
 }

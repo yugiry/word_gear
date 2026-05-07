@@ -13,6 +13,7 @@ public class CSV_load_s : MonoBehaviour
     /// <param name = "pass">csvファイルのパス</param>
     /// <returns>csvから分割されたList<string>を返す</string></returns>
     /// 
+
     public List<string> CSVInput(string _pass)
     {
         List<string> F_list = new List<string>();

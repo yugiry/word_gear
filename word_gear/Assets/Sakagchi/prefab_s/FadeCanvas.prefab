@@ -120,6 +120,8 @@ MonoBehaviour:
   Fade_In: 0
   Finish_Fade: 0
   fade_image: {fileID: 5971611864123491852}
+  AS: {fileID: 2660583548841794663, guid: 26e56cda4cd19b04d94137412befb0d7, type: 3}
+  cliclk_button_se: {fileID: 8300000, guid: 5fe252e1865155d439525f1f25003e39, type: 3}
 --- !u!1 &8856646090660349275
 GameObject:
   m_ObjectHideFlags: 0
