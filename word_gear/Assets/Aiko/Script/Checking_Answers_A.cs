@@ -32,6 +32,7 @@ public class Checking_Answers_A : MonoBehaviour
 
     public void SetAnswer()
     {
+        //Answers = LS.Problem_Answer;
         Split_answers = Answers.ToCharArray();
         Chosen_Word = new bool[Split_answers.Length];
     }

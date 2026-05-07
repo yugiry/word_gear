@@ -1,5 +1,6 @@
 //using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Failue_Game_A : MonoBehaviour
@@ -60,7 +61,7 @@ public class Failue_Game_A : MonoBehaviour
         LS.BP.StopBGM();
 
         //タイトルシーンに戻る処理
-
+        SceneManager.LoadScene(LS.Title_Scene_Name);
     }
 
 }

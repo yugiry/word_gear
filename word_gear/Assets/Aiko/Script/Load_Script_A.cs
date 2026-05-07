@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 [DefaultExecutionOrder(0)]
 public class Load_Script_A : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class Load_Script_A : MonoBehaviour
     public AudioClip[] Sound_Effect;
     public AudioClip[] BGM_Clip;
 
+    public string Problem_Answer;
     public Text Synopsis_Text;
     public Text Deseption_Text;
     public Text Success_Text;
@@ -40,6 +42,13 @@ public class Load_Script_A : MonoBehaviour
     //public string Answer_String;
     public GameObject[] Game_Images=new GameObject[3];
     public Image[] Images=new Image[3];
+
+    public string Title_Scene_Name;
+    public string Next_Stage_Scene_Name;
+
+    [SerializeField] private Collider2D all_block_collider;
+
+    
 
     public enum SE_Names
     {
@@ -63,13 +72,18 @@ public class Load_Script_A : MonoBehaviour
         FG = Failure_Canvas.GetComponent<Failue_Game_A>();
         BP=bgm_playback_object.GetComponent<BGM_Playback_A>();
         CL=csv_loader.GetComponent<Csv_Loader_A>();
+        //SCM = GameObject.Find("StageClearManager").GetComponent<StageClear_Manager_M>();
 
-        for (int i = 0; i < Images.Length; i++)
-        {
-            //Game_Images[i].GetComponent<Image>().sprite = Images[i].sprite;
-        }
+        //for (int i = 0; i < Images.Length; i++)
+        //{
+        //    Game_Images[i].GetComponent<Image>().sprite = Images[i].sprite;
+        //}
 
         CL.Csv_Input(CL.file);
+
+        
+
+        //Problem_Answer = CL.csv_texts.p;
 
         Normal_Canvas.gameObject.SetActive(false);
         Success_Canvas.gameObject.SetActive(false);
@@ -78,6 +92,42 @@ public class Load_Script_A : MonoBehaviour
         Audio_Souce=GetComponent<AudioSource>();
 
         BP.PlayBGM(BGM_Clip[(int)BGM_Names.Synopsis]);
+    }
+
+    IEnumerator GameStartCount(float _first_time)
+    {
+        all_block_collider.gameObject.SetActive(true);
+
+        while(_first_time > 0.0f)
+        {
+            _first_time -=1/* Time.deltaTime*/;
+
+            yield return null;
+
+
+            yield return new WaitForSeconds(1.0f);
+
+            if (_first_time<=0.0f)
+            {
+                PlaySE(Sound_Effect[(int)SE_Names.Failure]);
+            }
+            else
+            {
+                PlaySE(Sound_Effect[(int)SE_Names.Click]);
+            }
+                
+        }
+       
+        {
+            BP.PlayBGM(BGM_Clip[(int)Load_Script_A.BGM_Names.GameStart]);
+            all_block_collider.gameObject.SetActive(false);
+            
+        }
+       
+       
+
+
+ 
     }
 
     public void GameStart()
@@ -99,6 +149,9 @@ public class Load_Script_A : MonoBehaviour
 
         RG.SetCenterBallColor();
 
+        float F_game_start_count = 3.0f;
+
+        StartCoroutine(GameStartCount(F_game_start_count));
 
     }
 
