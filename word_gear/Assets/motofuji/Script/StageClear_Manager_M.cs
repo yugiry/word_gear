@@ -10,6 +10,7 @@ public class StageClear_Manager_M : MonoBehaviour
     {
         if (instance == null)
         {
+            instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
         else

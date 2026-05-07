@@ -908,6 +908,22 @@ MonoBehaviour:
   game_text: {fileID: 334912709}
   success_text: {fileID: 456419269}
   failure_text: {fileID: 38560934}
+  wordgea_image:
+  - start_img: {fileID: -5036632471001484730, guid: 218f4ff920639af4d850140b0ce1ec99, type: 3}
+    success_img: {fileID: -2370575298457166293, guid: 2b3cade8d0165724c83182af497db286, type: 3}
+    failure_img: {fileID: 7152254832901136493, guid: 63f4775ec5bd97546b0b55fe34b07bbb, type: 3}
+  - start_img: {fileID: -2626512582016040255, guid: 04affa56c80efe546b450b21adf0c1b9, type: 3}
+    success_img: {fileID: 1999248136449830257, guid: 41b8d429c1bb5394fa3ecc78e40bfd9c, type: 3}
+    failure_img: {fileID: 4607229970895839502, guid: 4d0a89ef4ce61604ea06f97beab54dc7, type: 3}
+  - start_img: {fileID: -6121907166443835250, guid: bfc5bdd0126bcd148b7d3973693da87a, type: 3}
+    success_img: {fileID: 3018488250021252509, guid: f1c14fe7745bc744a964ef8958911d4d, type: 3}
+    failure_img: {fileID: 2176218516224359604, guid: c8206b8d9aec0ad458e3f43780004f18, type: 3}
+  - start_img: {fileID: -7648537321097967548, guid: 1a84614cd385def41b0f01dd159ea9a5, type: 3}
+    success_img: {fileID: -1410678114541103546, guid: 7926062844b9bfb46a8425aa5ac81565, type: 3}
+    failure_img: {fileID: -4367389733711735463, guid: 31e730e9fc9bd874cb2b9d5e1848e55b, type: 3}
+  - start_img: {fileID: 8849083376935013079, guid: 97788a3b47f62ff4fa6ad693e70f15f5, type: 3}
+    success_img: {fileID: -5805940839416585984, guid: 673abcfefc860bd4998b6f31cb21bfec, type: 3}
+    failure_img: {fileID: 3063933140886657343, guid: d3cd654c6b12c3741847a6df25f4802b, type: 3}
 --- !u!1 &448900944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,6 +1667,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1719,7 +1736,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1792,6 +1809,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e253e74bee7f734aab5ebca9913c0c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetCamera: {fileID: 519420031}
+  aspectVec: {x: 810, y: 1440}
 --- !u!1 &520318008
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,7 +2347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 810, y: 1440}
@@ -2995,10 +3026,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 810, y: 1440}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -3311,10 +3342,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 810, y: 1440}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4722,10 +4753,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 810, y: 1440}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

@@ -47,20 +47,21 @@ public class Title_Manager_M : MonoBehaviour
     public void ClickStage(int _button_num)
     {
         //クリックしたステージの１つ前がクリア済みもしくは最初のステージならステージに移行する
-        if (_button_num - 1 >= 0 && scm.ClearCheck_Flag[_button_num - 1] || _button_num == 0)
+        //if (_button_num - 1 >= 0 && scm.ClearCheck_Flag[_button_num - 1] || _button_num == 0)
         {
             scm.now_stage = _button_num;
             switch(_button_num % 3)
             {
                 case 0:
-                    SceneManager.LoadScene("GearNeedleRotationScene");
+                    //SceneManager.LoadScene("GearNeedleRotationScene");
+                    SceneManager.LoadScene("wordgea_scene");
                     Debug.Log("愛甲");
                     break;
-                case 1:
+                case 2:
                     SceneManager.LoadScene("wordgea_scene");
                     Debug.Log("元藤");
                     break;
-                case 2:
+                case 1:
                     SceneManager.LoadScene("Word_Search");
                     Debug.Log("坂口");
                     break;

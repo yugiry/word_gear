@@ -68,10 +68,6 @@ public class Game_Manager_M : MonoBehaviour
             //答えの文字数分入っていたら答えが合っているかチェックする
             if (check_inball == ans_num) CheckAnswerBall();
 
-            if (do_slide)
-            {
-                MoveSlide();
-            }
             if (time != 0)
             {
                 if (flame_time >= 60)
@@ -81,6 +77,10 @@ public class Game_Manager_M : MonoBehaviour
                 }
                 flame_time++;
             }
+        }
+        if (do_slide)
+        {
+            MoveSlide();
         }
     }
 
