@@ -33,4 +33,11 @@ public class Continue_Synopsis_A : MonoBehaviour
         LS.GameStart();
     }
 
+    public void NextStage()
+    {
+        LS.SCM.StageClear();
+        LS.SCM.now_stage += 1;
+
+    }
+
 }

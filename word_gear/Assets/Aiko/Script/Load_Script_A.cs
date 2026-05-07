@@ -13,6 +13,8 @@ public class Load_Script_A : MonoBehaviour
     public Failue_Game_A FG;
     public Csv_Loader_A CL;
     public BGM_Playback_A BP;
+    public StageClear_Manager_M SCM;
+    
 
     [SerializeField] private GameObject needle;
     [SerializeField] private GameObject rotate_gear;
@@ -37,6 +39,7 @@ public class Load_Script_A : MonoBehaviour
     public Text Failure_Text;
     //public string Answer_String;
     public GameObject[] Game_Images=new GameObject[3];
+    public Image[] Images=new Image[3];
 
     public enum SE_Names
     {
@@ -60,8 +63,11 @@ public class Load_Script_A : MonoBehaviour
         FG = Failure_Canvas.GetComponent<Failue_Game_A>();
         BP=bgm_playback_object.GetComponent<BGM_Playback_A>();
         CL=csv_loader.GetComponent<Csv_Loader_A>();
-        
 
+        for (int i = 0; i < Images.Length; i++)
+        {
+            //Game_Images[i].GetComponent<Image>().sprite = Images[i].sprite;
+        }
 
         CL.Csv_Input(CL.file);
 

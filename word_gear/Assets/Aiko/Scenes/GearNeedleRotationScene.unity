@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 82798703}
   - component: {fileID: 82798702}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Deseption_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1520,7 +1520,7 @@ GameObject:
   - component: {fileID: 566030971}
   - component: {fileID: 566030970}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: FailureText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2806,6 +2806,7 @@ MonoBehaviour:
   FG: {fileID: 0}
   CL: {fileID: 0}
   BP: {fileID: 0}
+  SCM: {fileID: 0}
   needle: {fileID: 1907141350}
   rotate_gear: {fileID: 1598574792}
   check_answer_script: {fileID: 989979631}
@@ -2837,6 +2838,10 @@ MonoBehaviour:
   - {fileID: 1664150455}
   - {fileID: 1906371204}
   - {fileID: 2108825666}
+  Images:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1268238797
 Transform:
   m_ObjectHideFlags: 0
@@ -3315,7 +3320,7 @@ GameObject:
   - component: {fileID: 1499254615}
   - component: {fileID: 1499254614}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Success_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
