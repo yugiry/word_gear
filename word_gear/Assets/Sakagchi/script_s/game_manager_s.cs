@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class game_manager_s : MonoBehaviour
 {
@@ -218,7 +219,8 @@ public class game_manager_s : MonoBehaviour
         //SE
         music_class.AS.PlayOneShot(music_class.Success_SE);
         fade_manager.Instance.Fade_In = true;
-       //STAGECLEAR_MANAGER.StageClear();
+        StageClear_Manager_M.instance.now_stage++;
+        StageClear_Manager_M.instance.StageClear();
         Debug.Log(StageClear_Manager_M.instance);
     }
 
@@ -330,17 +332,42 @@ public class game_manager_s : MonoBehaviour
     }
 
     //ゲームオーバー時にタイトルボタンを押したとき
-    public void GameOverReturnTitle()
+    public void GameOverReturnTitleButton()
     {
-        Debug.Log("タイトルへ");
+        music_class.AS.PlayOneShot(music_class.Cliclk_Button_SE);
+        StartCoroutine(ReturnTitle());
     }
 
+    //タイトルに戻る処理
+    private IEnumerator ReturnTitle()
+    {
+        fade_manager.Instance.Fade();
+
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
+
+        SceneManager.LoadScene("titlescene");
+
+        fade_manager.Instance.Fade_In = true;
+    }
     //ゲームクリア時の次の問題ボタンンを押した時
     public void GameClearNextButton()
     {
-        Debug.Log("次");
+        music_class.AS.PlayOneShot(music_class.Cliclk_Button_SE);
         gc_running = false;
         panel_manager_s.Game_Clear = false;
+        StartCoroutine(NextStage());
+    }
+
+    //次のステージへ
+    private IEnumerator NextStage()
+    {
+        fade_manager.Instance.Fade();
+
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
+
+        SceneManager.LoadScene("wordgea_scene");
+
+        fade_manager.Instance.Fade_In = true;
     }
 
     //ボタンが押されたとき
