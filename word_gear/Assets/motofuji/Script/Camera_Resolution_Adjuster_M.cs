@@ -32,22 +32,5 @@ public class Camera_Resolution_Adjuster_M : MonoBehaviour
         }
 
         targetCamera.rect = viewportRect; //ƒJƒƒ‰‚ÌViewport‚É“K—p
-
-        //float baseOrthoSize = referenceHeight / 200f;
-
-        //Camera cam = Camera.main;
-
-        //if (currentAspect >= targetAspect)
-        //{
-        //    // ‰¡‚ªL‚¢ ¨ c‚ğ‡‚í‚¹‚é
-        //    float scale = targetAspect / currentAspect;
-        //    cam.orthographicSize = baseOrthoSize * scale;
-        //}
-        //else
-        //{
-        //    // c‚ª’·‚¢ ¨ ‰¡‚ğ‡‚í‚¹‚é
-        //    float scale = targetAspect / currentAspect;
-        //    cam.orthographicSize = baseOrthoSize * scale;
-        //}
     }
 }

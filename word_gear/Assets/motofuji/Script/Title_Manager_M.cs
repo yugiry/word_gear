@@ -53,8 +53,7 @@ public class Title_Manager_M : MonoBehaviour
             switch(_button_num % 3)
             {
                 case 0:
-                    //SceneManager.LoadScene("GearNeedleRotationScene");
-                    SceneManager.LoadScene("wordgea_scene");
+                    SceneManager.LoadScene("GearNeedleRotationScene");
                     Debug.Log("à§çb");
                     break;
                 case 2:

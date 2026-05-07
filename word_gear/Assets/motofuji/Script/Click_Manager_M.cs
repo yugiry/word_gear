@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Common;
+﻿using Common;
 using NUnit.Framework;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Click_Manager_M : MonoBehaviour
 {
@@ -256,5 +258,23 @@ public class Click_Manager_M : MonoBehaviour
 
         Debug.Log("スライダーを離した");
     }
+    #endregion
+
+    #region シーン移行
+
+    public void ClickNextButton()
+    {
+        StageClear_Manager_M F_scm = GameObject.Find("StageClearManager").GetComponent<StageClear_Manager_M>();
+        F_scm.StageClear();
+        SceneManager.LoadScene("GearNeedleRotationScene");
+    }
+
+    public void ClickTitleButton()
+    {
+        StageClear_Manager_M F_scm = GameObject.Find("StageClearManager").GetComponent<StageClear_Manager_M>();
+        F_scm.now_stage = -1;
+        SceneManager.LoadScene("titlescene");
+    }
+
     #endregion
 }

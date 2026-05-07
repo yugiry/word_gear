@@ -29,10 +29,10 @@ public class UI_Manager_M : MonoBehaviour
 
     private void Start()
     {
-        GameObject scm_obj = GameObject.Find("StageClearManager");
+        GameObject F_scm_obj = GameObject.Find("StageClearManager");
 
-        scm = scm_obj.GetComponent<StageClear_Manager_M>();
-        csvl = scm_obj.GetComponent<Csv_Loder_M>();
+        scm = F_scm_obj.GetComponent<StageClear_Manager_M>();
+        csvl = F_scm_obj.GetComponent<Csv_Loder_M>();
 
         start_text.text = csvl.csv_texts[scm.now_stage].start;
         game_text.text = csvl.csv_texts[scm.now_stage].description;
