@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
 [DefaultExecutionOrder(0)]
 public class Load_Script_A : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public class Load_Script_A : MonoBehaviour
     public Create_Balls_A CBL;
     public Tap_Center_Ball_A TCB;
     public Failue_Game_A FG;
-    public Csv_Loader_A CL;
+    public Csv_Loder_M CL;
+    public Csv_Loader_A CLA;
     public BGM_Playback_A BP;
     public StageClear_Manager_M SCM;
-    
+    public Timer_A TA;
+    public Continue_Synopsis_A CS;
 
     [SerializeField] private GameObject needle;
     [SerializeField] private GameObject rotate_gear;
@@ -25,6 +28,8 @@ public class Load_Script_A : MonoBehaviour
     [SerializeField] private GameObject center_ball;
     [SerializeField] private GameObject csv_loader;
     [SerializeField] private GameObject bgm_playback_object;
+    [SerializeField] private GameObject time_bar;
+    [SerializeField] private GameObject synopsis_object;
 
     public Canvas Normal_Canvas;
     public Canvas Success_Canvas;
@@ -41,18 +46,25 @@ public class Load_Script_A : MonoBehaviour
     public Text Failure_Text;
     //public string Answer_String;
     public GameObject[] Game_Images=new GameObject[3];
-    public Image[] Images=new Image[3];
+    public Sprite[] Images=new Sprite[3];
+
+    public GameObject Clear_Over_Image;
+
+    [SerializeField] private GameObject count_down_object;
+    [SerializeField] private Sprite[] count_down_images;
+    public GameObject FadeIn_FadeOut_Object;
+    public bool Fadein_Time_Flag = false;
 
     public string Title_Scene_Name;
     public string Next_Stage_Scene_Name;
 
     [SerializeField] private Collider2D all_block_collider;
 
-    
+    [SerializeField] private GameObject stage_clear_manager;
 
     public enum SE_Names
     {
-        Click,Gear,Failure,Success,InCorrect
+        Click,Gear,Failure,Success,InCorrect,CountFinish,CountDown
     }
     public enum BGM_Names
     {
@@ -63,6 +75,8 @@ public class Load_Script_A : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
+
         ONAB = needle.GetComponent<Overlapping_Needle_And_Ball_A>();
         RG=rotate_gear.GetComponent<Rotate_Gear_A>();
         CA=check_answer_script.GetComponent<Checking_Answers_A>();
@@ -71,7 +85,30 @@ public class Load_Script_A : MonoBehaviour
         TCB=center_ball.GetComponent<Tap_Center_Ball_A>();
         FG = Failure_Canvas.GetComponent<Failue_Game_A>();
         BP=bgm_playback_object.GetComponent<BGM_Playback_A>();
-        CL=csv_loader.GetComponent<Csv_Loader_A>();
+        TA=time_bar.GetComponent<Timer_A>();
+        CS=synopsis_object.GetComponent<Continue_Synopsis_A>();
+
+        if (GameObject.Find("StageClearManager"))
+        {
+            stage_clear_manager = GameObject.Find("StageClearManager");
+            CL = stage_clear_manager.GetComponent<Csv_Loder_M>();
+            SCM= stage_clear_manager.GetComponent<StageClear_Manager_M>();
+
+            CL.CsvInput(CL.file);
+
+            Synopsis_Text.text = CL.csv_texts[SCM.now_stage].start;
+            Deseption_Text.text = CL.csv_texts[SCM.now_stage].description;
+            Problem_Answer = CL.csv_texts[SCM.now_stage].problem;
+            Success_Text.text= CL.csv_texts[SCM.now_stage].success;
+            Failure_Text.text= CL.csv_texts[SCM.now_stage].failur;
+        }
+        else
+        {
+            CLA = csv_loader.GetComponent<Csv_Loader_A>();
+            CLA.Csv_Input(CLA.file);
+        }
+
+
         //SCM = GameObject.Find("StageClearManager").GetComponent<StageClear_Manager_M>();
 
         //for (int i = 0; i < Images.Length; i++)
@@ -79,26 +116,37 @@ public class Load_Script_A : MonoBehaviour
         //    Game_Images[i].GetComponent<Image>().sprite = Images[i].sprite;
         //}
 
-        CL.Csv_Input(CL.file);
 
-        
+
+
 
         //Problem_Answer = CL.csv_texts.p;
-
+       
         Normal_Canvas.gameObject.SetActive(false);
         Success_Canvas.gameObject.SetActive(false);
         Failure_Canvas.gameObject.SetActive(false);
 
-        Audio_Souce=GetComponent<AudioSource>();
+        count_down_object.SetActive(false);
+        Clear_Over_Image.gameObject.SetActive(false);
+
+       // FadeIn_FadeOut_Object.gameObject.SetActive(false);
+
+        Audio_Souce =GetComponent<AudioSource>();
 
         BP.PlayBGM(BGM_Clip[(int)BGM_Names.Synopsis]);
     }
 
     IEnumerator GameStartCount(float _first_time)
     {
+        count_down_object.SetActive(true);
         all_block_collider.gameObject.SetActive(true);
+        PlaySE(Sound_Effect[(int)SE_Names.CountDown]);
 
-        while(_first_time > 0.0f)
+        int image_num = 0;
+
+        count_down_object.GetComponent<Image>().sprite = count_down_images[image_num];
+
+        while (_first_time > 0.0f)
         {
             _first_time -=1/* Time.deltaTime*/;
 
@@ -107,21 +155,31 @@ public class Load_Script_A : MonoBehaviour
 
             yield return new WaitForSeconds(1.0f);
 
-            if (_first_time<=0.0f)
+            if (_first_time <= 0.0f)
             {
-                PlaySE(Sound_Effect[(int)SE_Names.Failure]);
+                count_down_object.transform.localScale = new Vector3(3.5f, 1.0f, 1.0f);
+                //PlaySE(Sound_Effect[(int)SE_Names.CountFinish]);
             }
             else
             {
-                PlaySE(Sound_Effect[(int)SE_Names.Click]);
+                //PlaySE(Sound_Effect[(int)SE_Names.Click]);
             }
-                
+            image_num++;
+            count_down_object.GetComponent<Image>().sprite = count_down_images[image_num];
+            
+
         }
        
         {
             BP.PlayBGM(BGM_Clip[(int)Load_Script_A.BGM_Names.GameStart]);
             all_block_collider.gameObject.SetActive(false);
-            
+            TA.CountStart();
+
+            yield return new WaitForSeconds(1.0f);
+
+            image_num = 0;
+            count_down_object.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            count_down_object.SetActive(false);
         }
        
        
@@ -132,6 +190,8 @@ public class Load_Script_A : MonoBehaviour
 
     public void GameStart()
     {
+        StartCoroutine(Color_FadeIn());
+
         ResetNormalCanvas();
 
         CA.SetAnswer();
@@ -150,6 +210,8 @@ public class Load_Script_A : MonoBehaviour
         RG.SetCenterBallColor();
 
         float F_game_start_count = 3.0f;
+
+        
 
         StartCoroutine(GameStartCount(F_game_start_count));
 
@@ -209,8 +271,158 @@ public class Load_Script_A : MonoBehaviour
         Failure_Canvas.gameObject.SetActive(false);
         Success_Canvas.gameObject.SetActive(false);
         Normal_Canvas.gameObject.SetActive(true);
+        Clear_Over_Image.gameObject.SetActive(false);
 
-        //カウントダウンのリセット
+
+    }
+
+    public void ImageAppearAndChange(int _image_num)
+    {
+        Clear_Over_Image.GetComponent<Image>().sprite = Images[_image_num];
+        Clear_Over_Image.SetActive(true);
+
+
+    }
+
+    public IEnumerator Color_FadeIn()
+    {
+        // 画面をフェードインさせるコールチン
+        // 前提：画面を覆うPanelにアタッチしている
+
+        // 色を変えるゲームオブジェクトからImageコンポーネントを取得
+        Image fade = FadeIn_FadeOut_Object.GetComponent<Image>();
+
+        // フェード元の色を設定（黒）★変更可
+        fade.color = new Color((0.0f / 255.0f), (0.0f / 255.0f), (0.0f / 0.0f), (255.0f / 255.0f));
+
+        // フェードインにかかる時間（秒）★変更可
+        const float fade_time = 0.5f;
+
+        // ループ回数（0はエラー）★変更可
+        const int loop_count = 10;
+
+        // ウェイト時間算出
+        float wait_time = fade_time / loop_count;
+
+        // 色の間隔を算出
+        float alpha_interval = 255.0f / loop_count;
+
+        // 色を徐々に変えるループ
+        for (float alpha = 255.0f; alpha >= 0.0f; alpha -= alpha_interval)
+        {
+            // 待ち時間
+            yield return new WaitForSeconds(wait_time);
+
+            // Alpha値を少しずつ下げる
+            Color new_color = fade.color;
+            new_color.a = alpha / 255.0f;
+            fade.color = new_color;
+        }
+
+        
+
+    }
+
+    public IEnumerator Color_FadeOut()
+    {
+        // 画面をフェードインさせるコールチン
+        // 前提：画面を覆うPanelにアタッチしている
+
+        // 色を変えるゲームオブジェクトからImageコンポーネントを取得
+        Image fade = FadeIn_FadeOut_Object.GetComponent<Image>();
+
+        // フェード後の色を設定（黒）★変更可
+        fade.color = new Color((0.0f / 255.0f), (0.0f / 255.0f), (0.0f / 0.0f), (0.0f / 255.0f));
+
+        // フェードインにかかる時間（秒）★変更可
+        const float fade_time = 0.5f;
+
+        // ループ回数（0はエラー）★変更可
+        const int loop_count = 10;
+
+        // ウェイト時間算出
+        float wait_time = fade_time / loop_count;
+
+        // 色の間隔を算出
+        float alpha_interval = 255.0f / loop_count;
+
+        // 色を徐々に変えるループ
+        for (float alpha = 0.0f; alpha <= 255.0f; alpha += alpha_interval)
+        {
+            // 待ち時間
+            yield return new WaitForSeconds(wait_time);
+
+            // Alpha値を少しずつ上げる
+            Color new_color = fade.color;
+            new_color.a = alpha / 255.0f;
+            fade.color = new_color;
+        }
+
+        
+
+        
+
+    }
+
+    public IEnumerator WaitFadeOut(int _start_function)
+    {
+        //StartCoroutine(Color_FadeOut());
+
+        Debug.Log("start");
+
+        IEnumerator enumerator = Color_FadeOut();
+        // 終わるまで待つ
+        yield return enumerator;
+
+        Debug.Log("end");
+
+        switch (_start_function)
+        {
+            case 0:
+                CS.TextClick();
+                break;
+                case 1:
+                CS.NextStage();
+                break;
+                case 2:
+                FG.RetryGame();
+                break;
+            case 3:
+                //Failure_Canvas.gameObject.SetActive(true);
+               // FG.TitleBack();
+                break;
+            case 4:
+                FG.TitleBack();
+                break;
+
+        }
+
+    }
+
+    public IEnumerator WaitFadeIn(int _start_function)
+    {
+        StartCoroutine(Color_FadeOut());
+
+        IEnumerator enumerator = Color_FadeIn();
+        // 終わるまで待つ
+        yield return enumerator;
+
+        switch (_start_function)
+        {
+            case 0:
+                CS.TextClick();
+                break;
+            case 1:
+                CS.NextStage();
+                break;
+            case 2:
+                FG.RetryGame();
+                break;
+            case 3:
+                FG.TitleBack();
+                break;
+
+        }
 
     }
 

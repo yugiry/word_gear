@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 [DefaultExecutionOrder(10)]
 public class Continue_Synopsis_A : MonoBehaviour
 {
@@ -24,22 +25,55 @@ public class Continue_Synopsis_A : MonoBehaviour
         
     }
 
-    public void TextClick()
+    public void TextbuttonClick()
     {
         LS.PlaySE(LS.Sound_Effect[0]);
-        synopsis_text.gameObject.SetActive(false );
+
+        StartCoroutine(LS.WaitFadeOut(0));
+    }
+
+    public void TextClick()
+    {
+       
+
+        //StartCoroutine( LS.Color_FadeOut());
+
+        //StartCoroutine(WaitFade());
+
+        synopsis_text.gameObject.SetActive(false);
         LS.Normal_Canvas.gameObject.SetActive(true);
         LS.BP.StopBGM();
-       // LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.GameStart]);
+        // LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.GameStart]);
+
+        //LS.FadeIn_FadeOut_Object.gameObject.SetActive(true);
 
         LS.GameStart();
+
+
+
+    }
+
+    //IEnumerator WaitFade()
+    //{
+    //    IEnumerator enumerator = LS.Color_FadeOut();
+    //    // TestCorが終わるまで待つ
+    //    yield return enumerator;
+
+       
+    //}
+
+    public void NextButtonClick()
+    {
+        LS.PlaySE(LS.Sound_Effect[0]);
+        LS.SCM.StageClear();
+        StartCoroutine(LS.WaitFadeOut(1));
     }
 
     public void NextStage()
     {
-        LS.PlaySE(LS.Sound_Effect[0]);
-        LS.SCM.StageClear();
-        LS.SCM.now_stage += 1;
+        
+        
+        //LS.SCM.now_stage += 1;
         SceneManager.LoadScene(LS.Next_Stage_Scene_Name);
 
     }
