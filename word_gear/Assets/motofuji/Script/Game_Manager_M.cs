@@ -3,6 +3,7 @@ using Common;
 using System;
 using System.Linq;
 using UnityEngine.UI;
+using TMPro;
 
 public class Game_Manager_M : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class Game_Manager_M : MonoBehaviour
     const int hole_half_width = hole_width / 2;
 
     //変数
-    public int time = 60;
     private int flame_time;
     public string ans_text;     //答えの文字列
     public int ans_num;         //答えの文字数の保持用
@@ -36,6 +36,10 @@ public class Game_Manager_M : MonoBehaviour
     private bool show_slide = false;
     private bool game_over = false;
     private bool in_game = false;
+    [Header("時間制限")]
+    public float timelimit = 60;
+    public float time;
+    public Slider time_slider;
 
     private void Start()
     {
@@ -43,13 +47,15 @@ public class Game_Manager_M : MonoBehaviour
         game_canvas.SetActive(false);
         success_canvas.SetActive(false);
         failure_canvas.SetActive(false);
+        time_slider.value = 1f;
+        time = timelimit;
     }
 
     private void Update()
     {
         if (!game_over && in_game)
         {
-            if (time == 0)
+            if (time <= 0)
             {
                 game_over = true;
                 TimeOver();
@@ -68,15 +74,8 @@ public class Game_Manager_M : MonoBehaviour
             //答えの文字数分入っていたら答えが合っているかチェックする
             if (check_inball == ans_num) CheckAnswerBall();
 
-            if (time != 0)
-            {
-                if (flame_time >= 60)
-                {
-                    flame_time = 0;
-                    time--;
-                }
-                flame_time++;
-            }
+            Timer();
+            
         }
         if (do_slide)
         {
@@ -84,12 +83,24 @@ public class Game_Manager_M : MonoBehaviour
         }
     }
 
+    //時間計測
+    private void Timer()
+    {
+        flame_time++;
+        if (flame_time > 60)
+        {
+            flame_time = 0;
+            time--;
+        }
+        float t = 1f - time / timelimit;//スライダーの値ー正規化
+        time_slider.value = Mathf.Lerp(1f, 0f, t);
+    }
+
     public void StageTap()
     {
         TurnCanvas(2);
         GameStart();
         flame_time = 0;
-        in_game = true;
     }
 
     /// <summary>
@@ -101,6 +112,9 @@ public class Game_Manager_M : MonoBehaviour
         RectTransform F_parent_rectpos = hole_parent.GetComponent<RectTransform>();
         slide_mid = new Vector2(-F_parent_rectpos.anchoredPosition.x, F_parent_rectpos.anchoredPosition.y);
         get_correct = false;
+        in_game = true;
+        game_over = false;
+        check_inball = 0;
 
         SpawnHole(ans_num);
         SetUpStringOnBalls();
@@ -277,6 +291,7 @@ public class Game_Manager_M : MonoBehaviour
     {
         time = 60;
         flame_time = 0;
+        time_slider.value = 1f;
         TurnCanvas(2);
         GameStart();
     }
