@@ -3,6 +3,7 @@ using Common;
 using System;
 using System.Linq;
 using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 
 public class Game_Manager_M : MonoBehaviour
@@ -16,6 +17,7 @@ public class Game_Manager_M : MonoBehaviour
     [SerializeField] GameObject hole_parent;
     [SerializeField] GameObject ball;
     [SerializeField] GameObject ball_parent;
+    [SerializeField] GameObject clear_image;
     GameObject[] hole_array;
     GameObject[] ball_array = new GameObject[10];
     RectTransform[] hole_rect_array;
@@ -41,12 +43,24 @@ public class Game_Manager_M : MonoBehaviour
     public float time;
     public Slider time_slider;
 
+    //SE
+    [SerializeField] private C_Music music_class;
+    [System.Serializable]
+    class C_Music
+    {
+        public AudioSource AS;
+        public AudioClip Click_Button;
+        public AudioClip Game_Over_SE;
+        public AudioClip Game_Clear_SE;
+        public AudioClip Success_SE;
+    }
     private void Start()
     {
         start_canvas.SetActive(true);
         game_canvas.SetActive(false);
         success_canvas.SetActive(false);
         failure_canvas.SetActive(false);
+        clear_image.SetActive(false);
         time_slider.value = 1f;
         time = timelimit;
     }
@@ -58,7 +72,7 @@ public class Game_Manager_M : MonoBehaviour
             if (time <= 0)
             {
                 game_over = true;
-                TimeOver();
+                StartCoroutine(TimeOver());
             }
 
             //スライダーの穴にボールが入っているか調べる
@@ -74,6 +88,7 @@ public class Game_Manager_M : MonoBehaviour
             //答えの文字数分入っていたら答えが合っているかチェックする
             if (check_inball == ans_num) CheckAnswerBall();
 
+            if(start_processing.Instance.Finish_Count)
             Timer();
             
         }
@@ -98,9 +113,21 @@ public class Game_Manager_M : MonoBehaviour
 
     public void StageTap()
     {
+        //SE
+        music_class.AS.PlayOneShot(music_class.Click_Button);
+        fade_manager.Instance.Start_Fade = true;
+        StartCoroutine(PlayGameIn());
+    }
+
+    //遅延関数
+    private IEnumerator PlayGameIn()
+    {
+        fade_manager.Instance.Fade();
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         TurnCanvas(2);
         GameStart();
         flame_time = 0;
+        fade_manager.Instance.Fade_In = true;
     }
 
     /// <summary>
@@ -119,6 +146,7 @@ public class Game_Manager_M : MonoBehaviour
         SpawnHole(ans_num);
         SetUpStringOnBalls();
         SpawnBalls();
+
     }
 
     /// <summary>
@@ -234,11 +262,11 @@ public class Game_Manager_M : MonoBehaviour
             get_correct = true;
             do_slide = true;
             game_over = true;
-
             Debug.Log("大正解！！！");
         }
     }
 
+    //
     /// <summary>
     /// 正解した後スライダーを画面右から左に動かす
     /// </summary>
@@ -272,28 +300,62 @@ public class Game_Manager_M : MonoBehaviour
                 show_slide = false;
                 do_slide = false;
                 //成功画面に移行
-                TurnCanvas(0);
-                DeleteObject();
+                clear_image.SetActive(true);
+                //SE
+                music_class.AS.PlayOneShot(music_class.Game_Clear_SE);
+                StartCoroutine(PlayGameClear());
             }
         }
+    }
+
+    //ゲームクリアの遅延関数
+    private IEnumerator PlayGameClear()
+    {
+        float wait_time = 2.0f;
+        yield return new WaitForSeconds(wait_time);
+        fade_manager.Instance.Fade();
+        // 真っ黒になるまで待機
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
+        TurnCanvas(0);
+        music_class.AS.PlayOneShot(music_class.Success_SE);
+        DeleteObject();
+        fade_manager.Instance.Fade_In = true;
     }
 
     /// <summary>
     /// 時間切れ
     /// </summary>
-    private void TimeOver()
+    private IEnumerator TimeOver()
     {
+        fade_manager.Instance.Fade();
+        // 真っ黒になるまで待機
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         TurnCanvas(1);
+        music_class.AS.PlayOneShot(music_class.Game_Over_SE);
         DeleteObject();
+        fade_manager.Instance.Fade_In = true;
     }
 
     public void ReplayGame()
     {
+        //SE
+        music_class.AS.PlayOneShot(music_class.Click_Button);
+        StartCoroutine(RetryGame());
+    }
+
+    //遅延関数
+    private IEnumerator RetryGame()
+    {
+        fade_manager.Instance.Fade();
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         time = 60;
         flame_time = 0;
         time_slider.value = 1f;
         TurnCanvas(2);
         GameStart();
+        start_processing.Instance.Initialization();
+        fade_manager.Instance.Start_Fade = true;
+        fade_manager.Instance.Fade_In = true;
     }
 
     private void DeleteObject()
@@ -322,6 +384,7 @@ public class Game_Manager_M : MonoBehaviour
         if (_mode == 0)
         {
             success_canvas.SetActive(true);
+
         }
         else if (_mode == 1)
         {

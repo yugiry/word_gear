@@ -1,5 +1,6 @@
 ﻿using Common;
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -36,6 +37,17 @@ public class Click_Manager_M : MonoBehaviour
     [SerializeField] private float angle;
     [SerializeField] private List<Vector2> vecList = new List<Vector2>();
 
+
+    //SE
+    [SerializeField] private C_Music music_class;
+    [System.Serializable]
+    class C_Music
+    {
+        public AudioSource AS;
+        public AudioClip Release_Disk;//ディスク回転時のSE
+        public AudioClip Click_Button;//ボタンが押されたとき
+    }
+    private bool check_se_disk = false;
     private void Update()
     {
         disk_rotation = disk_transform.localEulerAngles.z;
@@ -60,6 +72,9 @@ public class Click_Manager_M : MonoBehaviour
     //ディスクがクリックされた時
     public void ClickMouseOnDisk()
     {
+        if (!start_processing.Instance.Finish_Count)
+            return;
+
         if (!return_rotation)
         {
             object_pos = Camera.main.WorldToScreenPoint(disk_transform.position);
@@ -87,6 +102,9 @@ public class Click_Manager_M : MonoBehaviour
     //ディスクがドラッグされた時
     public void DragMouseOnDisk()
     {
+        if (!start_processing.Instance.Finish_Count)
+            return;
+
         if (!return_rotation && on_click)
         {
             //現在の入力位置(スクリーン座標)
@@ -141,6 +159,13 @@ public class Click_Manager_M : MonoBehaviour
             //計算された角度差をもとにオブジェクトを回転させる
             disk_transform.rotation = Quaternion.Euler(0, 0, total_angle);
 
+            //SE
+            if (!check_se_disk)
+            {
+                music_class.AS.PlayOneShot(music_class.Release_Disk);
+                check_se_disk = true;
+
+            }
             Debug.Log("ディスクをドラッグ中");
         }
     }
@@ -148,6 +173,9 @@ public class Click_Manager_M : MonoBehaviour
     //ディスクが離された時
     public void RevertDisk()
     {
+        if (!start_processing.Instance.Finish_Count)
+            return;
+
         if (!return_rotation)
         {
             //現在のディスクの角度
@@ -185,6 +213,7 @@ public class Click_Manager_M : MonoBehaviour
 
             on_click = false;
 
+            check_se_disk = false;
             Debug.Log("ディスクを離した");
         }
     }
@@ -194,6 +223,9 @@ public class Click_Manager_M : MonoBehaviour
     //スライダーがクリックされた時
     public void ClickMouseOnSlide()
     {
+        if (!start_processing.Instance.Finish_Count)
+            return;
+
         //オブジェクトのスクリーン上の位置を取得(ワールド→スクリーン変換)
         object_pos = Camera.main.WorldToScreenPoint(slide_parent.transform.position);
         //クリック時の入力位置(スクリーン座標)
@@ -221,6 +253,9 @@ public class Click_Manager_M : MonoBehaviour
     //スライダーがドラッグされた時
     public void DragMouseOnSlide()
     {
+        if (!start_processing.Instance.Finish_Count)
+            return;
+
         //現在の入力位置(スクリーン座標)
         mouse_pos = (Vector2)Input.mousePosition - object_pos;
         Vector2 F_move_vec = mouse_pos - click_pos;
@@ -237,6 +272,9 @@ public class Click_Manager_M : MonoBehaviour
     //スライダーが離された時
     public void RevertSlide()
     {
+        if (!start_processing.Instance.Finish_Count)
+            return;
+
         int F_near_child = 0;
         Vector2 F_move_pos;
 
@@ -264,16 +302,38 @@ public class Click_Manager_M : MonoBehaviour
 
     public void ClickNextButton()
     {
+        //SE
+        music_class.AS.PlayOneShot(music_class.Click_Button);
+        StartCoroutine(PlayNextStage());
+    }
+
+    //遅延関数
+    private IEnumerator PlayNextStage()
+    {
+        fade_manager.Instance.Fade();
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         StageClear_Manager_M F_scm = GameObject.Find("StageClearManager").GetComponent<StageClear_Manager_M>();
         F_scm.StageClear();
         SceneManager.LoadScene("GearNeedleRotationScene");
+        fade_manager.Instance.Fade_In = true;
     }
 
     public void ClickTitleButton()
     {
+        //SE
+        music_class.AS.PlayOneShot(music_class.Click_Button);
+        StartCoroutine(PlayReturnTitle());       
+    }
+
+    //遅延関数
+    private IEnumerator PlayReturnTitle()
+    {
+        fade_manager.Instance.Fade();
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         StageClear_Manager_M F_scm = GameObject.Find("StageClearManager").GetComponent<StageClear_Manager_M>();
         F_scm.now_stage = -1;
         SceneManager.LoadScene("titlescene");
+        fade_manager.Instance.Fade_In = true;
     }
 
     #endregion

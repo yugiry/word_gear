@@ -3122,10 +3122,10 @@ MonoBehaviour:
     Panel_Num: 16
     Scale_X: 1.5
     Scale_Y: 1.5
-    Pos_X: 1
-    Interval_X: 0.95
+    Pos_X: -1.4
+    Interval_X: 1
     Pos_Y: 1
-    Interval_Y: 0.95
+    Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 7320786185768604762, guid: c281a935b5b0e044c9b7ad78fc34cea5, type: 3}
   - Length: 4

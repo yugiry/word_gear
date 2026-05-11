@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class game_manager_s : MonoBehaviour
 {
-    public static int Stage_Count = 1;//ステージのカウント
+    public static int Stage_Count = 2;//ステージのカウント
     public static game_manager_s Instance;
     private const float wait_time = 2.0f;//切り替わる時間変数
     [SerializeField] private GameObject main_game_scene;//ゲームメインシーンゲームオブジェクト
@@ -144,7 +144,7 @@ public class game_manager_s : MonoBehaviour
     // Update is called once per frame
     void Update()
    {
-        if (start_processing.Instance.Finish_Count)
+        if (!start_processing.Instance.Finish_Count)
         {
 
             TimeControl();
@@ -206,6 +206,7 @@ public class game_manager_s : MonoBehaviour
     //ゲームクリア関数
    private IEnumerator GameClear()
     {
+
         gc_running = true;
         clear_text.gameObject.SetActive(true);
         //SE

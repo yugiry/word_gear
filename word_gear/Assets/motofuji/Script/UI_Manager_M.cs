@@ -33,6 +33,7 @@ public class UI_Manager_M : MonoBehaviour
 
         scm = F_scm_obj.GetComponent<StageClear_Manager_M>();
         csvl = F_scm_obj.GetComponent<Csv_Loder_M>();
+        //scm = StageClear_Manager_M.instance;
 
         start_text.text = csvl.csv_texts[scm.now_stage].start;
         game_text.text = csvl.csv_texts[scm.now_stage].description;

@@ -5,6 +5,15 @@ public class Slide_Status_M : Text_Status_M
     public bool In_Ball;
     [SerializeField] private Ball_Status_M ball_status;
 
+    //SE
+    [SerializeField] private C_Music music_class;
+    [System.Serializable]
+    class C_Music
+    {
+        public AudioSource AS;
+        public AudioClip Drop_Ball;//ボールが落ちた時のSE
+    }
+
     //入っている文字が自身と同じか判定
     public bool CheckString()
     {
@@ -27,6 +36,8 @@ public class Slide_Status_M : Text_Status_M
     {
         if(collision.gameObject.name == "ball(Clone)")
         {
+            //SE
+            music_class.AS.PlayOneShot(music_class.Drop_Ball);
             if (In_Ball)
             {
                 //ボールを取り出す

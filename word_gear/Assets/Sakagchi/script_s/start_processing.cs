@@ -38,8 +38,9 @@ public class start_processing : MonoBehaviour
 
     private void Update()
     {
+      
         //カウント開始
-        if(fade_manager.Instance.Finish_Fade && !is_count && fade_manager.Instance.Start_Fade)
+        if (fade_manager.Instance.Finish_Fade && !is_count && fade_manager.Instance.Start_Fade)
         {
             StartCoroutine(CountDown());
         }
