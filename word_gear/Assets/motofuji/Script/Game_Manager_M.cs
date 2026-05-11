@@ -19,7 +19,7 @@ public class Game_Manager_M : MonoBehaviour
     [SerializeField] GameObject ball_parent;
     [SerializeField] GameObject clear_image;
     GameObject[] hole_array;
-    GameObject[] ball_array = new GameObject[10];
+    GameObject[] ball_array = new GameObject[C_GrovalConst.Ball_Num];
     RectTransform[] hole_rect_array;
 
     //定数
@@ -63,6 +63,12 @@ public class Game_Manager_M : MonoBehaviour
         clear_image.SetActive(false);
         time_slider.value = 1f;
         time = timelimit;
+
+        GameObject F_scm_obj = GameObject.Find("StageClearManager");
+        Csv_Loder_M F_cl = F_scm_obj.GetComponent<Csv_Loder_M>();
+        StageClear_Manager_M F_scm = F_scm_obj.GetComponent<StageClear_Manager_M>();
+        ans_text = F_cl.csv_texts[F_scm.now_stage].problem;
+        ans_num = ans_text.Length;
     }
 
     private void Update()

@@ -71,12 +71,12 @@ public class Title_Manager_M : MonoBehaviour
     public void ClickStage(int _button_num)
     {
         //クリックしたステージの１つ前がクリア済みもしくは最初のステージならステージに移行する
-        //if (_button_num - 1 >= 0 && scm.ClearCheck_Flag[_button_num - 1] || _button_num == 0)
+        //if ((_button_num + 10 * page) - 1 >= 0 && _button_num + 10 * page < 15 && scm.ClearCheck_Flag[(_button_num + 10 * page) - 1] || _button_num + 10 * page == 0)
         {
-            scm.now_stage = _button_num;
+            scm.now_stage = _button_num + 10 * page;
             //SE
             music_class.AS.PlayOneShot(music_class.Click_Button);
-            StartCoroutine(PlayScene(_button_num));
+            StartCoroutine(PlayScene(_button_num + 10 * page));
         }
     }
 

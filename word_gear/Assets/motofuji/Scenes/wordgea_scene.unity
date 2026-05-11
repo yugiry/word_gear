@@ -848,7 +848,7 @@ MonoBehaviour:
   clear_image: {fileID: 1110867474}
   ans_text: "\u3072\u3068\u307F\u3054\u308D"
   ans_num: 5
-  timelimit: 60
+  timelimit: 180
   time: 0
   time_slider: {fileID: 1422997842}
   music_class:
