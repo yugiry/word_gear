@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class game_manager_s : MonoBehaviour
 {
-    public static int Stage_Count = 2;//ステージのカウント
+    private int stage_count = -1;//ステージのカウント
     public static game_manager_s Instance;
     private const float wait_time = 2.0f;//切り替わる時間変数
     [SerializeField] private GameObject main_game_scene;//ゲームメインシーンゲームオブジェクト
@@ -120,7 +120,7 @@ public class game_manager_s : MonoBehaviour
 
         clear_text.gameObject.SetActive(false);
 
-        //StageClear_Manager_M.instance.now_stage = Stage_Count;
+        stage_count = StageClear_Manager_M.instance.now_stage + 1; 
     }
 
 
@@ -144,7 +144,7 @@ public class game_manager_s : MonoBehaviour
     // Update is called once per frame
     void Update()
    {
-        if (!start_processing.Instance.Finish_Count)
+        if (start_processing.Instance.Finish_Count)
         {
 
             TimeControl();
@@ -177,12 +177,12 @@ public class game_manager_s : MonoBehaviour
 
 
         Time_Related_Class.Now_Time += Time.deltaTime;
-        float F_t = Time_Related_Class.Now_Time / Time_Related_Class.Time_Limit[Stage_Count - 1];//スライダーの正規化
+        float F_t = Time_Related_Class.Now_Time / Time_Related_Class.Time_Limit[stage_count - 1];//スライダーの正規化
         Time_Related_Class.Time_Slider.value = Mathf.Lerp(1f, 0, F_t);
-        float F_remaeining_time = Time_Related_Class.Time_Limit[Stage_Count - 1] - Time_Related_Class.Now_Time;//残り時間
+        float F_remaeining_time = Time_Related_Class.Time_Limit[stage_count - 1] - Time_Related_Class.Now_Time;//残り時間
         F_remaeining_time = Mathf.Max(F_remaeining_time, 0f);
 
-        if(Time_Related_Class.Now_Time >= Time_Related_Class.Time_Limit[Stage_Count - 1])
+        if(Time_Related_Class.Now_Time >= Time_Related_Class.Time_Limit[stage_count - 1])
         {
             //ゲームオーバー
             Game_Over = true;
@@ -220,7 +220,6 @@ public class game_manager_s : MonoBehaviour
         //SE
         music_class.AS.PlayOneShot(music_class.Success_SE);
         fade_manager.Instance.Fade_In = true;
-        StageClear_Manager_M.instance.now_stage++;
         StageClear_Manager_M.instance.StageClear();
         Debug.Log(StageClear_Manager_M.instance);
     }
@@ -236,7 +235,7 @@ public class game_manager_s : MonoBehaviour
         csv_data_2 = Problem_Class.CSV_LOAD.CSVInput("stage_inf");
 
         //分割
-        int F_start = (Stage_Count - 1) * split;
+        int F_start = (stage_count - 1) * split;
 
         string F_problem;
 
@@ -246,7 +245,7 @@ public class game_manager_s : MonoBehaviour
 
         string F_gameclear_text;
 
-        if(Stage_Count < first_half)
+        if(stage_count <= first_half)
         {
             F_problem = csv_data[F_start + problem_row];
 
@@ -277,13 +276,13 @@ public class game_manager_s : MonoBehaviour
     void ChangeUI(string _go_text,string _gc_text,string _sit_text)
     {
         //ゲームオーバー
-        Game_Over_Class.Image.sprite = Game_Over_Class.Sprite[Stage_Count -1];
+        Game_Over_Class.Image.sprite = Game_Over_Class.Sprite[stage_count -1];
         Game_Over_Class.Dialogue_Text.text = _go_text.Replace("\\n", "\n");
         //ゲームクリア
-        Game_Clear_Class.Image.sprite = Game_Clear_Class.Sprite[Stage_Count - 1];
+        Game_Clear_Class.Image.sprite = Game_Clear_Class.Sprite[stage_count - 1];
         Game_Clear_Class.Dialogue_Text.text = _gc_text.Replace("\\n", "\n");
         //状況説明
-        Situation_Scene_Class.Image.sprite = Situation_Scene_Class.Sprite[Stage_Count - 1];
+        Situation_Scene_Class.Image.sprite = Situation_Scene_Class.Sprite[stage_count - 1];
         Situation_Scene_Class.Dialogue_Text.text = _sit_text.Replace("\\n", "\n");
     }
 

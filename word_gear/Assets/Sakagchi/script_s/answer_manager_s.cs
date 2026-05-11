@@ -62,7 +62,7 @@ public class answer_manager_s : MonoBehaviour
     public   int Count = 0;
     private int stage_index
     {
-        get { return game_manager_s.Stage_Count - 1; }
+        get { return StageClear_Manager_M.instance.now_stage + 1; }
     }
 
     private panel_manager_s[,] panel_grid;//パネルのグリッド
@@ -151,9 +151,9 @@ public class answer_manager_s : MonoBehaviour
     void LoadCSV()
     {
         csv_data = CSV_LOAD.CSVInput("stage_inf");
-        cas_data_2 = CSV_LOAD.CSVInput("stage_inf2");
+        cas_data_2 = CSV_LOAD.CSVInput("stage_inf");
 
-        int F_problem_index = game_manager_s.Stage_Count;
+        int F_problem_index = StageClear_Manager_M.instance.now_stage + 1;
         //分割
         int F_start = (F_problem_index - 1) * split;
 

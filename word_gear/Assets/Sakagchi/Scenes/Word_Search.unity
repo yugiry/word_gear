@@ -155,7 +155,6 @@ GameObject:
   m_Component:
   - component: {fileID: 815367304}
   - component: {fileID: 815367303}
-  - component: {fileID: 815367302}
   - component: {fileID: 815367301}
   m_Layer: 0
   m_Name: ClearCamera
@@ -208,14 +207,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &815367302
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815367300}
-  m_Enabled: 1
 --- !u!20 &815367303
 Camera:
   m_ObjectHideFlags: 0
@@ -1123,6 +1114,21 @@ MonoBehaviour:
     - 10
     - 10
     - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
+    - 10
     Now_Time: 0
   Game_Over_Class:
     Sprite:
@@ -1141,6 +1147,21 @@ MonoBehaviour:
     - {fileID: 4319429885965197768, guid: 94252c8b04856c140b6880e5d16dcbe7, type: 3}
     - {fileID: 5243357416822041054, guid: 83c4a986ca6292842897784845ab6e46, type: 3}
     - {fileID: -5805940839416585984, guid: 765740ee7b9ff044a927fa3689ee8cc2, type: 3}
+    - {fileID: 4415249038154985527, guid: 75b7251cb2a866c40b17293cfc4ec10b, type: 3}
+    - {fileID: 3086344383181752278, guid: 6714d86b04e6dda408a6221798d6de87, type: 3}
+    - {fileID: -2510308743075917419, guid: 9f58fcc14fa3a2b40918b7e4369e595b, type: 3}
+    - {fileID: 804424278724418239, guid: f90e3c95aa032554583db3789cd4b448, type: 3}
+    - {fileID: 5351058929939497444, guid: 24be43d2aca9dd041a53b575126c26a6, type: 3}
+    - {fileID: 329519842970380249, guid: d126c3315075139418c79d63f8f79918, type: 3}
+    - {fileID: -8917010513271553197, guid: 54b30dc55c185b1408c0bc2796ddb64f, type: 3}
+    - {fileID: -6825532843420850269, guid: ce993e0b53d7bfc4c9c38037c951a852, type: 3}
+    - {fileID: -6622987396268006788, guid: 34d5592188c6ecf4e8bf566c70bbcf8d, type: 3}
+    - {fileID: 6045693661325563390, guid: 9f06fba3719c5f841956da489aa5912a, type: 3}
+    - {fileID: -7295429856508141114, guid: 22d35ca873778ba47b651442025bdd8a, type: 3}
+    - {fileID: -159143740924928057, guid: 6e202726516029c499cdb3f45eafcb37, type: 3}
+    - {fileID: 5927763399986916252, guid: 38fe760552ad8d04caff04606a7993cb, type: 3}
+    - {fileID: 2841339276071751837, guid: c576282bb6215f94eac43217f66838ab, type: 3}
+    - {fileID: -4992788245743637439, guid: b04e1650526e36b4585140cbd4e454af, type: 3}
     Image: {fileID: 1997485891040072665}
     Dialogue_Text: {fileID: 9044626462772972004}
     Insert_An_Ad: 0
@@ -1163,6 +1184,21 @@ MonoBehaviour:
     - {fileID: -1750620070262745891, guid: 4c183df3407287b42b6b2fa5b5059e4b, type: 3}
     - {fileID: 2217778173018009746, guid: f16dd1124b881b04cbd00226b454fdbe, type: 3}
     - {fileID: 3063933140886657343, guid: 949d1c343448dd24fbd1214eaeeb1a29, type: 3}
+    - {fileID: 6623092672991898148, guid: 60ac385ce9304e24aa39f6385aa05365, type: 3}
+    - {fileID: -7270268017770920833, guid: 49f9b4ffb3cfc3746b093637e69a8c6a, type: 3}
+    - {fileID: 1145661877294725755, guid: e00727f91c675234299b6d1b43d5ad74, type: 3}
+    - {fileID: 4564679053075087503, guid: 44e23524db71cbc479858547697f6753, type: 3}
+    - {fileID: 7983432066821233995, guid: dc54576e72dc1cf4bb5efef109f9b561, type: 3}
+    - {fileID: -2567324678034752324, guid: 309ba0ab3c2260843b19f7ee6e0537f5, type: 3}
+    - {fileID: 2382326942250203127, guid: ee6c296c34ded7e4a8356995e894edd2, type: 3}
+    - {fileID: -2250456745646192716, guid: 4882b224e2ccdd84280d43c159f6761c, type: 3}
+    - {fileID: 5627656704426938983, guid: 09652dc8e1532704e8e1fdae544e363d, type: 3}
+    - {fileID: 1032849994032371143, guid: 5d3ad65b64492434d96614135264a7cd, type: 3}
+    - {fileID: -9180038095130220514, guid: 37336f2f1ae00f544b1d551a01034192, type: 3}
+    - {fileID: 5477841243159285607, guid: df9a0a52ebea24044b9b0f3ab9236e00, type: 3}
+    - {fileID: -7129505457892527195, guid: a45c471bdf64f2343acd2d97d39939c0, type: 3}
+    - {fileID: -8049141686404716199, guid: 91fafe72bf99cc24f8205b8f6526f99b, type: 3}
+    - {fileID: 3951856940434500123, guid: d246dcaf8705e8d4ea0592af30a2785f, type: 3}
     Image: {fileID: 1991426469011971230}
     Dialogue_Text: {fileID: 8584536129747524785}
     Insert_An_Ad: 0
@@ -1184,6 +1220,21 @@ MonoBehaviour:
     - {fileID: 14518454292601411, guid: 1513ef24428db4f48906b6bdb1fc10ed, type: 3}
     - {fileID: 941457866757693559, guid: b707a60d4e704bf4b8e12ee8535196f2, type: 3}
     - {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+    - {fileID: -4241474940411068295, guid: d48a61ef4205e194aad8cbba546204b5, type: 3}
+    - {fileID: -6097638756675341959, guid: bfdee8703ba8b0c4fb0237c9fc866e7c, type: 3}
+    - {fileID: 6653502716812564578, guid: 177805a68a7fe05478810a029f5e9c63, type: 3}
+    - {fileID: 9185225330630639190, guid: 02b1b6ed08570714b90be534bfd74d37, type: 3}
+    - {fileID: 5178798234414100159, guid: 1bc8b234726632842bc9339bc67e1200, type: 3}
+    - {fileID: 1655543162290529258, guid: db7fb5377801ace43ab14080ebce52df, type: 3}
+    - {fileID: 2942819423039217807, guid: 8516e398e37649648957875bf70902de, type: 3}
+    - {fileID: -1456815091799895196, guid: 546491483d99d944dbd24214e5a88e0a, type: 3}
+    - {fileID: 8887327130374541551, guid: c81f085348cacf34db4225aaa7f047fd, type: 3}
+    - {fileID: -1403995983726017954, guid: e39ee5480c28274469bca4dd10418c12, type: 3}
+    - {fileID: -7874378562906502703, guid: cd2a01109eb0b234bb195224c512200d, type: 3}
+    - {fileID: 2475603430643545653, guid: 1ae02ee13244c56449ff75f9a480675b, type: 3}
+    - {fileID: 7148211316981564411, guid: 467d709739c623247bc3c957655c3f42, type: 3}
+    - {fileID: -5104388621083935862, guid: d69af5565f5278a47b2bb04b8c35ed2c, type: 3}
+    - {fileID: -13704359170150965, guid: 6bd3ff1d8211b9342ab66572bce584d3, type: 3}
     Image: {fileID: 510530635813039118}
     Dialogue_Text: {fileID: 7154723577903986893}
     Insert_An_Ad: 0
@@ -3254,10 +3305,10 @@ MonoBehaviour:
     Panel_Num: 25
     Scale_X: 1.5
     Scale_Y: 1.5
-    Pos_X: -1.4
-    Interval_X: 0.95
-    Pos_Y: 1
-    Interval_Y: 0.95
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 941457866757693559, guid: b707a60d4e704bf4b8e12ee8535196f2, type: 3}
   - Length: 5
@@ -3265,10 +3316,175 @@ MonoBehaviour:
     Panel_Num: 25
     Scale_X: 1.5
     Scale_Y: 1.5
-    Pos_X: -1.4
-    Interval_X: 0.95
-    Pos_Y: 1
-    Interval_Y: 0.95
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
+    Limit_Time: 0
+    Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
+  - Length: 5
+    Side: 5
+    Panel_Num: 25
+    Scale_X: 1.5
+    Scale_Y: 1.5
+    Pos_X: -2
+    Interval_X: 1
+    Pos_Y: 1.5
+    Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
   img: {fileID: 2435719691574632297}
