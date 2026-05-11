@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +15,15 @@ public class Title_Manager_M : MonoBehaviour
 
     private int page;
 
+    //SE
+    [SerializeField] private C_Music music_class;
+    [System.Serializable]
+    class C_Music
+    {
+        public AudioSource AS;
+        public AudioClip Click_Button;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,6 +34,16 @@ public class Title_Manager_M : MonoBehaviour
 
     public void ClickStart()
     {
+        //SE
+        music_class.AS.PlayOneShot(music_class.Click_Button);
+        StartCoroutine(TransitionScene());
+    }
+
+    //遅延させてキャンバス切り替え（タイトル）
+    private IEnumerator TransitionScene()
+    {
+        fade_manager.Instance.Fade();
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         title_canvas.SetActive(false);
         stageselect_canvas.SetActive(true);
         page = 0;
@@ -31,10 +52,13 @@ public class Title_Manager_M : MonoBehaviour
         {
             button_text[i].text = $"Stage {i + 1 + page * 10}";
         }
+        fade_manager.Instance.Fade_In = true;
     }
 
     public void ClickNext()
     {
+        //SE
+        music_class.AS.PlayOneShot(music_class.Click_Button);
         page++;
         if (page > 2) page = 0;
         window_text.text = $"ステージを選んでください。 {page + 1}/３";
@@ -50,21 +74,38 @@ public class Title_Manager_M : MonoBehaviour
         //if (_button_num - 1 >= 0 && scm.ClearCheck_Flag[_button_num - 1] || _button_num == 0)
         {
             scm.now_stage = _button_num;
-            switch(_button_num % 3)
-            {
-                case 0:
-                    SceneManager.LoadScene("GearNeedleRotationScene");
-                    Debug.Log("愛甲");
-                    break;
-                case 2:
-                    SceneManager.LoadScene("wordgea_scene");
-                    Debug.Log("元藤");
-                    break;
-                case 1:
-                    SceneManager.LoadScene("Word_Search");
-                    Debug.Log("坂口");
-                    break;
-            }
+            //SE
+            music_class.AS.PlayOneShot(music_class.Click_Button);
+            StartCoroutine(PlayScene(_button_num));
         }
     }
+
+   //個々のシーン再生
+   private IEnumerator PlayScene(int _bn)
+    {
+        const int F_stage_num = 3;
+        //フェード
+        fade_manager.Instance.Fade();
+        yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
+
+        //ステージの切り替え処理
+        switch (_bn % F_stage_num)
+        {
+            case 0:
+                SceneManager.LoadScene("GearNeedleRotationScene");
+                Debug.Log("愛甲");
+                break;
+            case 1:
+                SceneManager.LoadScene("Word_Search");
+                Debug.Log("坂口");
+                break;
+            case 2:
+                SceneManager.LoadScene("wordgea_scene");
+                Debug.Log("元藤");
+                break;
+
+        }
+
+        fade_manager.Instance.Fade_In = true;
+   }
 }
