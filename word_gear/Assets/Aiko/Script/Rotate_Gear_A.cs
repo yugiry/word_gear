@@ -110,7 +110,7 @@ public class Rotate_Gear_A : MonoBehaviour
                 Debug.Log("時計回り");
 
                 // 例：時計回り時の処理（今のモザイク減少をこっちに）
-                if (Mosike_alpha.a > 0.8f)
+                if (Mosike_alpha.a > 0.1f)
                 {
                     Mosike_alpha.a -= 0.0005f;
                     Mosike_image.color = Mosike_alpha;

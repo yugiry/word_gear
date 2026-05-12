@@ -70,8 +70,9 @@ public class Tap_Center_Ball_A : MonoBehaviour
                 {
                     Center_click_count++;
                     LS.CBX.VanishBox();
-                    LS.ONAB.Chosen_ball_number = LS.ONAB.RandomBallChoose(LS.ONAB.Chosen_ball_number,/*onab.MysteriousBalls*/LS.CA.Split_answers,/*onab.Ball_flg*/LS.CA.Chosen_Word);
-
+                    
+                    /*LS.ONAB.Chosen_ball_number =*/ LS.ONAB.ChosenWord(LS.ONAB.Words_Num,Center_click_count, LS.CA.Split_answers); //LS.ONAB.RandomBallChoose(LS.ONAB.Chosen_ball_number,/*onab.MysteriousBalls*/LS.CA.Split_answers,/*onab.Ball_flg*/LS.CA.Chosen_Word);
+                    //LS.ONAB.Words_Num[LS.ONAB.Chosen_ball_number]++;
                     LS.ONAB.Overlapped_Needle_Ball_Flag = false;
                 }
 
@@ -83,6 +84,21 @@ public class Tap_Center_Ball_A : MonoBehaviour
 
             }
             
+        }
+        else if (LS.HIOMB.Pressed_Flag && LS.ONAB.Overlapping_Ball)
+        {
+            LS.RG.Mosike_alpha.a = 1.0f;
+
+            LS.RG.Mosike_image.color = LS.RG.Mosike_alpha;
+
+            LS.HIOMB.Ball_text.text = gameObject.GetComponentInChildren<Text>().text;
+            LS.HIOMB.Ball_Letter = LS.HIOMB.Ball_text.text;
+
+            LS.ONAB.SwapWord(LS.ONAB.Words_Num, Center_click_count, LS.CA.Split_answers);
+
+            
+
+            Debug.Log("aiya-?");
         }
         else
         {
@@ -122,8 +138,9 @@ public class Tap_Center_Ball_A : MonoBehaviour
             Center_click_count = 0;
 
         }
+        LS.ONAB.RearrangeWord(LS.CA.Split_answers, LS.CA.Chosen_Word);
+        //LS.ONAB.Chosen_ball_number++ /*= LS.ONAB.RandomBallChoose(LS.ONAB.Chosen_ball_number, LS.CA.Split_answers, LS.CA.Chosen_Word)*/;
 
-        LS.ONAB.Chosen_ball_number = LS.ONAB.RandomBallChoose(LS.ONAB.Chosen_ball_number, LS.CA.Split_answers, LS.CA.Chosen_Word);
     }
 
     

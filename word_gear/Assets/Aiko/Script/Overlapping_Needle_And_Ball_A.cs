@@ -31,6 +31,8 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
     public bool[] Ball_flg;
     public int Chosen_ball_number;
 
+    public int[] Words_Num;
+
     //外部
     float previous_z;
     private int rotate_gear_num;
@@ -112,6 +114,73 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
         return _chosen_ball;
     }
 
+    public int ChosenWord(int[] _words_num,int _now_num, char[] _mysteryous_balls)
+    {
+        MbLetter = _mysteryous_balls[_words_num[_now_num]].ToString()/*.GetComponent<HoldInformationOfMysteriousBall>().Ball_Letter*/;
+        CenterBall.GetComponentInChildren<Text>().text = MbLetter;
+
+        Debug.Log("%d" + _words_num[_now_num]+_mysteryous_balls.ToString());
+
+        return _now_num;
+    }
+
+    public int SwapWord(int[] _words_num, int _now_num, char[] _mysteryous_balls)
+    {
+        int F_vault_num=_words_num[_now_num-1];
+
+        for (int i = _now_num; i < _mysteryous_balls.Length; i++)
+        {
+            //if (i==_now_num)
+            //{
+            //    _words_num[i] = _mysteryous_balls.Length-1;
+            //}
+            //else
+            {
+                _words_num[i-1]= _words_num[i];
+            }
+        }
+
+        _words_num[_mysteryous_balls.Length - 1] = F_vault_num;
+
+        MbLetter = _mysteryous_balls[_words_num[_now_num]].ToString()/*.GetComponent<HoldInformationOfMysteriousBall>().Ball_Letter*/;
+        CenterBall.GetComponentInChildren<Text>().text = MbLetter;
+
+        
+
+        return _now_num;
+    }
+
+    public int[] RearrangeWord( char[] _mysteryous_balls, bool[] _ball_flag)
+    {
+        Words_Num=new int[_mysteryous_balls.Length];
+
+        for (int i = 0; i < _mysteryous_balls.Length; i++)
+        {
+            //if (!_ball_flag[i])
+            //{
+
+            //    break;
+            //}
+
+            //if (i == _mysteryous_balls.Length - 1)
+            //    return UnityEngine.Random.Range(0, _mysteryous_balls.Length);
+
+            do
+            {
+
+
+                Words_Num[i] = UnityEngine.Random.Range(0, _mysteryous_balls.Length);
+            } while (_ball_flag[Words_Num[i]]);
+            _ball_flag[Words_Num[i]] = true;
+        }
+
+
+        Chosen_ball_number = 0;
+
+        ChosenWord(Words_Num,Chosen_ball_number, _mysteryous_balls);
+
+        return Words_Num;
+    }
     
     private void OnTriggerStay2D(Collider2D other)
     {

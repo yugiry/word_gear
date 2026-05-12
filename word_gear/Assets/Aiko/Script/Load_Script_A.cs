@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ public class Load_Script_A : MonoBehaviour
     public StageClear_Manager_M SCM;
     public Timer_A TA;
     public Continue_Synopsis_A CS;
+    public VaultImage_A VI;
 
     [SerializeField] private GameObject needle;
     [SerializeField] private GameObject rotate_gear;
@@ -30,6 +32,7 @@ public class Load_Script_A : MonoBehaviour
     [SerializeField] private GameObject bgm_playback_object;
     [SerializeField] private GameObject time_bar;
     [SerializeField] private GameObject synopsis_object;
+    [SerializeField] private GameObject vault_image_object;
 
     public Canvas Normal_Canvas;
     public Canvas Success_Canvas;
@@ -62,6 +65,9 @@ public class Load_Script_A : MonoBehaviour
 
     [SerializeField] private GameObject stage_clear_manager;
 
+    [SerializeField] private Image[] stage_images;
+
+
     public enum SE_Names
     {
         Click,Gear,Failure,Success,InCorrect,CountFinish,CountDown
@@ -87,6 +93,7 @@ public class Load_Script_A : MonoBehaviour
         BP=bgm_playback_object.GetComponent<BGM_Playback_A>();
         TA=time_bar.GetComponent<Timer_A>();
         CS=synopsis_object.GetComponent<Continue_Synopsis_A>();
+        VI = vault_image_object.GetComponent<VaultImage_A>();
 
         if (GameObject.Find("StageClearManager"))
         {
@@ -103,6 +110,11 @@ public class Load_Script_A : MonoBehaviour
             Failure_Text.text= CL.csv_texts[SCM.now_stage].failur;
 
             CA.Answers = Problem_Answer;
+
+            Game_Images[0].GetComponent<Image>().sprite = VI.Normal_Illust[SCM.now_stage];
+            Game_Images[1].GetComponent<Image>().sprite = VI.Success_Illust[SCM.now_stage];
+            Game_Images[2].GetComponent<Image>().sprite = VI.Failure_Illust[SCM.now_stage];
+
 
         }
         else
@@ -206,7 +218,9 @@ public class Load_Script_A : MonoBehaviour
 
         ONAB.SetNeedle();
 
-        ONAB.Chosen_ball_number = ONAB.RandomBallChoose(ONAB.Chosen_ball_number,CA.Split_answers, CA.Chosen_Word);
+        //ONAB.Chosen_ball_number = ONAB.RandomBallChoose(ONAB.Chosen_ball_number,CA.Split_answers, CA.Chosen_Word);
+
+        ONAB.RearrangeWord(CA.Split_answers, CA.Chosen_Word);
 
         TCB.Center_click_count = 0;
 
@@ -367,6 +381,8 @@ public class Load_Script_A : MonoBehaviour
 
     }
 
+   
+
     public IEnumerator WaitFadeOut(int _start_function)
     {
         //StartCoroutine(Color_FadeOut());
@@ -382,7 +398,9 @@ public class Load_Script_A : MonoBehaviour
         switch (_start_function)
         {
             case 0:
+                all_block_collider.gameObject.SetActive(true);
                 CS.TextClick();
+                
                 break;
                 case 1:
                 CS.NextStage();
@@ -413,7 +431,9 @@ public class Load_Script_A : MonoBehaviour
         switch (_start_function)
         {
             case 0:
+                all_block_collider.gameObject.SetActive(true);
                 CS.TextClick();
+                
                 break;
             case 1:
                 CS.NextStage();

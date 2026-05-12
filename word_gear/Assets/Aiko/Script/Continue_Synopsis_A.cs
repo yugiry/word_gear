@@ -8,7 +8,7 @@ public class Continue_Synopsis_A : MonoBehaviour
 {
     [SerializeField] private Load_Script_A LS;
 
-    
+    private bool once_click_text_flag = false;
     
     [SerializeField] private GameObject synopsis_text;
 
@@ -27,9 +27,13 @@ public class Continue_Synopsis_A : MonoBehaviour
 
     public void TextbuttonClick()
     {
-        LS.PlaySE(LS.Sound_Effect[0]);
-
+        if (!once_click_text_flag)
+        {
+            LS.PlaySE(LS.Sound_Effect[0]);
+            once_click_text_flag = true;
         StartCoroutine(LS.WaitFadeOut(0));
+        }
+        
     }
 
     public void TextClick()
@@ -46,7 +50,7 @@ public class Continue_Synopsis_A : MonoBehaviour
         // LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.GameStart]);
 
         //LS.FadeIn_FadeOut_Object.gameObject.SetActive(true);
-
+        once_click_text_flag = false;
         LS.GameStart();
 
 
