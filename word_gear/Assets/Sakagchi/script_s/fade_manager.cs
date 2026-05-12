@@ -44,12 +44,12 @@ public class fade_manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //フェードイン
         if (Fade_In)
         {
             FadeIn();
         }
-
+        //フェードアウト
         if (Fade_Out)
         {
             FadeOut();
@@ -65,8 +65,6 @@ public class fade_manager : MonoBehaviour
         ApplyColor();
         fade_image.gameObject.SetActive(true);
         fade_image.enabled = true;
-
-        //fade_image.transform.SetAsLastSibling(); // 最前面へ
 
         Fade_In = false;
         Fade_Out = true;

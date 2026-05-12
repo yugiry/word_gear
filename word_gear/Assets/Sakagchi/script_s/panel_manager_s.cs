@@ -331,10 +331,6 @@ public class panel_manager_s : MonoBehaviour
 
     private IEnumerator ProblemCount()
     {
-    
-
-        //_correctSE = true;
-
         //正解のパネルの_cantouchをfalseに設定
         foreach (var panel in Correct_Word)
         {
@@ -347,8 +343,6 @@ public class panel_manager_s : MonoBehaviour
 
         yield return new WaitForSeconds(3.0f);
 
-  
-
         if (Problem_Count == 3)
         {
             //正解のパネルの_cantouchをfalseに設定
@@ -359,8 +353,6 @@ public class panel_manager_s : MonoBehaviour
         }
 
         Problem_Count++;
-
-        //_problemSE = true;
     }
 
     //表示更新関数
