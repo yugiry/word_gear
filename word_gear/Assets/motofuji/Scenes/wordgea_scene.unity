@@ -1017,10 +1017,13 @@ MonoBehaviour:
   game_img: {fileID: 678011302}
   success_img: {fileID: 833583614}
   failure_img: {fileID: 1070732385}
+  next_img: {fileID: 448900947}
   start_text: {fileID: 91645192}
   game_text: {fileID: 334912709}
   success_text: {fileID: 456419269}
   failure_text: {fileID: 38560934}
+  next_sprite: {fileID: 5683370195272223577, guid: d7f1c9e173662c448b072193801e7221, type: 3}
+  title_sprite: {fileID: -6098571350751997549, guid: 69cd511065171294281254ab5349a96b, type: 3}
   wordgea_image:
   - start_img: {fileID: -5036632471001484730, guid: 218f4ff920639af4d850140b0ce1ec99, type: 3}
     success_img: {fileID: -2370575298457166293, guid: 2b3cade8d0165724c83182af497db286, type: 3}
@@ -1037,6 +1040,21 @@ MonoBehaviour:
   - start_img: {fileID: 8849083376935013079, guid: 97788a3b47f62ff4fa6ad693e70f15f5, type: 3}
     success_img: {fileID: -5805940839416585984, guid: 673abcfefc860bd4998b6f31cb21bfec, type: 3}
     failure_img: {fileID: 3063933140886657343, guid: d3cd654c6b12c3741847a6df25f4802b, type: 3}
+  - start_img: {fileID: 6653502716812564578, guid: 4c01c29798a195043bdff61e21ea008a, type: 3}
+    success_img: {fileID: -2510308743075917419, guid: e754dfca05ce01540960f0b1ad6f5eb5, type: 3}
+    failure_img: {fileID: 1145661877294725755, guid: d18afcd02c0d64a42bf47f598d37fab2, type: 3}
+  - start_img: {fileID: 1655543162290529258, guid: dea8f6ca2c148f84787545a4bc4e0a66, type: 3}
+    success_img: {fileID: 329519842970380249, guid: e9a03f30234780e4ba4bd679e7cfddef, type: 3}
+    failure_img: {fileID: -2567324678034752324, guid: c96273f9b7423a046adaa77bd371aabb, type: 3}
+  - start_img: {fileID: 8887327130374541551, guid: e9edc8782b5e4a440bd171f71a5bd4b4, type: 3}
+    success_img: {fileID: -6622987396268006788, guid: c110bbec839fd4342be9ff0c1944b837, type: 3}
+    failure_img: {fileID: 5627656704426938983, guid: 066490f1aaaa6f546b3696a8f1fa1be7, type: 3}
+  - start_img: {fileID: 2475603430643545653, guid: 48e6110f36dd34d42857f15971ecf550, type: 3}
+    success_img: {fileID: -159143740924928057, guid: bf327975e0ffa2949af58730be35164c, type: 3}
+    failure_img: {fileID: 5477841243159285607, guid: 81cb11e72c4e1914d8d5f0bc997ced5d, type: 3}
+  - start_img: {fileID: -13704359170150965, guid: e177148599b9af948999e02375a39e71, type: 3}
+    success_img: {fileID: -4992788245743637439, guid: c1a65c0e6e6270e4ab094cb7cb332394, type: 3}
+    failure_img: {fileID: 3951856940434500123, guid: 8617653c7312b484e876d871104b80ab, type: 3}
 --- !u!1 &448900944
 GameObject:
   m_ObjectHideFlags: 0

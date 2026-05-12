@@ -48,6 +48,8 @@ public class Failue_Game_A : MonoBehaviour
     public void RetryButtonClick()
     {
         LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Click]);
+        Show_Commercial_M.instance.PlayGame();
+
         StartCoroutine(LS.WaitFadeOut(2));
     }
 

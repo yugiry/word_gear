@@ -314,8 +314,16 @@ public class Click_Manager_M : MonoBehaviour
         yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         StageClear_Manager_M F_scm = GameObject.Find("StageClearManager").GetComponent<StageClear_Manager_M>();
         F_scm.StageClear();
-        SceneManager.LoadScene("GearNeedleRotationScene");
-        fade_manager.Instance.Fade_In = true;
+        if(F_scm.now_stage >= 29)
+        {
+            SceneManager.LoadScene("titlescene");
+        }
+        else
+        {
+            Show_Commercial_M.instance.PlayGame();
+            SceneManager.LoadScene("GearNeedleRotationScene");
+        }
+            fade_manager.Instance.Fade_In = true;
     }
 
     public void ClickTitleButton()
@@ -332,6 +340,7 @@ public class Click_Manager_M : MonoBehaviour
         yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
         StageClear_Manager_M F_scm = GameObject.Find("StageClearManager").GetComponent<StageClear_Manager_M>();
         F_scm.now_stage = -1;
+        Show_Commercial_M.instance.PlayGame();
         SceneManager.LoadScene("titlescene");
         fade_manager.Instance.Fade_In = true;
     }

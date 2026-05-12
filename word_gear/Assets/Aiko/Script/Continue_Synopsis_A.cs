@@ -75,8 +75,8 @@ public class Continue_Synopsis_A : MonoBehaviour
 
     public void NextStage()
     {
-        
-        
+        Show_Commercial_M.instance.PlayGame();
+
         //LS.SCM.now_stage += 1;
         SceneManager.LoadScene(LS.Next_Stage_Scene_Name);
 

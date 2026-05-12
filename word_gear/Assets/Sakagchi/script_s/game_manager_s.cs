@@ -344,6 +344,9 @@ public class game_manager_s : MonoBehaviour
         InitializeVariableGO();
         Game_Over_Class.Insert_An_Ad = false;
         start_processing.Instance.Initialization();
+
+        Show_Commercial_M.instance.PlayGame();
+
         fade_manager.Instance.InitVariable();
         fade_manager.Instance.Fade_In = true;
         go_running = false;
@@ -382,6 +385,8 @@ public class game_manager_s : MonoBehaviour
         fade_manager.Instance.Fade();
 
         yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
+
+        Show_Commercial_M.instance.PlayGame();
 
         BGM_manager_s.Instance.PlayBGM(BGM_manager_s.SCENE_TYPE.GAME_3);
         SceneManager.LoadScene("wordgea_scene");

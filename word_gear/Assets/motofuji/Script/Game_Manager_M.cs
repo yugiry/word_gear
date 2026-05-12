@@ -280,6 +280,7 @@ public class Game_Manager_M : MonoBehaviour
     {
         if (!show_slide)
         {
+            //最左のホールが画面右側まで来るように右にスライドする
             if (hole_rect_array[0].anchoredPosition.x < 285f)
             {
                 for (int i = 0; i < hole_rect_array.Length; i++)
@@ -294,6 +295,7 @@ public class Game_Manager_M : MonoBehaviour
         }
         else
         {
+            //最右のホールが画面内の右側まで来るように左にスライドする
             if (hole_rect_array[hole_rect_array.Length - 1].anchoredPosition.x > 150f)
             {
                 for (int i = 0; i < hole_rect_array.Length; i++)

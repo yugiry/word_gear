@@ -22,6 +22,7 @@ public class StageClear_Manager_M : MonoBehaviour
 
     private void Start()
     {
+        //内部に保存してあった最大ステージクリア数に応じてチェックフラグを立てていく
         int F_max_clear = PlayerPrefs.GetInt("MaxClear", -1);
         for(int i = 0; i <= F_max_clear; i++)
         {
@@ -30,7 +31,8 @@ public class StageClear_Manager_M : MonoBehaviour
     }
 
     /// <summary>
-    /// ステージがクリアしたらそのステージのフラグを有効化する
+    /// ステージがクリアしたらそのステージのフラグを有効化して、
+    /// クリアした最大ステージ数を変更する
     /// </summary>
     public void StageClear()
     {
