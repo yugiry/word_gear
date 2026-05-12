@@ -34,7 +34,11 @@ public class Checking_Answers_A : MonoBehaviour
 
     public void SetAnswer()
     {
-        //Answers = LS.Problem_Answer;
+        //if (LS.Problem_Answer!=null)
+        //{
+        //    Answers = LS.Problem_Answer;
+        //}
+        
         Split_answers = Answers.ToCharArray();
         Chosen_Word = new bool[Split_answers.Length];
     }
@@ -67,24 +71,23 @@ public class Checking_Answers_A : MonoBehaviour
 
         LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Success]);
         LS.BP.StopBGM();
-
+        
         yield return new WaitForSeconds(1.0f);
 
 
 
         yield return StartCoroutine(LS.Color_FadeOut());
-
+        LS.TA.CountReset();
+       
         LS.Success_Canvas.gameObject.SetActive(true);
         LS.Clear_Over_Image.GetComponent<Image>().sprite = LS.Images[0];
         
 
         yield return StartCoroutine(LS.Color_FadeIn());
-
-        LS.Normal_Canvas.gameObject.SetActive(false);
-        
+       
         LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.GameClear]);
         Debug.Log("toottayo!");
-
+        LS.Normal_Canvas.gameObject.SetActive(false);
 
     }
 

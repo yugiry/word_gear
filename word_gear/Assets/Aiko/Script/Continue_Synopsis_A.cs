@@ -78,10 +78,17 @@ public class Continue_Synopsis_A : MonoBehaviour
 
     }
 
+    public void TitleButtonClick()
+    {
+        LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Click]);
+        LS.BP.StopBGM();
+        StartCoroutine(LS.WaitFadeOut(4));
+    }
+
     public void TitleBack()
     {
-        LS.PlaySE(LS.Sound_Effect[0]);
-        LS.BP.StopBGM();
+       // LS.PlaySE(LS.Sound_Effect[0]);
+        //LS.BP.StopBGM();
         //タイトルシーンに戻す。
         SceneManager.LoadScene(LS.Title_Scene_Name);
     }

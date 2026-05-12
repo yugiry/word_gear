@@ -747,6 +747,7 @@ GameObject:
   - component: {fileID: 402553087}
   - component: {fileID: 402553086}
   - component: {fileID: 402553085}
+  - component: {fileID: 402553088}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -818,7 +819,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 292741166}
+      - m_Target: {fileID: 402553088}
         m_TargetAssemblyTypeName: Failue_Game_A, Assembly-CSharp
         m_MethodName: RetryButtonClick
         m_Mode: 1
@@ -868,6 +869,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 402553083}
   m_CullTransparentMesh: 1
+--- !u!114 &402553088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402553083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cfcc7465e3d854197cf1b3e7935b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &413903102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,6 +1854,7 @@ GameObject:
   - component: {fileID: 620617896}
   - component: {fileID: 620617895}
   - component: {fileID: 620617894}
+  - component: {fileID: 620617897}
   m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
@@ -1912,8 +1926,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 292741166}
-        m_TargetAssemblyTypeName: Failue_Game_A, Assembly-CSharp
+      - m_Target: {fileID: 620617897}
+        m_TargetAssemblyTypeName: Continue_Synopsis_A, Assembly-CSharp
         m_MethodName: TitleButtonClick
         m_Mode: 1
         m_Arguments:
@@ -1962,6 +1976,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620617892}
   m_CullTransparentMesh: 1
+--- !u!114 &620617897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620617892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834c88845aa098e4c9adb0a1f34d8a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LS: {fileID: 0}
+  synopsis_text: {fileID: 0}
 --- !u!1 &636694457
 GameObject:
   m_ObjectHideFlags: 0
@@ -3148,7 +3176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Split_answers: 
-  Answers: "\u30BF\u30AF\u30B7\u30FC"
+  Answers: "\u30BF\u30AF\u30B7\u30FC\u304B\u3082"
   Chosen_Word: 
   LS: {fileID: 0}
   tag_name_center_ball: CenterBall
@@ -3499,6 +3527,7 @@ GameObject:
   - component: {fileID: 1074723089}
   - component: {fileID: 1074723088}
   - component: {fileID: 1074723087}
+  - component: {fileID: 1074723090}
   m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
@@ -3570,7 +3599,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 292741166}
+      - m_Target: {fileID: 1074723090}
         m_TargetAssemblyTypeName: Failue_Game_A, Assembly-CSharp
         m_MethodName: TitleButtonClick
         m_Mode: 1
@@ -3620,6 +3649,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074723085}
   m_CullTransparentMesh: 1
+--- !u!114 &1074723090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074723085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cfcc7465e3d854197cf1b3e7935b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1190360167
 GameObject:
   m_ObjectHideFlags: 0
@@ -5668,7 +5709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2046284560
 RectTransform:
   m_ObjectHideFlags: 0

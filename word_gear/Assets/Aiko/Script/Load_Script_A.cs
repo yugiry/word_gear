@@ -101,6 +101,9 @@ public class Load_Script_A : MonoBehaviour
             Problem_Answer = CL.csv_texts[SCM.now_stage].problem;
             Success_Text.text= CL.csv_texts[SCM.now_stage].success;
             Failure_Text.text= CL.csv_texts[SCM.now_stage].failur;
+
+            CA.Answers = Problem_Answer;
+
         }
         else
         {
@@ -388,11 +391,11 @@ public class Load_Script_A : MonoBehaviour
                 FG.RetryGame();
                 break;
             case 3:
-                //Failure_Canvas.gameObject.SetActive(true);
-               // FG.TitleBack();
+                
+                FG.TitleBack();
                 break;
             case 4:
-                FG.TitleBack();
+                CS.TitleBack();
                 break;
 
         }
