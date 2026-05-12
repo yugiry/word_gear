@@ -144,12 +144,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene_type: 0
   AC:
-  - {fileID: 8300000, guid: 4dce278ce0fce314fa485c2a52827613, type: 3}
-  - {fileID: 8300000, guid: 4dce278ce0fce314fa485c2a52827613, type: 3}
-  - {fileID: 8300000, guid: 4dce278ce0fce314fa485c2a52827613, type: 3}
-  - {fileID: 8300000, guid: 4dce278ce0fce314fa485c2a52827613, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: f1c1f1b906053724e83b6d7d9718369d, type: 3}
   - {fileID: 8300000, guid: c4673503bc42505438d10aa278a0c569, type: 3}
   - {fileID: 8300000, guid: c4673503bc42505438d10aa278a0c569, type: 3}
   - {fileID: 8300000, guid: c4673503bc42505438d10aa278a0c569, type: 3}
-  - {fileID: 8300000, guid: c4673503bc42505438d10aa278a0c569, type: 3}
-  - {fileID: 8300000, guid: c4673503bc42505438d10aa278a0c569, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

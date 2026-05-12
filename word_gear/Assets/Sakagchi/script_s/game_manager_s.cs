@@ -120,7 +120,7 @@ public class game_manager_s : MonoBehaviour
 
         clear_text.gameObject.SetActive(false);
 
-        stage_count = StageClear_Manager_M.instance.now_stage + 1; 
+        stage_count = StageClear_Manager_M.instance.now_stage + 1;
     }
 
 
@@ -165,7 +165,7 @@ public class game_manager_s : MonoBehaviour
     public  void ChangeCanvas()
     {
         Situation_Scene_Class.Scene.SetActive(false);
-        BGM_manager_s.Instance.PlayBGM(BGM_manager_s.SCENE_TYPE.GAME_1);
+        BGM_manager_s.Instance.PlayBGM(BGM_manager_s.SCENE_TYPE.GAME_2);
         main_game_scene.SetActive(true);
     }
 
@@ -383,6 +383,7 @@ public class game_manager_s : MonoBehaviour
 
         yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
 
+        BGM_manager_s.Instance.PlayBGM(BGM_manager_s.SCENE_TYPE.GAME_3);
         SceneManager.LoadScene("wordgea_scene");
 
         fade_manager.Instance.Fade_In = true;

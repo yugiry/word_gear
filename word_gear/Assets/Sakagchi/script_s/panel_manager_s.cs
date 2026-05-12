@@ -235,15 +235,37 @@ public class panel_manager_s : MonoBehaviour
         if (!start_processing.Instance.Finish_Count)
             return;
 
-        //正解済みにパネルを押すとリセット
-        if (!this.Touch)
+        if (Game_Clear)
+            return;
+
+        
+        if(game_manager_s.Instance.Game_Over)
         {
-            ResetAnswer();
             return;
         }
 
-        if(game_manager_s.Instance.Game_Over)
+        //押されたパネルをもう一度押したとき
+        if(!this.Touch)
         {
+            //パネルを戻す
+            if(Correct_Word.Count > 0 &&
+                Correct_Word[Correct_Word.Count - 1] == this)
+            {
+                //リストの削除
+                Word_List.RemoveAt(Word_List.Count - 1);
+                Word_Color.RemoveAt(Word_Color.Count - 1);
+                Correct_Word.RemoveAt(Correct_Word.Count - 1);
+
+                //色の変更
+                panel_image.sprite = incorrect_sprite;
+
+                //押せるようにする
+                this.Touch = true;
+
+                //SE
+                music_class.AS.PlayOneShot(music_class.Click_Button);
+            }
+
             return;
         }
 

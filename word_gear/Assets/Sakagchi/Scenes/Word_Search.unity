@@ -739,7 +739,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5955434711019724696, guid: 37123c7dfa79ccc48ada3ea3273cf7e6, type: 3}
+  m_Sprite: {fileID: 1417491893031183850, guid: fe635541b8e2fd24fb55a6c9ba71e9ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1971,7 +1971,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -72.39, y: 0}
+  m_SizeDelta: {x: -86.49, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4221731014437832617
 CanvasRenderer:
@@ -2390,7 +2390,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: 0}
+  m_SizeDelta: {x: -86.49, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5917611784579136831
 MonoBehaviour:
@@ -2605,7 +2605,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1417491893031183850, guid: fe635541b8e2fd24fb55a6c9ba71e9ae, type: 3}
+  m_Sprite: {fileID: -5323446100596096120, guid: d37ed825313acba479a3be230c94cd73, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2900,6 +2900,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BGMManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6454822169277826564, guid: 24a65e1f294bd6240baf244ba9ccd9ab, type: 3}
+      propertyPath: 'AC.Array.data[6]'
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2921,8 +2925,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_AnchoredPosition: {x: 2.1124878, y: 0}
+  m_SizeDelta: {x: -4.2251, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8584536129747524785 stripped
 MonoBehaviour:
@@ -3307,7 +3311,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 941457866757693559, guid: b707a60d4e704bf4b8e12ee8535196f2, type: 3}
@@ -3318,7 +3322,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 8849083376935013079, guid: 68d98d1eb3549c04789a61d60d9f15f8, type: 3}
@@ -3329,7 +3333,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: -4241474940411068295, guid: d48a61ef4205e194aad8cbba546204b5, type: 3}
@@ -3340,7 +3344,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: -6097638756675341959, guid: bfdee8703ba8b0c4fb0237c9fc866e7c, type: 3}
@@ -3351,7 +3355,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 6653502716812564578, guid: 67ca080c6a82ac246bde3218fa5bc953, type: 3}
@@ -3362,7 +3366,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 9185225330630639190, guid: 02b1b6ed08570714b90be534bfd74d37, type: 3}
@@ -3373,7 +3377,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 5178798234414100159, guid: c55e34e42feec964dafb511c76e72648, type: 3}
@@ -3384,7 +3388,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 1655543162290529258, guid: 92bac369700aadf478256b77a57d7b23, type: 3}
@@ -3395,7 +3399,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 2942819423039217807, guid: bfa4726eee593774fa0130630d257924, type: 3}
@@ -3406,7 +3410,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: -1456815091799895196, guid: 546491483d99d944dbd24214e5a88e0a, type: 3}
@@ -3417,7 +3421,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 8887327130374541551, guid: 42faaf271b29f0d4eb1ab0b957c72519, type: 3}
@@ -3428,7 +3432,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: -1403995983726017954, guid: e39ee5480c28274469bca4dd10418c12, type: 3}
@@ -3439,7 +3443,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: -7874378562906502703, guid: cd2a01109eb0b234bb195224c512200d, type: 3}
@@ -3450,7 +3454,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 2475603430643545653, guid: 1ae02ee13244c56449ff75f9a480675b, type: 3}
@@ -3461,7 +3465,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: 7148211316981564411, guid: ad63dc54eeb08db47a25de968da099cc, type: 3}
@@ -3472,7 +3476,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: -5104388621083935862, guid: d69af5565f5278a47b2bb04b8c35ed2c, type: 3}
@@ -3483,7 +3487,7 @@ MonoBehaviour:
     Scale_Y: 1.5
     Pos_X: -2
     Interval_X: 1
-    Pos_Y: 1.5
+    Pos_Y: 1.75
     Interval_Y: 1
     Limit_Time: 0
     Answer_Img: {fileID: -13704359170150965, guid: 6bd3ff1d8211b9342ab66572bce584d3, type: 3}
