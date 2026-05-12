@@ -995,7 +995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 834446002977523599, guid: 66cb4eb352693e446a1a39a4d7f78cc8, type: 3}
       propertyPath: file2
-      value: Assets\Sakagchi\Resources\stage_inf2.csv"
+      value: Assets\Sakagchi\Resources\stage_inf_2.csv"
       objectReference: {fileID: 0}
     - target: {fileID: 5289740328327350848, guid: 66cb4eb352693e446a1a39a4d7f78cc8, type: 3}
       propertyPath: m_Name

@@ -60,9 +60,14 @@ public class answer_manager_s : MonoBehaviour
     private int[] correct_num;
     public static answer_manager_s Instance;
     public   int Count = 0;
+    //private int stage_index
+    //{
+    //    get { return StageClear_Manager_M.instance.now_stage + 1; }
+    //}
+
     private int stage_index
     {
-        get { return StageClear_Manager_M.instance.now_stage + 1; }
+        get { return 17; }
     }
 
     private panel_manager_s[,] panel_grid;//パネルのグリッド
@@ -84,7 +89,7 @@ public class answer_manager_s : MonoBehaviour
     [SerializeField] private CSV_load_s CSV_LOAD;
     private const int split = 6;
     private const int answer_row  = 3;
-    private const int first_falf = 15;
+    private const int first_half = 15;
 
     //ゲームオーバー関連
     private bool game_over = false;
@@ -151,20 +156,24 @@ public class answer_manager_s : MonoBehaviour
     void LoadCSV()
     {
         csv_data = CSV_LOAD.CSVInput("stage_inf");
-        cas_data_2 = CSV_LOAD.CSVInput("stage_inf");
+        cas_data_2 = CSV_LOAD.CSVInput("stage_inf2");
 
-        int F_problem_index = StageClear_Manager_M.instance.now_stage + 1;
-        //分割
-        int F_start = (F_problem_index - 1) * split;
+        //int F_problem_index = StageClear_Manager_M.instance.now_stage + 1;
+        int F_problem_index = 17;
 
         string F_answer;
 
-        if (F_problem_index <= first_falf)
+        if (F_problem_index <= first_half)
         {
-           F_answer = csv_data[F_start + answer_row];
+            //分割
+            int F_start = (F_problem_index - 1) * split;
+            F_answer = csv_data[F_start + answer_row];
         }
         else
         {
+            // 16問目以降用
+            int F_second_index = F_problem_index - first_half;
+            int F_start = (F_second_index - 1) * split;
             F_answer = cas_data_2[F_start + answer_row];
         }
 

@@ -232,10 +232,7 @@ public class game_manager_s : MonoBehaviour
         Debug.Log("Dialogue = " + Problem_Class.Dialogue);
 
         csv_data = Problem_Class.CSV_LOAD.CSVInput("stage_inf");
-        csv_data_2 = Problem_Class.CSV_LOAD.CSVInput("stage_inf");
-
-        //分割
-        int F_start = (stage_count - 1) * split;
+        csv_data_2 = Problem_Class.CSV_LOAD.CSVInput("stage_inf2");
 
         string F_problem;
 
@@ -247,6 +244,9 @@ public class game_manager_s : MonoBehaviour
 
         if(stage_count <= first_half)
         {
+            //分割
+            int F_start = (stage_count - 1) * split;
+
             F_problem = csv_data[F_start + problem_row];
 
             F_situation = csv_data[F_start + situation_row];
@@ -257,6 +257,11 @@ public class game_manager_s : MonoBehaviour
         }
         else
         {
+            // 16問目以降
+            int F_second_index = stage_count - first_half;
+
+            int F_start = (F_second_index - 1) * split;
+
             F_problem = csv_data_2[F_start + problem_row];
 
             F_situation = csv_data_2[F_start + situation_row];
@@ -275,6 +280,12 @@ public class game_manager_s : MonoBehaviour
     //ステージによってテキストと背景を切り替え
     void ChangeUI(string _go_text,string _gc_text,string _sit_text)
     {
+        Debug.Log("stage_count = " + stage_count);
+
+        Debug.Log("GO Sprite Count = " + Game_Over_Class.Sprite.Length);
+        Debug.Log("GC Sprite Count = " + Game_Clear_Class.Sprite.Length);
+        Debug.Log("Situation Sprite Count = " + Situation_Scene_Class.Sprite.Length);
+
         //ゲームオーバー
         Game_Over_Class.Image.sprite = Game_Over_Class.Sprite[stage_count -1];
         Game_Over_Class.Dialogue_Text.text = _go_text.Replace("\\n", "\n");
