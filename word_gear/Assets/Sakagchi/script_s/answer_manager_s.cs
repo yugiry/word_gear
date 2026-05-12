@@ -60,14 +60,9 @@ public class answer_manager_s : MonoBehaviour
     private int[] correct_num;
     public static answer_manager_s Instance;
     public   int Count = 0;
-    //private int stage_index
-    //{
-    //    get { return StageClear_Manager_M.instance.now_stage + 1; }
-    //}
-
     private int stage_index
     {
-        get { return 17; }
+        get { return StageClear_Manager_M.instance.now_stage ; }
     }
 
     private panel_manager_s[,] panel_grid;//パネルのグリッド
@@ -158,8 +153,7 @@ public class answer_manager_s : MonoBehaviour
         csv_data = CSV_LOAD.CSVInput("stage_inf");
         cas_data_2 = CSV_LOAD.CSVInput("stage_inf2");
 
-        //int F_problem_index = StageClear_Manager_M.instance.now_stage + 1;
-        int F_problem_index = 17;
+        int F_problem_index = StageClear_Manager_M.instance.now_stage + 1;
 
         string F_answer;
 

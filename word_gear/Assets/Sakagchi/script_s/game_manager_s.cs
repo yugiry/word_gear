@@ -280,21 +280,28 @@ public class game_manager_s : MonoBehaviour
     //ステージによってテキストと背景を切り替え
     void ChangeUI(string _go_text,string _gc_text,string _sit_text)
     {
-        Debug.Log("stage_count = " + stage_count);
-
-        Debug.Log("GO Sprite Count = " + Game_Over_Class.Sprite.Length);
-        Debug.Log("GC Sprite Count = " + Game_Clear_Class.Sprite.Length);
-        Debug.Log("Situation Sprite Count = " + Situation_Scene_Class.Sprite.Length);
+        int F_sprite_index = stage_count - 1;
 
         //ゲームオーバー
-        Game_Over_Class.Image.sprite = Game_Over_Class.Sprite[stage_count -1];
-        Game_Over_Class.Dialogue_Text.text = _go_text.Replace("\\n", "\n");
+        Game_Over_Class.Image.sprite =
+            Game_Over_Class.Sprite[F_sprite_index];
+
+        Game_Over_Class.Dialogue_Text.text =
+            _go_text.Replace("\\n", "\n");
+
         //ゲームクリア
-        Game_Clear_Class.Image.sprite = Game_Clear_Class.Sprite[stage_count - 1];
-        Game_Clear_Class.Dialogue_Text.text = _gc_text.Replace("\\n", "\n");
+        Game_Clear_Class.Image.sprite =
+            Game_Clear_Class.Sprite[F_sprite_index];
+
+        Game_Clear_Class.Dialogue_Text.text =
+            _gc_text.Replace("\\n", "\n");
+
         //状況説明
-        Situation_Scene_Class.Image.sprite = Situation_Scene_Class.Sprite[stage_count - 1];
-        Situation_Scene_Class.Dialogue_Text.text = _sit_text.Replace("\\n", "\n");
+        Situation_Scene_Class.Image.sprite =
+            Situation_Scene_Class.Sprite[F_sprite_index];
+
+        Situation_Scene_Class.Dialogue_Text.text =
+            _sit_text.Replace("\\n", "\n");
     }
 
     //初期化関数
