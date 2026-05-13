@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-[DefaultExecutionOrder(1)]
+[DefaultExecutionOrder(2)]
 public class Checking_Answers_A : MonoBehaviour
 {
     public char[] Split_answers;

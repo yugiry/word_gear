@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-[DefaultExecutionOrder(0)]
+[DefaultExecutionOrder(1)]
 public class Load_Script_A : MonoBehaviour
 {
     public Overlapping_Needle_And_Ball_A ONAB;
@@ -99,15 +99,44 @@ public class Load_Script_A : MonoBehaviour
         {
             stage_clear_manager = GameObject.Find("StageClearManager");
             CL = stage_clear_manager.GetComponent<Csv_Loder_M>();
-            SCM= stage_clear_manager.GetComponent<StageClear_Manager_M>();
+
+            //if (stage_clear_manager.GetComponent<Csv_Loder_M>())
+            //{
+            //    Debug.Log("yomikometehairu");
+            //    CLA = csv_loader.GetComponent<Csv_Loader_A>();
+            //    CLA.Csv_Input(CLA.file);
+
+            //    Synopsis_Text.text = CLA.csv_texts[SCM.now_stage].start;
+            //    Deseption_Text.text = CLA.csv_texts[SCM.now_stage].description;
+            //    Problem_Answer = CLA.csv_texts[SCM.now_stage].problem;
+            //    Success_Text.text = CLA.csv_texts[SCM.now_stage].success;
+            //    Failure_Text.text = CLA.csv_texts[SCM.now_stage].failur;
+            //}
+            //else
+            //{
+            //    Debug.Log("daishippai");
+            //}
+
+            SCM = stage_clear_manager.GetComponent<StageClear_Manager_M>();
+
+
 
             CL.CsvInput(CL.file);
+
+            //if (CL.csv_texts[SCM.now_stage].start == null)
+            //{
+            //    Debug.Log("nakaminaiyo");
+            //}
+            //else
+            //{
+            //    Debug.Log(CL.csv_texts[SCM.now_stage].start + ":nakamiaruyo");
+            //}
 
             Synopsis_Text.text = CL.csv_texts[SCM.now_stage].start;
             Deseption_Text.text = CL.csv_texts[SCM.now_stage].description;
             Problem_Answer = CL.csv_texts[SCM.now_stage].problem;
-            Success_Text.text= CL.csv_texts[SCM.now_stage].success;
-            Failure_Text.text= CL.csv_texts[SCM.now_stage].failur;
+            Success_Text.text = CL.csv_texts[SCM.now_stage].success;
+            Failure_Text.text = CL.csv_texts[SCM.now_stage].failur;
 
             CA.Answers = Problem_Answer;
 
@@ -121,6 +150,7 @@ public class Load_Script_A : MonoBehaviour
         {
             CLA = csv_loader.GetComponent<Csv_Loader_A>();
             CLA.Csv_Input(CLA.file);
+            Debug.Log("CSV+Failured");
         }
 
 
@@ -133,10 +163,10 @@ public class Load_Script_A : MonoBehaviour
 
 
 
-
-
+        all_block_collider.gameObject.SetActive(false);
+        
         //Problem_Answer = CL.csv_texts.p;
-       
+
         Normal_Canvas.gameObject.SetActive(false);
         Success_Canvas.gameObject.SetActive(false);
         Failure_Canvas.gameObject.SetActive(false);
@@ -205,6 +235,7 @@ public class Load_Script_A : MonoBehaviour
 
     public void GameStart()
     {
+        
         StartCoroutine(Color_FadeIn());
 
         ResetNormalCanvas();

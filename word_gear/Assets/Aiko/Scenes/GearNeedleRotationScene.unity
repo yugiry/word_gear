@@ -3176,7 +3176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Split_answers: 
-  Answers: "\u30BF\u30AF\u30B7\u30FC\u304B\u3082"
+  Answers: "\u30BF\u30AB"
   Chosen_Word: 
   LS: {fileID: 0}
   tag_name_center_ball: CenterBall
@@ -5418,7 +5418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1732269764
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5817,7 +5817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451c652368ddd9d43b56017219cc7e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file: Assets/Motofuji/Resource/test.csv
+  file: test.csv
   csv_texts: []
 --- !u!4 &2035034070
 Transform:
