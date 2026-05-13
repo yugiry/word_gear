@@ -60,7 +60,7 @@ public class Click_Manager_M : MonoBehaviour
             {
                 disk_transform.transform.Rotate(0f, 0f, round * Time.deltaTime);
             }
-            if (disk_rotation < 5f)
+            if (disk_rotation < 15f || disk_rotation > 345f)
             {
                 return_rotation = false;
                 disk_transform.localEulerAngles = new Vector3(0f, 0f, 0f);
@@ -155,6 +155,7 @@ public class Click_Manager_M : MonoBehaviour
 
             //total_angle -= Mathf.Abs(angle);
             if (total_angle < 0) total_angle += round;
+            if (total_angle > 360) total_angle = 360;
 
             //計算された角度差をもとにオブジェクトを回転させる
             disk_transform.rotation = Quaternion.Euler(0, 0, total_angle);

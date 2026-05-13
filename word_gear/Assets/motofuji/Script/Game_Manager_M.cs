@@ -356,7 +356,7 @@ public class Game_Manager_M : MonoBehaviour
     {
         fade_manager.Instance.Fade();
         yield return new WaitUntil(() => fade_manager.Instance.Finish_Fade_Out);
-        time = 60;
+        time = timelimit;
         flame_time = 0;
         time_slider.value = 1f;
         TurnCanvas(2);

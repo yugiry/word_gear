@@ -7,7 +7,7 @@ public class Data_Saver_M : MonoBehaviour
     //クリアした最大のステージ数をスマホ内部に保存する
     public void ChengeMaxClear(int _clear_stage)
     {
-        PlayerPrefs.SetInt("MaxClear", _clear_stage);
+        //PlayerPrefs.SetInt("MaxClear", _clear_stage);
     }
 
     //内部に保存した最大クリアステージ数を削除する
