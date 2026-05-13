@@ -145,8 +145,8 @@ MonoBehaviour:
   scene_type: 0
   AC:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: d8bb7b66c379092408e3b1071dfd56ed, type: 3}
+  - {fileID: 8300000, guid: d8bb7b66c379092408e3b1071dfd56ed, type: 3}
   - {fileID: 8300000, guid: f1c1f1b906053724e83b6d7d9718369d, type: 3}
   - {fileID: 8300000, guid: c4673503bc42505438d10aa278a0c569, type: 3}
   - {fileID: 8300000, guid: c4673503bc42505438d10aa278a0c569, type: 3}

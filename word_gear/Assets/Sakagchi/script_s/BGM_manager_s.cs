@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BGM_manager_s : MonoBehaviour
@@ -17,11 +18,11 @@ public class BGM_manager_s : MonoBehaviour
         GAME_OVER
     }
 
-    public SCENE_TYPE scene_type;
+   [SerializeField] private SCENE_TYPE scene_type;
 
     private AudioSource AS;
 
-    [SerializeField] private AudioClip[] AC;
+    [SerializeField] private List<AudioClip> AC = new List<AudioClip>();
 
     private void Awake()
     {

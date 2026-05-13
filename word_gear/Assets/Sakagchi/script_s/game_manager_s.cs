@@ -67,8 +67,6 @@ public class game_manager_s : MonoBehaviour
     [System.Serializable]
     public class C_SituationScene : C_GameSceneUI
     {
-        //public  UnityEngine.Vector2 Situation_Text_Pos;
-        //public Transform Dialogue_Recttransform;
         public GameObject Start_Button;
     }
     private bool situation_running = false;
@@ -369,6 +367,8 @@ public class game_manager_s : MonoBehaviour
         SceneManager.LoadScene("titlescene");
 
         fade_manager.Instance.Fade_In = true;
+
+        BGM_manager_s.Instance.PlayBGM(BGM_manager_s.SCENE_TYPE.TITLE);
     }
     //ゲームクリア時の次の問題ボタンンを押した時
     public void GameClearNextButton()
