@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+[DefaultExecutionOrder(1)]
 public class Timer_A : MonoBehaviour
 {
    public float Limit = 30.5f;  // êßå¿éûä‘

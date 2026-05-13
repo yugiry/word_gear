@@ -2,7 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
+[DefaultExecutionOrder(1)]
 public class Rotate_Gear_A : MonoBehaviour
 {
     // public GameObject Gear;//回転させる歯車

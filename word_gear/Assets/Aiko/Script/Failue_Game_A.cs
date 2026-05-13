@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
+[DefaultExecutionOrder(1)]
 public class Failue_Game_A : MonoBehaviour
 {
     private Load_Script_A LS;

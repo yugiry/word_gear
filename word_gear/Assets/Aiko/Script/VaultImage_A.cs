@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[DefaultExecutionOrder(1)]
 public class VaultImage_A : MonoBehaviour
 {
     [SerializeField] public Sprite[] Normal_Illust;

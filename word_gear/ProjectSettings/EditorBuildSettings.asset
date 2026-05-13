@@ -6,17 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Motofuji/Scenes/titlescene.unity
+    path: Assets/motofuji/Scenes/titlescene.unity
     guid: 58bbdbdf7175e2b48b221d7729bc7490
-  - enabled: 1
-    path: Assets/Motofuji/Scenes/wordgea_scene.unity
-    guid: d87522e8c62d50647b34d2598f61e31a
   - enabled: 1
     path: Assets/Aiko/Scenes/GearNeedleRotationScene.unity
     guid: 8a8129c15a66ecf438464927cc24f620
   - enabled: 1
     path: Assets/Sakagchi/Scenes/Word_Search.unity
     guid: d9fa5bbddac3754429977f854c7512ba
+  - enabled: 1
+    path: Assets/motofuji/Scenes/wordgea_scene.unity
+    guid: d87522e8c62d50647b34d2598f61e31a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
