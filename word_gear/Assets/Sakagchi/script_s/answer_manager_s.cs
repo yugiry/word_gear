@@ -324,7 +324,7 @@ public class answer_manager_s : MonoBehaviour
             }
         }
 
-        //ここまで来たら、失敗したパネルを周囲に配置する処理を追加
+        //失敗したパネルを周囲に配置する処理を追加
         for (int i = 0; i < F_initial_positions.Count && _panel_count > 0; i++)
         {
             if (panel_chr_layout[F_initial_positions[i].X, F_initial_positions[i].Y] == -1)
@@ -378,7 +378,7 @@ public class answer_manager_s : MonoBehaviour
     }
 
 
-
+    //置いたパネルの隣が空いてるかチェック
     List<C_PosStock> GetValidNeighbors(int _x, int _y)
     {
         List<C_PosStock> F_neighbors = new List<C_PosStock>();

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
-using static UnityEditor.ShaderData;
 
 public class CSV_load_s : MonoBehaviour
 {
