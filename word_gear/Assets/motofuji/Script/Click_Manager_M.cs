@@ -120,7 +120,7 @@ public class Click_Manager_M : MonoBehaviour
                 {
                     before_delta = F_angle_current;
                 }
-                else if (before_delta > 300f && F_angle_current > 0 && (before_delta - 360f) - F_angle_current < 0)
+                else if (before_delta > 0f && F_angle_current > 300f && before_delta - (F_angle_current - 360f) < 0)
                 {
                     before_delta = F_angle_current;
                 }
