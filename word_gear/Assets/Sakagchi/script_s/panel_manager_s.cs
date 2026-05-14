@@ -84,23 +84,6 @@ public class panel_manager_s : MonoBehaviour
         Panel_Num = answer_manager_s.Instance.Panel_Box;
         Debug.Log(name + " => " + word_display.name);
     }
-
-    private void OnEnable()
-    {
-        
-
-        //if (game_data_s.Instance.Answer_List.Count > 0)
-        //{
-        //    //numberList0からランダムに値を取得して設定
-        //    int F_randomIndex = Random.Range(0, game_data_s.Instance.Answer_List.Count);
-        //    this.Word_Index = game_data_s.Instance.Answer_List[F_randomIndex];
-        //    game_data_s.Instance.Answer_List.RemoveAt(F_randomIndex);
-
-        //    SetWord();
-        //}
-        
-    }
-
     private void OnDisable()
     {
 
@@ -222,14 +205,6 @@ public class panel_manager_s : MonoBehaviour
 
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-      
-    }
-       
-
     public void Paneltouch()
     {
         if (!start_processing.Instance.Finish_Count)
@@ -299,8 +274,6 @@ public class panel_manager_s : MonoBehaviour
             StartCoroutine(ProblemCount());
             Game_Clear = true;
         }
-
-
     }
 
 

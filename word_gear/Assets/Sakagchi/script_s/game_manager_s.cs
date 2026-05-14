@@ -10,7 +10,7 @@ public class game_manager_s : MonoBehaviour
     public static game_manager_s Instance;
     private const float wait_time = 2.0f;//切り替わる時間変数
     [SerializeField] private GameObject main_game_scene;//ゲームメインシーンゲームオブジェクト
-    private const int first_half = 15;
+
     [SerializeField] private GameObject clear_text;
     [SerializeField] private StageClear_Manager_M STAGECLEAR_MANAGER;
 
@@ -32,7 +32,6 @@ public class game_manager_s : MonoBehaviour
         public Sprite[] Sprite;//背景の画像配列
         public Image Image;//背景
         public Text Dialogue_Text;//セリフテキスト
-        public bool Insert_An_Ad = true;//広告フラグ
         public GameObject Scene;//シーンのゲームオブジェクト
     }
 
@@ -69,7 +68,6 @@ public class game_manager_s : MonoBehaviour
     {
         public GameObject Start_Button;
     }
-    private bool situation_running = false;
     private const int situation_row = 1;
 
 
@@ -99,7 +97,6 @@ public class game_manager_s : MonoBehaviour
     private const int split = 6;
     private const int problem_row = 2;
     private List<string> csv_data = new List<string>();
-    private List<string> csv_data_2 = new List<string>();
 
 
     private void Awake()
@@ -136,7 +133,6 @@ public class game_manager_s : MonoBehaviour
         Game_Over_Class.Scene.SetActive(false);
         Game_Clear_Class.Scene.SetActive(false);
         Time_Related_Class.Time_Slider.value = 1f;
-        //Situation_Scene_Class.Dialogue_Recttransform.anchoredPosition = Situation_Scene_Class.Situation_Text_Pos;//状況説明のテキストの代入
     }
 
     // Update is called once per frame
@@ -219,7 +215,6 @@ public class game_manager_s : MonoBehaviour
         music_class.AS.PlayOneShot(music_class.Success_SE);
         fade_manager.Instance.Fade_In = true;
         StageClear_Manager_M.instance.StageClear();
-        Debug.Log(StageClear_Manager_M.instance);
     }
 
     //問題csvのロード
@@ -230,7 +225,6 @@ public class game_manager_s : MonoBehaviour
         Debug.Log("Dialogue = " + Problem_Class.Dialogue);
 
         csv_data = Problem_Class.CSV_LOAD.CSVInput("stage_inf");
-        csv_data_2 = Problem_Class.CSV_LOAD.CSVInput("stage_inf2");
 
         string F_problem;
 
@@ -240,36 +234,18 @@ public class game_manager_s : MonoBehaviour
 
         string F_gameclear_text;
 
-        if(stage_count <= first_half)
-        {
-            //分割
-            int F_start = (stage_count - 1) * split;
+        //分割
+        int F_start = (stage_count - 1) * split;
 
-            F_problem = csv_data[F_start + problem_row];
+        F_problem = csv_data[F_start + problem_row];
 
-            F_situation = csv_data[F_start + situation_row];
+        F_situation = csv_data[F_start + situation_row];
 
-            F_gameover_text = csv_data[F_start + failure_row];
+        F_gameover_text = csv_data[F_start + failure_row];
 
-            F_gameclear_text = csv_data[F_start + success_row];
-        }
-        else
-        {
-            // 16問目以降
-            int F_second_index = stage_count - first_half;
+        F_gameclear_text = csv_data[F_start + success_row];
 
-            int F_start = (F_second_index - 1) * split;
-
-            F_problem = csv_data_2[F_start + problem_row];
-
-            F_situation = csv_data_2[F_start + situation_row];
-
-            F_gameover_text = csv_data_2[F_start + failure_row];
-
-            F_gameclear_text = csv_data_2[F_start + success_row];
-        }
-
-            Problem_Class.Dialogue.text = F_problem.Replace("\\n", "\n");
+        Problem_Class.Dialogue.text = F_problem.Replace("\\n", "\n");
 
 
         ChangeUI(F_gameover_text,F_gameclear_text,F_situation);
@@ -340,7 +316,6 @@ public class game_manager_s : MonoBehaviour
 
         answer_manager_s.Instance.InitializeVariable();
         InitializeVariableGO();
-        Game_Over_Class.Insert_An_Ad = false;
         start_processing.Instance.Initialization();
 
         Show_Commercial_M.instance.PlayGame();

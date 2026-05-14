@@ -55,7 +55,7 @@ public class answer_manager_s : MonoBehaviour
     [SerializeField] private GameObject parent;
     [SerializeField] private GameObject tap;
 
-    public static GameObject Copy_Panel;
+    public  GameObject Copy_Panel;
     public int[] Panel_Box;
     private int[] correct_num;
     public static answer_manager_s Instance;
@@ -80,16 +80,9 @@ public class answer_manager_s : MonoBehaviour
     //csv関連
     //CSV関連--------------------------------------
     private List<string> csv_data = new List<string>();
-    private List<string> cas_data_2 = new List<string>();
     [SerializeField] private CSV_load_s CSV_LOAD;
     private const int split = 6;
     private const int answer_row  = 3;
-    private const int first_half = 15;
-
-    //ゲームオーバー関連
-    private bool game_over = false;
-
-
 
     private void Awake()
     {
@@ -102,36 +95,7 @@ public class answer_manager_s : MonoBehaviour
 
     private void OnEnable()
     {
-        panel_manager_s.InitDictionary();
-        LoadCSV();
-
-        // ハズレ文字生成
-        Anser_List.Clear();
-
-        for (int i = 0; i <= all_word; i++)
-        {
-            if (!panel_manager_s.Problem_List.Contains(i))
-            {
-                Anser_List.Add(i);
-            }
-        }
-
-        layout_initialized = false;
-
-        correct_num = new int[panel_inf[stage_index].Panel_Num];
-        panel_grid = new panel_manager_s[
-            panel_inf[stage_index].Length,
-            panel_inf[stage_index].Side
-        ];
-
-        panel_chr_layout = new int[
-            panel_inf[stage_index].Length,
-            panel_inf[stage_index].Side
-        ];
-
-        Panel_Box = new int[
-            panel_inf[stage_index].Panel_Num
-        ];
+        InitPanelVariable();
     }
 
     private void OnDisable()
@@ -151,25 +115,14 @@ public class answer_manager_s : MonoBehaviour
     void LoadCSV()
     {
         csv_data = CSV_LOAD.CSVInput("stage_inf");
-        cas_data_2 = CSV_LOAD.CSVInput("stage_inf2");
 
         int F_problem_index = StageClear_Manager_M.instance.now_stage + 1;
 
         string F_answer;
 
-        if (F_problem_index <= first_half)
-        {
-            //分割
-            int F_start = (F_problem_index - 1) * split;
-            F_answer = csv_data[F_start + answer_row];
-        }
-        else
-        {
-            // 16問目以降用
-            int F_second_index = F_problem_index - first_half;
-            int F_start = (F_second_index - 1) * split;
-            F_answer = cas_data_2[F_start + answer_row];
-        }
+        //分割
+        int F_start = (F_problem_index - 1) * split;
+        F_answer = csv_data[F_start + answer_row];
 
         Debug.Log("現在ステージ = " + F_problem_index);
         Debug.Log("答え = " + F_answer);
@@ -196,11 +149,6 @@ public class answer_manager_s : MonoBehaviour
     void ChangeImg(int _index)
     {
         img.sprite = panel_inf[_index - 1].Answer_Img;
-    }
-
-    private void Start()
-    {
-        
     }
 
     void Update()
@@ -534,12 +482,46 @@ public class answer_manager_s : MonoBehaviour
         //カウント
         Count = 0;
         layout_initialized = false;
-        game_over = false;
 
         game_manager_s.Instance.Game_Over = false;
         panel_manager_s.Problem_Count = 1;
 
         //再度読み込み
-        OnEnable();
+        InitPanelVariable();
+    }
+
+    //パネル関連の初期化
+    private void InitPanelVariable()
+    {
+        panel_manager_s.InitDictionary();
+        LoadCSV();
+
+        // ハズレ文字生成
+        Anser_List.Clear();
+
+        for (int i = 0; i <= all_word; i++)
+        {
+            if (!panel_manager_s.Problem_List.Contains(i))
+            {
+                Anser_List.Add(i);
+            }
+        }
+
+        layout_initialized = false;
+
+        correct_num = new int[panel_inf[stage_index].Panel_Num];
+        panel_grid = new panel_manager_s[
+            panel_inf[stage_index].Length,
+            panel_inf[stage_index].Side
+        ];
+
+        panel_chr_layout = new int[
+            panel_inf[stage_index].Length,
+            panel_inf[stage_index].Side
+        ];
+
+        Panel_Box = new int[
+            panel_inf[stage_index].Panel_Num
+        ];
     }
 }
