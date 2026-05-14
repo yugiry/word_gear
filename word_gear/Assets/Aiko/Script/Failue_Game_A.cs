@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Failue_Game_A : MonoBehaviour
 {
     private Load_Script_A LS;
-
+    private bool once_click_text_flag = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -50,10 +50,14 @@ public class Failue_Game_A : MonoBehaviour
 
     public void RetryButtonClick()
     {
-        LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Click]);
-        Show_Commercial_M.instance.PlayGame();
-
-        StartCoroutine(LS.WaitFadeOut(2));
+        if (!once_click_text_flag)
+        {
+            LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Click]);
+            Show_Commercial_M.instance.PlayGame();
+            once_click_text_flag= true;
+            StartCoroutine(LS.WaitFadeOut(2));
+        }
+        
     }
 
     public void RetryGame()
@@ -77,22 +81,27 @@ public class Failue_Game_A : MonoBehaviour
 
         LS.BP.StopBGM();
         LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.GameStart]);
-
+        once_click_text_flag = false;
         //カウントダウンのリセット
         LS.ResetNormalCanvas();
     }
 
     public void TitleButtonClick()
     {
-        LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Click]);
-        LS.BP.StopBGM();
-        StartCoroutine(LS.WaitFadeOut(3));
+        if (!once_click_text_flag)
+        {
+            LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Click]);
+            LS.BP.StopBGM();
+            once_click_text_flag = true;
+            StartCoroutine(LS.WaitFadeOut(3));
+        }
+        
     }
 
     public void TitleBack()
     {
-       
 
+        once_click_text_flag = false;
         //タイトルシーンに戻る処理
         SceneManager.LoadScene(LS.Title_Scene_Name);
     }

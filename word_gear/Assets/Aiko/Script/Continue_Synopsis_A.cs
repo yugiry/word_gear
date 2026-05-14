@@ -67,15 +67,22 @@ public class Continue_Synopsis_A : MonoBehaviour
 
     public void NextButtonClick()
     {
-        LS.PlaySE(LS.Sound_Effect[0]);
-        LS.SCM.StageClear();
-        StartCoroutine(LS.WaitFadeOut(1));
+        if (!once_click_text_flag)
+        {
+            LS.PlaySE(LS.Sound_Effect[0]);
+            LS.SCM.StageClear();
+            once_click_text_flag = true;
+            StartCoroutine(LS.WaitFadeOut(1));
+        }
+
+       
     }
 
     public void NextStage()
     {
-        Show_Commercial_M.instance.PlayGame();
-
+        
+            Show_Commercial_M.instance.PlayGame();
+        once_click_text_flag = false;
         //LS.SCM.now_stage += 1;
         SceneManager.LoadScene(LS.Next_Stage_Scene_Name);
 
@@ -83,15 +90,20 @@ public class Continue_Synopsis_A : MonoBehaviour
 
     public void TitleButtonClick()
     {
-        LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Click]);
-        LS.BP.StopBGM();
-        StartCoroutine(LS.WaitFadeOut(4));
+        if (!once_click_text_flag)
+        {
+            LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Click]);
+            LS.BP.StopBGM();
+            once_click_text_flag = true;
+            StartCoroutine(LS.WaitFadeOut(4));
+        }
     }
 
     public void TitleBack()
     {
-       // LS.PlaySE(LS.Sound_Effect[0]);
+        // LS.PlaySE(LS.Sound_Effect[0]);
         //LS.BP.StopBGM();
+        once_click_text_flag = false;
         //タイトルシーンに戻す。
         SceneManager.LoadScene(LS.Title_Scene_Name);
     }

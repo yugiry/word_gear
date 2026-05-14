@@ -89,7 +89,7 @@ public class Tap_Center_Ball_A : MonoBehaviour
         }
         else if (LS.HIOMB.Pressed_Flag && LS.ONAB.Overlapping_Ball)
         {
-            //LS.RG.Mosike_alpha.a = 1.0f;
+            LS.RG.Mosike_alpha.a = 1.0f;
 
             LS.RG.Mosike_image.color = LS.RG.Mosike_alpha;
 

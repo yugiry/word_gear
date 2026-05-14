@@ -2844,7 +2844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b8afd61f24a404cb3637d86f4d3c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Limit: 70.5
+  Limit: 60.5
   Time_Limit: 0
   time: {fileID: 374573325}
   Timer_Gauge: {fileID: 834517918}
