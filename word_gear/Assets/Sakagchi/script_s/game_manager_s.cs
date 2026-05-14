@@ -169,7 +169,6 @@ public class game_manager_s : MonoBehaviour
         if (Game_Over || panel_manager_s.Game_Clear)
             return;
 
-
         Time_Related_Class.Now_Time += Time.deltaTime;
         float F_t = Time_Related_Class.Now_Time / Time_Related_Class.Time_Limit[stage_count - 1];//スライダーの正規化
         Time_Related_Class.Time_Slider.value = Mathf.Lerp(1f, 0, F_t);

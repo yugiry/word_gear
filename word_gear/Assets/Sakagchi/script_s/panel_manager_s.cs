@@ -21,13 +21,10 @@ public class panel_manager_s : MonoBehaviour
 
     private WORD_TYPE word_type;
     [HideInInspector] public int Word_Index;
-    public static List<int> Word_List = new List<int>();
+    private static List<int> word_list = new List<int>();
     public static List<int> Problem_List = new List<int>();
-    public static List<int> Anser_List = new List<int>();
-    public static List<Text>  Word_Color = new List<Text>();
+    private static List<Text>  word_color = new List<Text>();
     public static List<panel_manager_s> Correct_Word = new List<panel_manager_s>();
-    [HideInInspector] public int Number;
-    [HideInInspector] public int[] Panel_Num;
     [HideInInspector] public int Corn_Num;
     private int word_num;
     public static int Problem_Count = 1;
@@ -76,19 +73,9 @@ public class panel_manager_s : MonoBehaviour
         word_type = WORD_TYPE.KATAKANA;
     }
 
-
-    private void Start()
-    {
-
-        Number = answer_manager_s.Instance.Count;
-        Panel_Num = answer_manager_s.Instance.Panel_Box;
-        Debug.Log(name + " => " + word_display.name);
-    }
     private void OnDisable()
     {
-
-        Word_List.Clear();
-        Word_Color.Clear();
+        ListClear();
         Correct_Word.Clear();
 
        Problem_Count = 1;
@@ -207,17 +194,9 @@ public class panel_manager_s : MonoBehaviour
 
     public void Paneltouch()
     {
-        if (!start_processing.Instance.Finish_Count)
+        //パネルタッチ不可
+        if (CanNotTouchPanel())
             return;
-
-        if (Game_Clear)
-            return;
-
-        
-        if(game_manager_s.Instance.Game_Over)
-        {
-            return;
-        }
 
         //押されたパネルをもう一度押したとき
         if(!this.Touch)
@@ -227,8 +206,8 @@ public class panel_manager_s : MonoBehaviour
                 Correct_Word[Correct_Word.Count - 1] == this)
             {
                 //リストの削除
-                Word_List.RemoveAt(Word_List.Count - 1);
-                Word_Color.RemoveAt(Word_Color.Count - 1);
+                word_list.RemoveAt(word_list.Count - 1);
+                word_color.RemoveAt(word_color.Count - 1);
                 Correct_Word.RemoveAt(Correct_Word.Count - 1);
 
                 //色の変更
@@ -244,14 +223,14 @@ public class panel_manager_s : MonoBehaviour
             return;
         }
 
-        Word_List.Add(this.Word_Index);
+        word_list.Add(this.Word_Index);
 
-        Word_Color.Add(this.word_display);
+        word_color.Add(this.word_display);
 
-        int F_index = Word_List.Count - 1;
+        int F_index = word_list.Count - 1;
 
         //あっていたら文字の色を変更
-        if (Word_List[F_index] == Problem_List[F_index])
+        if (word_list[F_index] == Problem_List[F_index])
         {
             panel_image.sprite = correct_sprite;
             Correct_Word.Add(this);
@@ -269,7 +248,7 @@ public class panel_manager_s : MonoBehaviour
         }
 
         //全てのパネルが正しい順番で押された場合の処理
-        if (Word_List.Count >= Problem_List.Count)
+        if (word_list.Count >= Problem_List.Count)
         {
             StartCoroutine(ProblemCount());
             Game_Clear = true;
@@ -286,8 +265,7 @@ public class panel_manager_s : MonoBehaviour
             F_panel.panel_image.sprite = F_panel.incorrect_sprite;
         }
 
-        Word_Color.Clear();
-        Word_List.Clear();
+        ListClear();
         Correct_Word.Clear();
 
         word_num = 0;
@@ -310,8 +288,7 @@ public class panel_manager_s : MonoBehaviour
             panel.Touch = false;
         }
 
-        Word_List.Clear();
-        Word_Color.Clear();
+        ListClear();
         word_num = 0;
 
         yield return new WaitForSeconds(3.0f);
@@ -351,5 +328,19 @@ public class panel_manager_s : MonoBehaviour
         float F_se_time = 1f;
         yield return new WaitForSeconds(F_se_time);
         music_class.End_SE = false;
+    }
+
+    //操作不能にする関数
+    private bool CanNotTouchPanel()
+    {
+        return !start_processing.Instance.Finish_Count || Game_Clear || game_manager_s.Instance.Game_Over;
+         
+    }
+
+    //リストのクリア
+    public static void ListClear()
+    {
+        word_list.Clear();
+        word_color.Clear();
     }
 }

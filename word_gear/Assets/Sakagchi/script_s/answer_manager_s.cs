@@ -48,18 +48,16 @@ public class answer_manager_s : MonoBehaviour
         public int Panel_Type;
     }
 
-    //private float _time;
     [SerializeField] private GameObject panel_text;
     [SerializeField] private GameObject correct_panel;
     [SerializeField] private GameObject tap_panel;
     [SerializeField] private GameObject parent;
     [SerializeField] private GameObject tap;
 
-    public  GameObject Copy_Panel;
-    public int[] Panel_Box;
+    private  GameObject copy_panel;
     private int[] correct_num;
     public static answer_manager_s Instance;
-    public   int Count = 0;
+
     private int stage_index
     {
         get { return StageClear_Manager_M.instance.now_stage ; }
@@ -72,8 +70,7 @@ public class answer_manager_s : MonoBehaviour
     private bool layout_initialized = true;//レイアウトを初期化するか
 
     ////各_cornumのList
-    public static List<int> Problem_List = new List<int>();
-    public static List<int> Anser_List = new List<int>();
+    private List<int> anser_list = new List<int>();
 
     private const int all_word = 71;
 
@@ -102,13 +99,9 @@ public class answer_manager_s : MonoBehaviour
     {
         panel_manager_s.Problem_List.Clear();
 
-        Problem_List.Clear();
-
-
-       Anser_List.Clear();
+        anser_list.Clear();
 
         layout_initialized = false;
-        Count = 0;
     }
 
     //問題のロード
@@ -168,36 +161,34 @@ public class answer_manager_s : MonoBehaviour
         
         //パネル配置処理
         for (int x = 0; x < panel_inf[stage_index].Length; x++)
+        {
+            for (int y = 0; y < panel_inf[stage_index].Side; y++)
             {
-                for (int y = 0; y < panel_inf[stage_index].Side; y++)
-                {
-                    //パネルプレハブをインスタンス化
-                    Copy_Panel = Instantiate(tap_panel);
+                //パネルプレハブをインスタンス化
+                copy_panel = Instantiate(tap_panel);
 
-                    //親オブジェクト、ローカルスケールを設定
-                    Copy_Panel.transform.SetParent(parent.transform, false);
-                    Copy_Panel.transform.localScale = new Vector2(panel_inf[stage_index].Scale_X, panel_inf[stage_index].Scale_Y);
+                //親オブジェクト、ローカルスケールを設定
+                copy_panel.transform.SetParent(parent.transform, false);
+                copy_panel.transform.localScale = new Vector2(panel_inf[stage_index].Scale_X, panel_inf[stage_index].Scale_Y);
 
-                    //パネルの位置を設定
-                    Copy_Panel.transform.position = new Vector2(
-                        panel_inf[stage_index].Pos_X + y * panel_inf[stage_index].Interval_X,
-                        panel_inf[stage_index].Pos_Y - x * panel_inf[stage_index].Interval_Y
+                //パネルの位置を設定
+                copy_panel.transform.position = new Vector2(
+                        panel_inf[stage_index].Pos_X + x * panel_inf[stage_index].Interval_X,
+                        panel_inf[stage_index].Pos_Y - y * panel_inf[stage_index].Interval_Y
                     );
 
 
 
-                    panel_manager_s F_PANEL_MANAGER_S = Copy_Panel.GetComponent<panel_manager_s>();
-                    F_PANEL_MANAGER_S.Word_Index = -1;
+                panel_manager_s F_PANEL_MANAGER_S = copy_panel.GetComponent<panel_manager_s>();
+                F_PANEL_MANAGER_S.Word_Index = -1;
                 //コンポーネントが存在する場合、_panelGridに設定
                 if (F_PANEL_MANAGER_S != null)
-                    {
-                        panel_grid[x, y] = F_PANEL_MANAGER_S;
-                    }
-
-                    Count++;
+                {
+                    panel_grid[x, y] = F_PANEL_MANAGER_S;
+                }
 
             }
-            }
+        }
 
         for (int x = 0; x < panel_inf[stage_index].Length; x++)
         {
@@ -434,7 +425,7 @@ public class answer_manager_s : MonoBehaviour
         numbersToRemove.AddRange(panel_manager_s.Problem_List);
 
         //削除リストに含まれる要素をnumberList0から一括で削除
-        Anser_List.RemoveAll(x => numbersToRemove.Contains(x));
+        anser_list.RemoveAll(x => numbersToRemove.Contains(x));
     }
 
     //不正解の文字を割り当てる関数
@@ -449,11 +440,11 @@ public class answer_manager_s : MonoBehaviour
                 {
                     panel_manager_s F_panel = panel_grid[x, y];
 
-                    if (Anser_List.Count > 0)
+                    if (anser_list.Count > 0)
                     {
-                        int F_rand = Random.Range(0, Anser_List.Count);
+                        int F_rand = Random.Range(0, anser_list.Count);
 
-                        F_panel.Word_Index = Anser_List[F_rand];
+                        F_panel.Word_Index = anser_list[F_rand];
 
                         F_panel.RefreshWord();
                     }
@@ -472,15 +463,11 @@ public class answer_manager_s : MonoBehaviour
         }
 
         //リストの初期化
-        Anser_List.Clear();
-        Problem_List.Clear();
+        anser_list.Clear();
         panel_manager_s.Problem_List.Clear();
-        panel_manager_s.Word_List.Clear();
-        panel_manager_s.Word_Color.Clear();
+        panel_manager_s.ListClear();
         panel_manager_s.Correct_Word.Clear();
 
-        //カウント
-        Count = 0;
         layout_initialized = false;
 
         game_manager_s.Instance.Game_Over = false;
@@ -497,13 +484,13 @@ public class answer_manager_s : MonoBehaviour
         LoadCSV();
 
         // ハズレ文字生成
-        Anser_List.Clear();
+        anser_list.Clear();
 
         for (int i = 0; i <= all_word; i++)
         {
             if (!panel_manager_s.Problem_List.Contains(i))
             {
-                Anser_List.Add(i);
+                anser_list.Add(i);
             }
         }
 
@@ -520,8 +507,5 @@ public class answer_manager_s : MonoBehaviour
             panel_inf[stage_index].Side
         ];
 
-        Panel_Box = new int[
-            panel_inf[stage_index].Panel_Num
-        ];
     }
 }
