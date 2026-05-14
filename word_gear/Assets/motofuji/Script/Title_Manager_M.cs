@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Title_Manager_M : MonoBehaviour
 {
+    [SerializeField] private GameObject[] black_area = new GameObject[10];
     [SerializeField] private GameObject title_canvas;
     [SerializeField] private GameObject stageselect_canvas;
     [SerializeField] private Text window_text;
@@ -37,6 +38,18 @@ public class Title_Manager_M : MonoBehaviour
         //SE
         music_class.AS.PlayOneShot(music_class.Click_Button);
         StartCoroutine(TransitionScene());
+        black_area[0].SetActive(false);
+        for (int i = 1; i < 10; i++)
+        {
+            if (scm.ClearCheck_Flag[i] == true)
+            {
+                black_area[i].SetActive(false);
+            }
+            else
+            {
+                black_area[i].SetActive(true);
+            }
+        }
     }
 
     //遅延させてキャンバス切り替え（タイトル）
@@ -65,13 +78,25 @@ public class Title_Manager_M : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             button_text[i].text = $"Stage {i + 1 + page * 10}";
+            if(page * 10 + i == 0)
+            {
+                black_area[i].SetActive(false);
+            }
+            else if(page * 10 + i - 1 >= 0 && scm.ClearCheck_Flag[page * 10 + i - 1] == true)
+            {
+                black_area[i].SetActive(false);
+            }
+            else
+            {
+                black_area[i].SetActive(true);
+            }
         }
     }
 
     public void ClickStage(int _button_num)
     {
         //クリックしたステージの１つ前がクリア済みもしくは最初のステージならステージに移行する
-        //if ((_button_num + 10 * page) - 1 >= 0 && scm.ClearCheck_Flag[(_button_num + 10 * page) - 1] || _button_num + 10 * page == 0)
+        if ((_button_num + 10 * page) - 1 >= 0 && scm.ClearCheck_Flag[(_button_num + 10 * page) - 1] || _button_num + 10 * page == 0)
         {
             scm.now_stage = _button_num + 10 * page;
             //SE
