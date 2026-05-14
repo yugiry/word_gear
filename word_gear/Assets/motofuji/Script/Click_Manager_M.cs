@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Click_Manager_M : MonoBehaviour
 {
@@ -301,11 +302,12 @@ public class Click_Manager_M : MonoBehaviour
 
     #region シーン移行
 
-    public void ClickNextButton()
+    public void ClickNextButton(Button _b)
     {
         //SE
         music_class.AS.PlayOneShot(music_class.Click_Button);
         StartCoroutine(PlayNextStage());
+        _b.interactable = false;
     }
 
     //遅延関数
