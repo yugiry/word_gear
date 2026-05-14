@@ -15,7 +15,7 @@ public class Load_Script_A : MonoBehaviour
     public Tap_Center_Ball_A TCB;
     public Failue_Game_A FG;
     public Csv_Loder_M CL;
-    public Csv_Loader_A CLA;
+    //public Csv_Loader_A CLA;
     public BGM_Playback_A BP;
     public StageClear_Manager_M SCM;
     public Timer_A TA;
@@ -34,6 +34,7 @@ public class Load_Script_A : MonoBehaviour
     [SerializeField] private GameObject synopsis_object;
     [SerializeField] private GameObject vault_image_object;
 
+    public Canvas Back_Canvas;
     public Canvas Normal_Canvas;
     public Canvas Success_Canvas;
     public Canvas Failure_Canvas;
@@ -148,8 +149,8 @@ public class Load_Script_A : MonoBehaviour
         }
         else
         {
-            CLA = csv_loader.GetComponent<Csv_Loader_A>();
-            CLA.Csv_Input(CLA.file);
+            //CLA = csv_loader.GetComponent<Csv_Loader_A>();
+            //CLA.Csv_Input(CLA.file);
             Debug.Log("CSV+Failured");
         }
 

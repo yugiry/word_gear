@@ -6,10 +6,10 @@ using System.Collections;
 public class Continue_Synopsis_A : MonoBehaviour
 {
     [SerializeField] private Load_Script_A LS;
-
-    private bool once_click_text_flag = false;
+    [SerializeField] private GameObject click_buttton;
+   [SerializeField] private bool once_click_text_flag = false;
     
-    [SerializeField] private GameObject synopsis_text;
+    /*[SerializeField] private*/ public GameObject Synopsis_Text;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,26 +30,36 @@ public class Continue_Synopsis_A : MonoBehaviour
         {
             LS.PlaySE(LS.Sound_Effect[0]);
             once_click_text_flag = true;
+            click_buttton=this.gameObject;
+            Debug.Log(click_buttton.name);
         StartCoroutine(LS.WaitFadeOut(0));
         }
-        
+        else
+        {
+            Debug.Log("Flag=True!!");
+        }
+
     }
 
     public void TextClick()
     {
        
+        LS.Back_Canvas.sortingOrder = -1;
 
         //StartCoroutine( LS.Color_FadeOut());
 
         //StartCoroutine(WaitFade());
+        click_buttton.GetComponent<Continue_Synopsis_A>().once_click_text_flag = false;
+        Synopsis_Text.gameObject.SetActive(false);
+        //LS.Normal_Canvas.gameObject.SetActive(true);
 
-        synopsis_text.gameObject.SetActive(false);
-        LS.Normal_Canvas.gameObject.SetActive(true);
+        LS.ResetNormalCanvas();
+
         LS.BP.StopBGM();
         // LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.GameStart]);
-
+        
         //LS.FadeIn_FadeOut_Object.gameObject.SetActive(true);
-        once_click_text_flag = false;
+
         LS.GameStart();
 
 

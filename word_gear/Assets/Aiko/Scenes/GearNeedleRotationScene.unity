@@ -326,7 +326,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LS: {fileID: 0}
-  synopsis_text: {fileID: 197278220}
+  click_buttton: {fileID: 1243529120}
+  once_click_text_flag: 0
+  Synopsis_Text: {fileID: 197278220}
 --- !u!114 &197278225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,6 +579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4cfcc7465e3d854197cf1b3e7935b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  once_click_text_flag: 0
+  click_buttton: {fileID: 402553083}
 --- !u!1 &322120297
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +730,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: b
+  m_Text: 
 --- !u!222 &374573326
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -881,6 +885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4cfcc7465e3d854197cf1b3e7935b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  once_click_text_flag: 0
+  click_buttton: {fileID: 402553083}
 --- !u!1 &413903102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,7 +1684,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LS: {fileID: 0}
-  synopsis_text: {fileID: 0}
+  click_buttton: {fileID: 0}
+  once_click_text_flag: 0
+  Synopsis_Text: {fileID: 0}
 --- !u!1 &566030968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,7 +1997,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LS: {fileID: 0}
-  synopsis_text: {fileID: 0}
+  click_buttton: {fileID: 0}
+  once_click_text_flag: 0
+  Synopsis_Text: {fileID: 0}
 --- !u!1 &636694457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,7 +2026,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636694457}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalPosition: {x: 0, y: 0, z: 70}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2196,6 +2206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4cfcc7465e3d854197cf1b3e7935b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  once_click_text_flag: 0
+  click_buttton: {fileID: 0}
 --- !u!114 &648015472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3662,6 +3674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4cfcc7465e3d854197cf1b3e7935b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  once_click_text_flag: 0
+  click_buttton: {fileID: 402553083}
 --- !u!1 &1190360167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3790,7 +3804,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LS: {fileID: 0}
-  synopsis_text: {fileID: 197278220}
+  click_buttton: {fileID: 1243529120}
+  once_click_text_flag: 0
+  Synopsis_Text: {fileID: 197278220}
 --- !u!114 &1243529123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3924,7 +3940,6 @@ MonoBehaviour:
   TCB: {fileID: 0}
   FG: {fileID: 0}
   CL: {fileID: 0}
-  CLA: {fileID: 0}
   BP: {fileID: 0}
   SCM: {fileID: 0}
   TA: {fileID: 0}
@@ -3941,6 +3956,7 @@ MonoBehaviour:
   time_bar: {fileID: 834517915}
   synopsis_object: {fileID: 197278220}
   vault_image_object: {fileID: 1918714801}
+  Back_Canvas: {fileID: 2071648976}
   Normal_Canvas: {fileID: 731727070}
   Success_Canvas: {fileID: 1026483786}
   Failure_Canvas: {fileID: 292741164}
@@ -5276,7 +5292,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664150455}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalPosition: {x: 0, y: 0, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

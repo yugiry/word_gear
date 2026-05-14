@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class Failue_Game_A : MonoBehaviour
 {
     private Load_Script_A LS;
-    private bool once_click_text_flag = false;
+   [SerializeField] private bool once_click_text_flag = false;
+    [SerializeField] private GameObject click_buttton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,8 +30,8 @@ public class Failue_Game_A : MonoBehaviour
 
         LS.CBL.VanishAllBalls();
         LS.Normal_Canvas.gameObject.SetActive(false);
-       // LS.Failure_Canvas.gameObject.SetActive(true); 
-        
+        // LS.Failure_Canvas.gameObject.SetActive(true); 
+
         
 
         LS.BP.StopBGM();
@@ -62,7 +63,11 @@ public class Failue_Game_A : MonoBehaviour
 
     public void RetryGame()
     {
-        
+        click_buttton.GetComponent<Failue_Game_A>().once_click_text_flag = false;
+        LS.Back_Canvas.sortingOrder = 1;
+        LS.CS.Synopsis_Text.gameObject.SetActive(true);
+        LS.Clear_Over_Image.SetActive(false);
+        //LS.Normal_Canvas.gameObject.SetActive(false);
         //LS.Normal_Canvas.gameObject.SetActive(true);
 
         //StartCoroutine(WaitFadeOut());
@@ -75,15 +80,16 @@ public class Failue_Game_A : MonoBehaviour
 
         LS.TA.CountReset();
 
-        LS.GameStart();
+        //LS.GameStart();
 
         //LS.TCB.ResetAllBalls();
 
         LS.BP.StopBGM();
-        LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.GameStart]);
+        LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.Synopsis]);
         once_click_text_flag = false;
         //カウントダウンのリセット
-        LS.ResetNormalCanvas();
+        //LS.ResetNormalCanvas();
+        StartCoroutine(LS.Color_FadeIn());
     }
 
     public void TitleButtonClick()
