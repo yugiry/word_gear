@@ -359,8 +359,7 @@ public class Game_Manager_M : MonoBehaviour
         time = timelimit;
         flame_time = 0;
         time_slider.value = 1f;
-        TurnCanvas(2);
-        GameStart();
+        TurnCanvas(3);
         start_processing.Instance.Initialization();
         fade_manager.Instance.Start_Fade = true;
         fade_manager.Instance.Fade_In = true;
@@ -401,6 +400,10 @@ public class Game_Manager_M : MonoBehaviour
         else if(_mode == 2)
         {
             game_canvas.SetActive(true);
+        }
+        else if(_mode == 3)
+        {
+            start_canvas.SetActive(true);
         }
     }
 }
