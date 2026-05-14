@@ -851,7 +851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6831510190246179710, guid: 4f215fd608aba684597b6b04998b1505, type: 3}
+  m_Sprite: {fileID: -6831510190246179710, guid: 888491dd0792a7d44b7c61843a7d8a88, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1647,7 +1647,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5683370195272223577, guid: d7f1c9e173662c448b072193801e7221, type: 3}
+  m_Sprite: {fileID: 5683370195272223577, guid: 92178fed7d58ad141b58fa968801f5d9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1958,7 +1958,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6098571350751997549, guid: 69cd511065171294281254ab5349a96b, type: 3}
+  m_Sprite: {fileID: -6098571350751997549, guid: 2876dc076fb6ad846ad9c69612f2042c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2849,6 +2849,7 @@ MonoBehaviour:
   time: {fileID: 374573325}
   Timer_Gauge: {fileID: 834517918}
   Count_Start_Flag: 0
+  Count_Stop_Flag: 0
 --- !u!114 &834517918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3176,7 +3177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Split_answers: 
-  Answers: "\u30BF\u30AB"
+  Answers: "\u30BF\u30AB\u30B7\u30FC"
   Chosen_Word: 
   LS: {fileID: 0}
   tag_name_center_ball: CenterBall
@@ -3631,7 +3632,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6098571350751997549, guid: 69cd511065171294281254ab5349a96b, type: 3}
+  m_Sprite: {fileID: -6098571350751997549, guid: 2876dc076fb6ad846ad9c69612f2042c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3967,16 +3968,17 @@ MonoBehaviour:
   - {fileID: 1906371204}
   - {fileID: 2108825666}
   Images:
-  - {fileID: -7217490356221040218, guid: 34963c81e9c29f945a92b6674687e07b, type: 3}
-  - {fileID: 21300000, guid: 60b7b4d19861ebd4395694301a6b4db7, type: 3}
-  - {fileID: 1097096398134152792, guid: a03b8a8e447b97844a7dd2b9dc5f50a2, type: 3}
+  - {fileID: -7217490356221040218, guid: d4598693af2d00a458eb3df899e522f9, type: 3}
+  - {fileID: 21300000, guid: 75ac420bf09a3294c84c806cd20da1c7, type: 3}
+  - {fileID: 1097096398134152792, guid: 84bd21067f2aac14d9c19b33f51a7fb3, type: 3}
+  - {fileID: 1097096398134152792, guid: 84bd21067f2aac14d9c19b33f51a7fb3, type: 3}
   Clear_Over_Image: {fileID: 1071295330}
   count_down_object: {fileID: 832414804}
   count_down_images:
-  - {fileID: 5563121648161446535, guid: 8a2c88ff024c76e429f70fcb41fda7c7, type: 3}
-  - {fileID: 546798250729256054, guid: b0795d58c52ea2446ba674762f67c486, type: 3}
-  - {fileID: -7328769490263375367, guid: 0b28ad3ec60e4d24aa0d44460f6e6a30, type: 3}
-  - {fileID: 3980168229369012863, guid: d19162f5a67964943bae27d76974d8e1, type: 3}
+  - {fileID: 5563121648161446535, guid: 99a4a1b00d2f37d478dc3531948bd5a9, type: 3}
+  - {fileID: 546798250729256054, guid: 8891a727b016f6245becda2bcc8c5895, type: 3}
+  - {fileID: -7328769490263375367, guid: 89506dea3bf8c934ba54a8b2201bef3e, type: 3}
+  - {fileID: 3980168229369012863, guid: 86fbd341956ee07448ad94a4376f0f82, type: 3}
   FadeIn_FadeOut_Object: {fileID: 1439185072}
   Fadein_Time_Flag: 0
   Title_Scene_Name: titlescene

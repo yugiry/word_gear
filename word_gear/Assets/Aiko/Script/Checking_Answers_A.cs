@@ -71,7 +71,7 @@ public class Checking_Answers_A : MonoBehaviour
 
         LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Success]);
         LS.BP.StopBGM();
-        
+        LS.TA.Count_Stop_Flag = true;
         yield return new WaitForSeconds(1.0f);
 
 
@@ -80,8 +80,8 @@ public class Checking_Answers_A : MonoBehaviour
         LS.TA.CountReset();
        
         LS.Success_Canvas.gameObject.SetActive(true);
-        LS.Clear_Over_Image.GetComponent<Image>().sprite = LS.Images[0];
-        
+        //LS.Clear_Over_Image.GetComponent<Image>().sprite = LS.Images[0];
+        LS.ImageAppearAndChange(0);
 
         yield return StartCoroutine(LS.Color_FadeIn());
        

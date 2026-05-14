@@ -7,6 +7,7 @@ public class Hold_Information_Of_Mysterious_Ball_A : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public string Ball_Letter;
+    public int Input_Ball_Num = -1;
     public Text Ball_text;
     public Sprite[] Ball_Image;
     public Image Img;

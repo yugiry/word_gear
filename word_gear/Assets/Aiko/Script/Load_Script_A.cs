@@ -161,7 +161,7 @@ public class Load_Script_A : MonoBehaviour
         //    Game_Images[i].GetComponent<Image>().sprite = Images[i].sprite;
         //}
 
-
+        Debug.Log("Start Success");
 
         all_block_collider.gameObject.SetActive(false);
         
@@ -226,11 +226,11 @@ public class Load_Script_A : MonoBehaviour
             count_down_object.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             count_down_object.SetActive(false);
         }
-       
-       
 
 
- 
+
+        Debug.Log("GameStartCoroutine Success");
+
     }
 
     public void GameStart()
@@ -262,6 +262,8 @@ public class Load_Script_A : MonoBehaviour
         
 
         StartCoroutine(GameStartCount(F_game_start_count));
+
+        Debug.Log("GameStart Success");
 
     }
 
@@ -326,9 +328,12 @@ public class Load_Script_A : MonoBehaviour
 
     public void ImageAppearAndChange(int _image_num)
     {
-        Clear_Over_Image.GetComponent<Image>().sprite = Images[_image_num];
-        Clear_Over_Image.SetActive(true);
+        Debug.Log("%d:" + _image_num);
 
+        Clear_Over_Image.SetActive(true);
+        Clear_Over_Image.GetComponent<Image>().sprite = Images[_image_num];
+
+        Debug.Log("ImagrAppearAndChange Success");
 
     }
 
@@ -367,8 +372,8 @@ public class Load_Script_A : MonoBehaviour
             fade.color = new_color;
         }
 
-        
 
+        Debug.Log("FadeIn Success");
     }
 
     public IEnumerator Color_FadeOut()
@@ -406,9 +411,9 @@ public class Load_Script_A : MonoBehaviour
             fade.color = new_color;
         }
 
-        
 
-        
+        Debug.Log("FadeOut Success");
+
 
     }
 

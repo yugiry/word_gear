@@ -68,12 +68,14 @@ public class Tap_Center_Ball_A : MonoBehaviour
                 }
                 else
                 {
+                    LS.HIOMB.Input_Ball_Num = LS.ONAB.Words_Num[Center_click_count];
                     Center_click_count++;
                     LS.CBX.VanishBox();
                     
                     /*LS.ONAB.Chosen_ball_number =*/ LS.ONAB.ChosenWord(LS.ONAB.Words_Num,Center_click_count, LS.CA.Split_answers); //LS.ONAB.RandomBallChoose(LS.ONAB.Chosen_ball_number,/*onab.MysteriousBalls*/LS.CA.Split_answers,/*onab.Ball_flg*/LS.CA.Chosen_Word);
                     //LS.ONAB.Words_Num[LS.ONAB.Chosen_ball_number]++;
                     LS.ONAB.Overlapped_Needle_Ball_Flag = false;
+                    
                 }
 
                
@@ -87,7 +89,7 @@ public class Tap_Center_Ball_A : MonoBehaviour
         }
         else if (LS.HIOMB.Pressed_Flag && LS.ONAB.Overlapping_Ball)
         {
-            LS.RG.Mosike_alpha.a = 1.0f;
+            //LS.RG.Mosike_alpha.a = 1.0f;
 
             LS.RG.Mosike_image.color = LS.RG.Mosike_alpha;
 

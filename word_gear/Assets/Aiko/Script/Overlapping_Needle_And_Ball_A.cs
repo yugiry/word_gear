@@ -116,6 +116,7 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
 
     public int ChosenWord(int[] _words_num,int _now_num, char[] _mysteryous_balls)
     {
+        
         MbLetter = _mysteryous_balls[_words_num[_now_num]].ToString()/*.GetComponent<HoldInformationOfMysteriousBall>().Ball_Letter*/;
         CenterBall.GetComponentInChildren<Text>().text = MbLetter;
 
@@ -126,24 +127,51 @@ public class Overlapping_Needle_And_Ball_A : MonoBehaviour
 
     public int SwapWord(int[] _words_num, int _now_num, char[] _mysteryous_balls)
     {
-        int F_vault_num=_words_num[_now_num-1];
+        LS.HIOMB = LS.ONAB.Overlapping_Ball.GetComponent<Hold_Information_Of_Mysterious_Ball_A>();
 
-        for (int i = _now_num; i < _mysteryous_balls.Length; i++)
+        int F_vault_num=LS.HIOMB.Input_Ball_Num;
+
+        int F_vault_num_center = _words_num[_now_num];
+
+        Debug.Log("F_Vault:" + F_vault_num+",F_center:"+F_vault_num_center);
+
+        LS.HIOMB.Input_Ball_Num = F_vault_num_center;
+
+        if (_now_num==_mysteryous_balls.Length-1)
         {
-            //if (i==_now_num)
-            //{
-            //    _words_num[i] = _mysteryous_balls.Length-1;
-            //}
-            //else
+            Debug.Log("Last Stand");
+
+            
+            // _words_num[_now_num - 1] = _words_num[_now_num];
+            _words_num[_now_num] = F_vault_num;
+
+            MbLetter = _mysteryous_balls[F_vault_num].ToString()/*.GetComponent<HoldInformationOfMysteriousBall>().Ball_Letter*/;
+            CenterBall.GetComponentInChildren<Text>().text = MbLetter;
+
+        }
+        else
+        {
+            for (int i = _now_num; i < _mysteryous_balls.Length; i++)
             {
-                _words_num[i-1]= _words_num[i];
+                //if (i==_now_num)
+                //{
+                //    _words_num[i] = _mysteryous_balls.Length-1;
+                //}
+                //else
+                {
+                    _words_num[i - 1] = _words_num[i];
+                }
             }
+
+            _words_num[_mysteryous_balls.Length - 1] = F_vault_num;
+
+            MbLetter = _mysteryous_balls[_words_num[_now_num]].ToString()/*.GetComponent<HoldInformationOfMysteriousBall>().Ball_Letter*/;
+            CenterBall.GetComponentInChildren<Text>().text = MbLetter;
         }
 
-        _words_num[_mysteryous_balls.Length - 1] = F_vault_num;
+           
 
-        MbLetter = _mysteryous_balls[_words_num[_now_num]].ToString()/*.GetComponent<HoldInformationOfMysteriousBall>().Ball_Letter*/;
-        CenterBall.GetComponentInChildren<Text>().text = MbLetter;
+       
 
         
 

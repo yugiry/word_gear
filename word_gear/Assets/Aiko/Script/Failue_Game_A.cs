@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[DefaultExecutionOrder(2)]
+[DefaultExecutionOrder(-2)]
 public class Failue_Game_A : MonoBehaviour
 {
     private Load_Script_A LS;
@@ -22,13 +22,16 @@ public class Failue_Game_A : MonoBehaviour
 
     public void GameOver()
     {
-        LS.ImageAppearAndChange(2);
+        Debug.Log("GameoverFunction");
 
+        LS.ImageAppearAndChange(2);
         LS.PlaySE(LS.Sound_Effect[(int)Load_Script_A.SE_Names.Failure]);
 
         LS.CBL.VanishAllBalls();
         LS.Normal_Canvas.gameObject.SetActive(false);
-        LS.Failure_Canvas.gameObject.SetActive(true);
+       // LS.Failure_Canvas.gameObject.SetActive(true); 
+        
+        
 
         LS.BP.StopBGM();
         LS.BP.PlayBGM(LS.BGM_Clip[(int)Load_Script_A.BGM_Names.GameOver]);
